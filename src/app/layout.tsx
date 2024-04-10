@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Tilt_Neon } from "next/font/google";
 import "./globals.css";
+import Navbar from "./components/Navbar";
 
-const inter = Tilt_Neon({ subsets: ["latin"] });
+const tilt = Tilt_Neon({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Ecommerce",
@@ -16,7 +17,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <Navbar/>
+      <body className={tilt.className}>{children}</body>
     </html>
   );
 }
