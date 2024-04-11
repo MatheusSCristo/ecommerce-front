@@ -6,10 +6,12 @@ import { IoPersonSharp, IoCart, IoMenu } from "react-icons/io5";
 
 import MobileMenu from "./MobileMenu";
 import Icons from "./Icons";
+import Cart from "./Cart";
 
 const  Navbar = () => {
   const [search, setSearch] = useState("");
   const [accountMobileIsOpen, setMenuMobileIsOpen] = useState(false);
+  const [cartMobileIsOpen,setCartMobileIsOpen]=useState(true);
 
   return (
     <header className="sticky top-0 flex flex-col gap-2 md:gap-0 md:flex-row md:items-center w-full justify-evenly py-4 border-b-gray-300 border-b-2 relative">
@@ -30,7 +32,6 @@ const  Navbar = () => {
         </div>
         <div className="flex gap-10 md:hidden">
           <IoCart size={25} className="hover:scale-[1.2]" />
-          <IoPersonSharp size={25} className="hover:scale-[1.2]" />
         </div>
       </div>
       <div className="flex w-full md:w-1/3 px-5 md:px-0">

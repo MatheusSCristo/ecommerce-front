@@ -2,17 +2,13 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { IoCart, IoHeart, IoPersonSharp } from "react-icons/io5";
 import CartProduct from "./CartProduct";
+import Link from "next/link";
+import Cart from "./Cart";
 
 const Icons = () => {
   const [accountDesktopIsOpen, setAccountDesktopIsOpen] = useState(false);
   const [cartMenuIsOpen, setCartMenuIsOpen] = useState(true);
 
-  const products = [
-    { nome: "Produto 1", priceInCents: 5000 },
-    { nome: "Produto 2", priceInCents: 3000 },
-    { nome: "Produto 3", priceInCents: 7500 },
-    { nome: "Produto 4", priceInCents: 12000 },
-  ];
 
   return (
     <div className="md:flex gap-10 hidden">
@@ -21,19 +17,11 @@ const Icons = () => {
         className="relative"
         onMouseEnter={() => setCartMenuIsOpen(true)}
         onMouseLeave={() => setCartMenuIsOpen(false)}
+        onClick={() => setCartMenuIsOpen((prevState) => !prevState)}
       >
         <IoCart size={25} className="hover:scale-[1.2]" />
         {cartMenuIsOpen && (
-          <div className="absolute h-[600px] w-[350px] rounded-xl bg-white border border-gray-400 right-0 p-5 flex flex-col gap-5">
-            <h1 className="text-xl">Carrinho de compras</h1>
-            <div className="w-full justify-between flex px-3">
-              <h2>Itens</h2>
-              <h2>Subtotal</h2>
-            </div>
-            {products.map((product) => (
-              <CartProduct product={product}/>
-            ))}
-          </div>
+          <Cart/>
         )}
       </div>
       <div
