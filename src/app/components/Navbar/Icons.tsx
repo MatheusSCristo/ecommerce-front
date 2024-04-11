@@ -7,8 +7,7 @@ import Cart from "./Cart";
 
 const Icons = () => {
   const [accountDesktopIsOpen, setAccountDesktopIsOpen] = useState(false);
-  const [cartMenuIsOpen, setCartMenuIsOpen] = useState(true);
-
+  const [cartMenuIsOpen, setCartMenuIsOpen] = useState(false);
 
   return (
     <div className="md:flex gap-10 hidden">

@@ -11,7 +11,6 @@ import Cart from "./Cart";
 const  Navbar = () => {
   const [search, setSearch] = useState("");
   const [accountMobileIsOpen, setMenuMobileIsOpen] = useState(false);
-  const [cartMobileIsOpen,setCartMobileIsOpen]=useState(true);
 
   return (
     <header className="sticky top-0 flex flex-col gap-2 md:gap-0 md:flex-row md:items-center w-full justify-evenly py-4 border-b-gray-300 border-b-2 relative">
