@@ -17,8 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Navbar/>
-      <body className={tilt.className}>{children}</body>
+      <body className={tilt.className}>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }

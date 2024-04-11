@@ -7,12 +7,12 @@ import { IoPersonSharp, IoCart, IoMenu } from "react-icons/io5";
 import MobileMenu from "./MobileMenu";
 import Icons from "./Icons";
 
-const Navbar = () => {
+const  Navbar = () => {
   const [search, setSearch] = useState("");
   const [accountMobileIsOpen, setMenuMobileIsOpen] = useState(false);
 
   return (
-    <header className="flex flex-col gap-2 md:gap-0 md:flex-row md:items-center w-full justify-evenly py-4 border-b-gray-300 border-b-2 relative">
+    <header className="sticky top-0 flex flex-col gap-2 md:gap-0 md:flex-row md:items-center w-full justify-evenly py-4 border-b-gray-300 border-b-2 relative">
       <div className="flex justify-between items-center px-5">
         <div className="flex items-center gap-2">
           <IoMenu

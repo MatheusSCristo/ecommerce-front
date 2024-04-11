@@ -1,8 +1,11 @@
 import React from 'react'
+import PrimaryBox from './components/PrimaryBox'
 
 const Home = () => {
   return (
-    <div></div>
+    <div className='flex flex-col'>
+      {/* <PrimaryBox/> */}
+    </div>
   )
 }
 
