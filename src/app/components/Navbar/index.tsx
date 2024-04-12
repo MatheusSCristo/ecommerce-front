@@ -8,12 +8,12 @@ import MobileMenu from "./MobileMenu";
 import Icons from "./Icons";
 import Cart from "./Cart";
 
-const  Navbar = () => {
+const Navbar = () => {
   const [search, setSearch] = useState("");
   const [accountMobileIsOpen, setMenuMobileIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 flex flex-col gap-2 md:gap-0 md:flex-row md:items-center w-full justify-evenly py-4 border-b-gray-300 border-b-2 relative">
+    <header className="sticky top-0 flex flex-col gap-2 md:gap-0 md:flex-row md:items-center w-full justify-evenly py-4 border-b-gray-300 border-b-2 relative bg-white z-10">
       <div className="flex justify-between items-center px-5">
         <div className="flex items-center gap-2">
           <IoMenu
@@ -40,7 +40,7 @@ const  Navbar = () => {
           onChange={(e) => setSearch(e.target.value)}
           className="p-2 border border-strongOrange rounded-lg rounded-r-none border-r-0 w-full"
         />
-        <button className="py-2 px-5 border bg-strongOrange border-strongOrange text-white rounded-lg rounded-l-none">
+        <button className="py-2 px-5 border bg-strongOrange border-strongOrange text-white rounded-lg rounded-l-none hover:bg-hoverOrange">
           Procurar
         </button>
       </div>

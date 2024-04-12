@@ -33,7 +33,7 @@ const DescountCarousel = ({
     >
       {products.map((product) => (
         <SwiperSlide
-          className="border-l-2 border-gray-400 p-2 flex flex-col items-center justify-evenly"
+          className="border-l-[1px] border-gray-400 p-2 flex flex-col items-center justify-evenly"
           key={product.img}
         >
           <div className="w-[100px] h-[100px] relative">

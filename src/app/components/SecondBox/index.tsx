@@ -37,7 +37,7 @@ const SecondBox = () => {
         {productsPromo.map((product) => (
           <Link
             href={"/"}
-            className="border-l-2 border-gray-400 p-2 flex flex-col items-center justify-evenly"
+            className=" p-2 flex flex-col items-center justify-evenly"
             key={product.img}
           >
             <div className="w-[150px] h-[150px] relative">

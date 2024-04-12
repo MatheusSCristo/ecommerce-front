@@ -1,10 +1,14 @@
 import React from 'react'
-import PrimaryBox from './components/PrimaryBox'
+import FirstBox from './components/FirstBox'
+import SecondBox from './components/SecondBox'
+import ThirdBox from './components/ThirdBox'
 
 const Home = () => {
   return (
-    <div className='flex flex-col bg-gray-400 min-h-screen md:p-5'>
-      <PrimaryBox/>
+    <div className='flex gap-2 flex-col bg-gray-300 min-h-screen md:p-5'>
+      <FirstBox/>
+      <SecondBox/>
+      <ThirdBox/>
     </div>
   )
 }
