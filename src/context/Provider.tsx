@@ -1,16 +1,17 @@
-'use client'
-import React from 'react'
-import { ProductsProvider } from './Products'
-import { SearchParamsBarProvider } from './SearchParamsBar'
+"use client";
+import React from "react";
+import { CartProvider } from "./Cart";
+import { ProductsProvider } from "./Products";
+import { SearchParamsBarProvider } from "./SearchParamsBar";
 
-const Provider = ({children}:{children:React.ReactNode}) => {
+const Provider = ({ children }: { children: React.ReactNode }) => {
   return (
     <SearchParamsBarProvider>
       <ProductsProvider>
-        {children}
+        <CartProvider>{children}</CartProvider>
       </ProductsProvider>
     </SearchParamsBarProvider>
-  )
-}
+  );
+};
 
-export default Provider
+export default Provider;

@@ -1,8 +1,5 @@
-import Image from "next/image";
-import React, { useState } from "react";
+import { useState } from "react";
 import { IoCart, IoHeart, IoPersonSharp } from "react-icons/io5";
-import CartProduct from "./CartProduct";
-import Link from "next/link";
 import Cart from "./Cart";
 
 const Icons = () => {
@@ -16,7 +13,7 @@ const Icons = () => {
         className="relative"
         onMouseEnter={() => setCartMenuIsOpen(true)}
         onMouseLeave={() => setCartMenuIsOpen(false)}
-        onClick={() => setCartMenuIsOpen((prevState) => !prevState)}
+        onClick={() => setCartMenuIsOpen(true)}
       >
         <IoCart size={25} className="hover:scale-[1.2]" />
         {cartMenuIsOpen && (

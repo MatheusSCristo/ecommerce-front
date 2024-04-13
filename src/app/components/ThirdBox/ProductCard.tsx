@@ -1,7 +1,13 @@
-import { Product } from "@/types";
+import { CartContext } from "@/context/Cart";
+import { CartProduct } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
-import { MdOutlineStarHalf, MdOutlineStarOutline, MdOutlineStarPurple500 } from "react-icons/md";
+import { useContext } from "react";
+import {
+  MdOutlineStarHalf,
+  MdOutlineStarOutline,
+  MdOutlineStarPurple500,
+} from "react-icons/md";
 
 const getRatingStars = (rating: number) => {
   const array = [];
@@ -15,18 +21,32 @@ const getRatingStars = (rating: number) => {
 };
 
 type ParamsType = {
-  product: Product;
+  product: CartProduct;
 };
 
 const ProductCard = ({ product }: ParamsType) => {
   const ratingStars = getRatingStars(product.rating);
   const array = new Array(5 - ratingStars.length).fill("");
+  const { products, setProducts } = useContext(CartContext);
+
+  const handleAddProductOnCard = (product: CartProduct) => {
+    const newProducts = products;
+    const index = newProducts.findIndex((item) => item.id === product.id);
+    if (index!==-1) {
+      newProducts[index].quantity += 1;
+    } else {
+      newProducts.push({...product,quantity:1});
+    }
+    setProducts(newProducts);
+  };
 
   return (
     <div className="bg-white rounded-lg border border-gray-300 p-3 flex flex-col items-center gap-2">
       <div className="w-[100px] h-[100px] md:w-[200px] md:h-[150px] xl:w-[250px] xl:h-[200px] relative rounded-xl">
         <Image
-          src={ product.imageUrl?product.imageUrl:`/images/notFoundImage.jpg`}
+          src={
+            product.imageUrl ? product.imageUrl : `/images/notFoundImage.jpg`
+          }
           fill
           className="object-fit rounded-lg"
           alt="Imagem do produto "
@@ -37,7 +57,7 @@ const ProductCard = ({ product }: ParamsType) => {
           <h2>{product.name}</h2>
           <h2>R${(product.priceInCents / 100).toFixed(2)}</h2>
         </div>
-        <button className="px-3 py-1 w-fit bg-strongOrange rounded-lg text-white hover:bg-hoverOrange">
+        <button className="px-3 py-1 w-fit bg-strongOrange rounded-lg text-white hover:bg-hoverOrange" onClick={()=>handleAddProductOnCard(product)}>
           Adicionar ao carrinho
         </button>
         <div className="flex gap-2 md:items-center flex-col md:flex-row">

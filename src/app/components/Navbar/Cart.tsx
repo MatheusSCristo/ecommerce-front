@@ -1,20 +1,21 @@
-import React from "react";
-import CartProduct from "./CartProduct";
+import { CartContext } from "@/context/Cart";
+import { CartProduct as CartProductType } from "@/types";
 import Link from "next/link";
+import { useContext, useEffect } from "react";
+import CartProduct from "./CartProduct";
 
-const getCartTotalPrice = (
-  products: { nome: string; priceInCents: number }[]
-) => {
-  return products.reduce((total, product) => total + product.priceInCents, 0);
+const getCartTotalPrice = (products: CartProductType[]) => {
+  return (
+    products.reduce(
+      (total, product) => total + product.priceInCents * product.quantity,
+      0
+    ) / 100
+  );
 };
 
 const Cart = () => {
-  const products = [
-    { nome: "Produto 1", priceInCents: 5000 },
-    { nome: "Produto 2", priceInCents: 3000 },
-    { nome: "Produto 3", priceInCents: 7500 },
-    { nome: "Produto 4", priceInCents: 12000 },
-  ];
+  const { products, setProducts } = useContext(CartContext);
+  useEffect(() => console.log("a"),[products]);
 
   return (
     <div className="absolute h-fit w-[350px] rounded-xl bg-white border border-gray-400 right-0 p-5 flex flex-col gap-5">
@@ -40,7 +41,7 @@ const Cart = () => {
         <button className="p-2 rounded-lg border border-gray-400">
           Finalizar compra
         </button>
-        <span>Total: ${getCartTotalPrice(products)}</span>
+        <span>Total: R$ {getCartTotalPrice(products)}</span>
       </div>
     </div>
   );
