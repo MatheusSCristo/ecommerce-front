@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Tilt_Neon } from "next/font/google";
-import "./globals.css";
+import { Footer } from "./components/Footer";
 import Navbar from "./components/Navbar";
+import "./globals.css";
 
 const tilt = Tilt_Neon({ subsets: ["latin"] });
 
@@ -17,9 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={tilt.className}>
+      <body className={`${tilt.className} bg-gray-200`}>
         <Navbar />
         {children}
+        <Footer/>
       </body>
     </html>
   );

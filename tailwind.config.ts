@@ -19,7 +19,8 @@ const config: Config = {
         "gray-500":"#8B96A5",
         "gray-600":"#505050",
         "dark":"#1C1C1C",
-        "starYellow":"#ffbe0b"
+        "starYellow":"#ffbe0b",
+        "blue":"#0D6EFD"
       }
     },
   },
