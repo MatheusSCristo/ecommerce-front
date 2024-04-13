@@ -1,3 +1,4 @@
+import Provider from "@/context/Provider";
 import type { Metadata } from "next";
 import { Tilt_Neon } from "next/font/google";
 import { Footer } from "./components/Footer";
@@ -18,11 +19,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${tilt.className} bg-gray-200`}>
-        <Navbar />
-        {children}
-        <Footer/>
-      </body>
+      <Provider>
+        <body className={`${tilt.className} bg-gray-200`}>
+          <Navbar />
+          {children}
+          <Footer />
+        </body>
+      </Provider>
     </html>
   );
 }
