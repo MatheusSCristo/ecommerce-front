@@ -1,7 +1,7 @@
 import { CartContext } from "@/context/Cart";
 import { CartProduct as CartProductType } from "@/types";
 import Link from "next/link";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import CartProduct from "./CartProduct";
 
 const getCartTotalPrice = (products: CartProductType[]) => {
@@ -14,8 +14,7 @@ const getCartTotalPrice = (products: CartProductType[]) => {
 };
 
 const Cart = () => {
-  const { products, setProducts } = useContext(CartContext);
-  useEffect(() => console.log("a"),[products]);
+  const { products } = useContext(CartContext);
 
   return (
     <div className="absolute h-fit w-[350px] rounded-xl bg-white border border-gray-400 right-0 p-5 flex flex-col gap-5">

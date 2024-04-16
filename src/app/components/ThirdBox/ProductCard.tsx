@@ -1,5 +1,5 @@
 import { CartContext } from "@/context/Cart";
-import { CartProduct } from "@/types";
+import { Product } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
@@ -21,7 +21,7 @@ const getRatingStars = (rating: number) => {
 };
 
 type ParamsType = {
-  product: CartProduct;
+  product: Product;
 };
 
 const ProductCard = ({ product }: ParamsType) => {
@@ -29,7 +29,7 @@ const ProductCard = ({ product }: ParamsType) => {
   const array = new Array(5 - ratingStars.length).fill("");
   const { products, setProducts } = useContext(CartContext);
 
-  const handleAddProductOnCard = (product: CartProduct) => {
+  const handleAddProductOnCard = (product: Product) => {
     const newProducts = products;
     const index = newProducts.findIndex((item) => item.id === product.id);
     if (index!==-1) {

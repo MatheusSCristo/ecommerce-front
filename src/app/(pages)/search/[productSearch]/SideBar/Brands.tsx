@@ -1,25 +1,19 @@
+import { ProductsContext } from "@/context/Products";
 import { SearchParamsBarContext } from "@/context/SearchParamsBar";
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { IoChevronDown, IoChevronUp } from "react-icons/io5";
-
-const brands = [
-  "Apple",
-  "Google",
-  "Microsoft",
-  "Nike",
-  "Samsung",
-  "Toyota",
-  "BMW",
-  "McDonald's",
-  "Adidas",
-  "Disney",
-  "Facebook",
-];
 
 const Brands = () => {
   const [showBrands, setShowBrands] = useState(true);
   const [showMoreIsActive, setShowMoreIsActive] = useState(false);
   const {brandsSelected,setBrandsSelected}=useContext(SearchParamsBarContext);
+  const {products}=useContext(ProductsContext)
+  const [brands,setBrands]=useState<string[]>([])
+  
+
+  useEffect(()=>{
+    setBrands(products.map((product)=>product.brand))
+  },[products])
 
   const handleSelectBrand = (e: ChangeEvent<HTMLInputElement>) => {
     const brand = e.target.value;

@@ -1,12 +1,13 @@
 import React, { createContext, useState } from "react";
 
-type PriceRangeType = { min: Number; max: Number };
+export type PriceRangeType = { min: number; max: number };
+export type CategoryType={category:string,categoria:string}
 
 type ContextType = {
-  brandsSelected: String[];
-  setBrandsSelected: React.Dispatch<React.SetStateAction<String[]>>;
-  categorySelected: String;
-  setCategorySelected: React.Dispatch<React.SetStateAction<String>>;
+  brandsSelected: string[];
+  setBrandsSelected: React.Dispatch<React.SetStateAction<string[]>>;
+  categorySelected: CategoryType;
+  setCategorySelected: React.Dispatch<React.SetStateAction<CategoryType>>;
   priceRangeSelected: PriceRangeType;
   setPriceRangeSelected: React.Dispatch<React.SetStateAction<PriceRangeType>>;
   ratingsSelected: Number[];
@@ -16,9 +17,11 @@ type ContextType = {
 const SearchParamsBarContext = createContext<ContextType>({} as ContextType);
 
 function SearchParamsBarProvider({ children }: { children: React.ReactNode }) {
-  const [brandsSelected, setBrandsSelected] = useState<String[]>([]);
-  const [categorySelected, setCategorySelected] = useState<String>("");
-  const [priceRangeSelected, setPriceRangeSelected] = useState<PriceRangeType>({} as PriceRangeType);
+  const [brandsSelected, setBrandsSelected] = useState<string[]>([]);
+  const [categorySelected, setCategorySelected] = useState<CategoryType>({} as CategoryType);
+  const [priceRangeSelected, setPriceRangeSelected] = useState<PriceRangeType>(
+    {} as PriceRangeType
+  );
   const [ratingsSelected, setRatingsSelected] = useState<Number[]>([]);
 
   return (
