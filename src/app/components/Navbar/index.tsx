@@ -1,26 +1,25 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { IoCart, IoMenu } from "react-icons/io5";
 
+import Cart from "./Cart";
 import Icons from "./Icons";
 import MobileMenu from "./MobileMenu";
 
 const Navbar = () => {
   const [search, setSearch] = useState("");
   const [accountMobileIsOpen, setMenuMobileIsOpen] = useState(false);
-  const router = useRouter();
+  const [cartMobileIsOpen, setCartMobileIsOpen] = useState(false);
   const searchParams = useSearchParams();
 
-  const handleSearchClick = (e:FormEvent<HTMLFormElement>) => {
+  const handleSearchClick = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const splitedSearch = search.split(" ");
     const queryParams = new URLSearchParams(Array.from(searchParams.entries()));
     queryParams.set("q", splitedSearch.join("+"));
-    const queryString = queryParams.toString();
-    router.push(`/search/${`/search/?${queryString}`}`);
   };
 
   return (
@@ -40,11 +39,23 @@ const Navbar = () => {
             Brand
           </Link>
         </div>
-        <div className="flex gap-10 md:hidden">
-          <IoCart size={25} className="hover:scale-[1.2]" />
+        <div className="flex gap-10 md:hidden relative">
+          {cartMobileIsOpen && (
+            <Cart setCartMobileIsOpen={setCartMobileIsOpen} />
+          )}
+          {!cartMobileIsOpen && (
+            <IoCart
+              size={25}
+              className="hover:scale-[1.2]"
+              onClick={() => setCartMobileIsOpen(true)}
+            />
+          )}
         </div>
       </div>
-      <form className="flex w-full md:w-1/3 px-5 md:px-0" onSubmit={(e)=>handleSearchClick(e)}>
+      <form
+        className="flex w-full md:w-1/3 px-5 md:px-0"
+        onSubmit={(e) => handleSearchClick(e)}
+      >
         <input
           placeholder="Encontre o produto perfeito para você."
           value={search}

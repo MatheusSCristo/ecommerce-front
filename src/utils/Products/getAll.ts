@@ -1,5 +1,5 @@
 export const GetAll = async () => {
-  const data = await fetch("http://localhost:8080/products", {
+  const data = await fetch("http://localhost:8080/api/products", {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });

@@ -1,10 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 export const Footer = () => {
   return (
-    <footer className="bg-gray-400 flex justify-between items-center px-32 py-2">
+    <footer className="bg-gray-400 flex justify-between items-center px-4 md:px-32 py-2">
       <Link
         href="/"
         className="font-bold text-strongOrange text-2xl flex items-center"

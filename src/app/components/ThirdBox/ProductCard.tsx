@@ -30,7 +30,7 @@ const ProductCard = ({ product }: ParamsType) => {
   const { products, setProducts } = useContext(CartContext);
 
   const handleAddProductOnCard = (product: Product) => {
-    const newProducts = products;
+    const newProducts = [...products];
     const index = newProducts.findIndex((item) => item.id === product.id);
     if (index!==-1) {
       newProducts[index].quantity += 1;

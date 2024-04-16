@@ -5,10 +5,12 @@ import { IoHeart, IoHome } from "react-icons/io5";
 import { TfiMenuAlt } from "react-icons/tfi";
 
 const MobileMenu = ({
-    setMenuMobileIsOpen,
+  setMenuMobileIsOpen,
 }: {
   setMenuMobileIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+
+
   return (
     <div className="absolute w-full z-10 bg-[#ededed7f] h-screen top-0">
       <div className="w-3/4 bg-white h-full relative">

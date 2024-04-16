@@ -4,7 +4,7 @@ import Cart from "./Cart";
 
 const Icons = () => {
   const [accountDesktopIsOpen, setAccountDesktopIsOpen] = useState(false);
-  const [cartMenuIsOpen, setCartMenuIsOpen] = useState(false);
+  const [cartMenuIsOpen, setCartMenuIsOpen] = useState(true);
 
   return (
     <div className="md:flex gap-10 hidden">
@@ -13,12 +13,9 @@ const Icons = () => {
         className="relative"
         onMouseEnter={() => setCartMenuIsOpen(true)}
         onMouseLeave={() => setCartMenuIsOpen(false)}
-        onClick={() => setCartMenuIsOpen(true)}
       >
         <IoCart size={25} className="hover:scale-[1.2]" />
-        {cartMenuIsOpen && (
-          <Cart/>
-        )}
+        {cartMenuIsOpen && <Cart/>}
       </div>
       <div
         className="relative "
