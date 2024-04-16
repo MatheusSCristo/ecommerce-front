@@ -70,12 +70,11 @@ const page = ({ params: { productSearch } }: PropsType) => {
       );
     });
     setProducts(searchedProducts);
-    getFiltered();
   };
 
   useEffect(() => {
     getFiltered();
-  }, [brandsSelected, categorySelected, priceRangeSelected]);
+  }, [brandsSelected, categorySelected, priceRangeSelected,products]);
 
   useEffect(() => {
     getSearchedProducts();

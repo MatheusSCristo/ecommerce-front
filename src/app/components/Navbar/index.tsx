@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { IoCart, IoMenu } from "react-icons/io5";
 
 import Icons from "./Icons";
@@ -11,16 +11,16 @@ import MobileMenu from "./MobileMenu";
 const Navbar = () => {
   const [search, setSearch] = useState("");
   const [accountMobileIsOpen, setMenuMobileIsOpen] = useState(false);
-  const router=useRouter();
-  const searchParams=useSearchParams();
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const handleSearchClick = () => {
+  const handleSearchClick = (e:FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const splitedSearch = search.split(" ");
-    const queryParams= new URLSearchParams(Array.from(searchParams.entries()));
-    queryParams.set('q', splitedSearch.join('+'));
+    const queryParams = new URLSearchParams(Array.from(searchParams.entries()));
+    queryParams.set("q", splitedSearch.join("+"));
     const queryString = queryParams.toString();
-    router.push(`/search/${`/search/?${queryString}`}`
-    )
+    router.push(`/search/${`/search/?${queryString}`}`);
   };
 
   return (
@@ -44,17 +44,20 @@ const Navbar = () => {
           <IoCart size={25} className="hover:scale-[1.2]" />
         </div>
       </div>
-      <div className="flex w-full md:w-1/3 px-5 md:px-0">
+      <form className="flex w-full md:w-1/3 px-5 md:px-0" onSubmit={(e)=>handleSearchClick(e)}>
         <input
           placeholder="Encontre o produto perfeito para você."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="p-2 border border-strongOrange rounded-lg rounded-r-none border-r-0 w-full focus:outline-none"
         />
-        <button className="py-2 px-5 border bg-strongOrange border-strongOrange text-white rounded-lg rounded-l-none hover:bg-hoverOrange" onClick={handleSearchClick}>
+        <button
+          type="submit"
+          className="py-2 px-5 border bg-strongOrange border-strongOrange text-white rounded-lg rounded-l-none hover:bg-hoverOrange"
+        >
           Procurar
         </button>
-      </div>
+      </form>
       <Icons />
       {accountMobileIsOpen && (
         <MobileMenu setMenuMobileIsOpen={setMenuMobileIsOpen} />
