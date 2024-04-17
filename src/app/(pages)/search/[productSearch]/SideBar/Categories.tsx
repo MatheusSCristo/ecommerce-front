@@ -1,4 +1,7 @@
-import { SearchParamsBarContext } from "@/context/SearchParamsBar";
+import {
+  CategoryType,
+  SearchParamsBarContext,
+} from "@/context/SearchParamsBar";
 import { useContext, useState } from "react";
 import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 
@@ -31,6 +34,17 @@ const Categories = () => {
     SearchParamsBarContext
   );
 
+  const handleAddCategory = (category: CategoryType) => {
+    if (categorySelected.categoria == category.categoria) {
+      setCategorySelected({} as CategoryType);
+      return 0;
+    }
+    setCategorySelected({
+      category: category.category,
+      categoria: category.categoria,
+    });
+  };
+
   return (
     <div className="flex flex-col border-gray-300 border-t-2 py-2 ">
       <div className="flex justify-between items-center gap-16">
@@ -61,12 +75,7 @@ const Categories = () => {
                   : ""
               }`}
               key={category.category}
-              onClick={() =>
-                setCategorySelected({
-                  category: category.category,
-                  categoria: category.categoria,
-                })
-              }
+              onClick={() => handleAddCategory(category)}
             >
               {category.categoria}
             </span>
@@ -75,15 +84,12 @@ const Categories = () => {
           return (
             <span
               className={`text-gray-500 capitalize rounded-md p-1 cursor-pointer ${
-                category.category == categorySelected.category ? "bg-gray-400" : ""
+                category.category == categorySelected.category
+                  ? "bg-gray-400"
+                  : ""
               }`}
               key={category.category}
-              onClick={() =>
-                setCategorySelected({
-                  category: category.category,
-                  categoria: category.categoria,
-                })
-              }
+              onClick={() => handleAddCategory(category)}
             >
               {category.categoria}
             </span>
