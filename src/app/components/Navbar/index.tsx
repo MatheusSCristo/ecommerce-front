@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { IoCart, IoMenu } from "react-icons/io5";
 
+import { useRouter } from "next/navigation";
 import Cart from "./Cart";
 import Icons from "./Icons";
 import MobileMenu from "./MobileMenu";
@@ -13,6 +14,7 @@ const Navbar = () => {
   const [search, setSearch] = useState("");
   const [accountMobileIsOpen, setMenuMobileIsOpen] = useState(false);
   const [cartMobileIsOpen, setCartMobileIsOpen] = useState(false);
+  const router=useRouter()
   const searchParams = useSearchParams();
 
   const handleSearchClick = (e: FormEvent<HTMLFormElement>) => {
@@ -20,6 +22,8 @@ const Navbar = () => {
     const splitedSearch = search.split(" ");
     const queryParams = new URLSearchParams(Array.from(searchParams.entries()));
     queryParams.set("q", splitedSearch.join("+"));
+    const queryString = queryParams.toString();
+    router.push(`/search/${`/search/?${queryString}`}`);
   };
 
   return (
@@ -39,17 +43,11 @@ const Navbar = () => {
             Brand
           </Link>
         </div>
-        <div className="flex gap-10 md:hidden relative">
-          {cartMobileIsOpen && (
-            <Cart setCartMobileIsOpen={setCartMobileIsOpen} />
-          )}
-          {!cartMobileIsOpen && (
-            <IoCart
-              size={25}
-              className="hover:scale-[1.2]"
-              onClick={() => setCartMobileIsOpen(true)}
-            />
-          )}
+        <div
+          className="flex gap-10 md:hidden relative"
+        >
+          {cartMobileIsOpen && <Cart setCartMobileIsOpen={setCartMobileIsOpen} />}
+          {!cartMobileIsOpen && <IoCart size={25} className="hover:scale-[1.2]" onClick={()=>setCartMobileIsOpen(true)} />}
         </div>
       </div>
       <form

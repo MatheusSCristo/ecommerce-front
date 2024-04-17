@@ -9,6 +9,7 @@ import {
 import { Product } from "@/types";
 import { useSearchParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
+import { IoFilter } from "react-icons/io5";
 import Menu from "./Menu";
 import SideBar from "./SideBar";
 
@@ -41,6 +42,8 @@ const page = ({ params: { productSearch } }: PropsType) => {
     SearchParamsBarContext
   );
   const query = searchParams.get("q");
+  const [sideBarMobileIsOpen, setSideBarMobileIsOpen] = useState(false);
+
   const productsHasSearchedWord = (product: Product, searched: string) => {
     return Object.values(product).some((value) => {
       if (typeof value === "string") {
@@ -74,17 +77,30 @@ const page = ({ params: { productSearch } }: PropsType) => {
 
   useEffect(() => {
     getFiltered();
-  }, [brandsSelected, categorySelected, priceRangeSelected,products]);
+  }, [brandsSelected, categorySelected, priceRangeSelected, products]);
 
   useEffect(() => {
     getSearchedProducts();
   }, [allProducts, query]);
 
   return (
-    <section className="flex gap-10 w-full px-32 py-8">
-      <SideBar />
-      <div className="flex flex-col w-full gap-2">
-        <Menu products={filteredProducts} />
+    <section className="flex gap-2 md:gap-10 w-full px-2 xl:px-32 py-8 relative ">
+      {sideBarMobileIsOpen && (
+        <SideBar setSideBarMobileIsOpen={setSideBarMobileIsOpen} />
+      )}
+      <div className="hidden md:block">
+        <SideBar setSideBarMobileIsOpen={setSideBarMobileIsOpen} />
+      </div>
+      <div className="flex flex-col w-full gap-2 ">
+        <div className="flex items-center gap-2">
+          <span
+            onClick={() => setSideBarMobileIsOpen(true)}
+            className="md:hidden items-center flex h-[50px] "
+          >
+            <IoFilter size={20} />
+          </span>
+          <Menu products={filteredProducts} />
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 ">
           {filteredProducts.map((product) => (
             <ProductCard product={product} />

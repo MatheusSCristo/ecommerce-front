@@ -17,7 +17,7 @@ const Prices = () => {
   useEffect(() => handleInputPriceRange(), [min, max]);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 ">
       <span className="font-bold">Preços</span>
       <div className="gap-2 flex items-center">
         <div className="flex flex-col bg-white border-gray-500 border rounded-lg w-[100px] px-2">

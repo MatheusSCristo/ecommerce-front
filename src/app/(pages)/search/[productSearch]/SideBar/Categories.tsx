@@ -1,6 +1,5 @@
 import { SearchParamsBarContext } from "@/context/SearchParamsBar";
 import { useContext, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 
 const categories = [
@@ -31,10 +30,9 @@ const Categories = () => {
   const { categorySelected, setCategorySelected } = useContext(
     SearchParamsBarContext
   );
-  const { t, i18n } = useTranslation();
 
   return (
-    <div className="flex flex-col border-gray-300 border-t-2 py-2">
+    <div className="flex flex-col border-gray-300 border-t-2 py-2 ">
       <div className="flex justify-between items-center gap-16">
         <span className="font-bold p-1">Categorias</span>
 

@@ -42,7 +42,7 @@ const ProductCard = ({ product }: ParamsType) => {
 
   return (
     <div className="bg-white rounded-lg border border-gray-300 p-3 flex flex-col items-center gap-2">
-      <div className="w-[100px] h-[100px] md:w-[200px] md:h-[150px] xl:w-[250px] xl:h-[200px] relative rounded-xl">
+      <div className="w-[100px] h-[100px] md:w-[150px] md:h-[150px] 2xl:w-[250px] 2xl:h-[200px] relative rounded-xl">
         <Image
           src={
             product.imageUrl ? product.imageUrl : `/images/notFoundImage.jpg`
@@ -60,8 +60,8 @@ const ProductCard = ({ product }: ParamsType) => {
         <button className="px-3 py-1 w-fit bg-strongOrange rounded-lg text-white hover:bg-hoverOrange" onClick={()=>handleAddProductOnCard(product)}>
           Adicionar ao carrinho
         </button>
-        <div className="flex gap-2 md:items-center flex-col md:flex-row">
-          <div className="flex text-starYellow">
+        <div className="flex gap-2 2xl:items-center flex-col 2xl:flex-row">
+          <div className="flex text-starYellow  ">
             {ratingStars.map((item, index) => {
               if (item === "full")
                 return <MdOutlineStarPurple500 key={index} size={20} />;
