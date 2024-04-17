@@ -27,18 +27,18 @@ const CartProduct = ({ product }: Props) => {
   return (
     <div className="flex w-full px-3 justify-between" key={product.id}>
       <div className="flex gap-2 ">
-        <div className="p-2 border border-gray-300 rounded-xl">
+        <div className="p-2 border border-gray-400 rounded-xl w-[60px] h-[60px] md:w-[100px] md:h-[100px] relative">
           <Image
             src={
               product.imageUrl ? product.imageUrl : "/images/notFoundImage.jpg"
             }
             alt=""
-            width={50}
-            height={50}
+            fill
+            className="object-cover p-1 rounded-xl"
           />
         </div>
         <div>
-          <h1>{product.name}</h1>
+          <h1 className="text-sm md:text-md">{product.name}</h1>
           <div className="flex items-center gap-2">
             {quantity > 1 && (
               <button
