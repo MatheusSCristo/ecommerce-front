@@ -20,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Provider>
-        <body className={`${tilt.className} bg-gray-200`}>
+        <body
+          className={`${tilt.className} bg-gray-200 flex flex-col h-screen`}
+        >
           <Navbar />
-          {children}
+          <div className="flex-1"> {children}</div>
           <Footer />
         </body>
       </Provider>

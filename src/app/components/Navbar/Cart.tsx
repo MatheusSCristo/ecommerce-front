@@ -56,9 +56,9 @@ const Cart = ({ setCartMobileIsOpen }: propsType) => {
         <span className="px-3">Seu carrinho ainda está vazio.</span>
       )}
       <div className="px-3 justify-between w-full flex  ">
-        <button className="px-2 md:p-2 text-sm md:text-md rounded-lg border border-gray-400">
+        <Link href={"/cart"} className="px-2 md:p-2 text-sm md:text-md rounded-lg border border-gray-400">
           Finalizar compra
-        </button>
+        </Link>
         <div className="flex-col md:flex-row flex md:gap-2">
           <span>Total:</span>
           <span>R$ {getCartTotalPrice(products)}</span>
