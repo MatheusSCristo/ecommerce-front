@@ -2,9 +2,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { IoCart, IoMenu } from "react-icons/io5";
 
+import { CartContext } from "@/context/Cart";
 import { useRouter } from "next/navigation";
 import Cart from "./Cart";
 import Icons from "./Icons";
@@ -14,8 +15,9 @@ const Navbar = () => {
   const [search, setSearch] = useState("");
   const [accountMobileIsOpen, setMenuMobileIsOpen] = useState(false);
   const [cartMobileIsOpen, setCartMobileIsOpen] = useState(false);
-  const router=useRouter()
+  const router = useRouter();
   const searchParams = useSearchParams();
+  const {products}=useContext(CartContext)
 
   const handleSearchClick = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -43,11 +45,19 @@ const Navbar = () => {
             Brand
           </Link>
         </div>
-        <div
-          className="flex gap-10 md:hidden relative"
-        >
-          {cartMobileIsOpen && <Cart setCartMobileIsOpen={setCartMobileIsOpen} />}
-          {!cartMobileIsOpen && <IoCart size={25} className="hover:scale-[1.2]" onClick={()=>setCartMobileIsOpen(true)} />}
+        <div className="flex gap-10 md:hidden relative">
+          {cartMobileIsOpen && (
+            <Cart setCartMobileIsOpen={setCartMobileIsOpen} />
+          )}
+          {!cartMobileIsOpen && (
+            <div className="relative hover:scale-[1.05]" >
+             {products.length>0 && <span className="absolute right-0 bottom-0 bg-[#fa1a1a] rounded-full w-[20px] h-[20px] text-sm flex items-center justify-center text-white">{products.length}</span>}
+              <IoCart
+                size={35}
+                onClick={() => setCartMobileIsOpen(true)}
+              />
+            </div>
+          )}
         </div>
       </div>
       <form

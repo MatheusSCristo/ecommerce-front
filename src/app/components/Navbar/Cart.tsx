@@ -53,10 +53,10 @@ const Cart = ({ setCartMobileIsOpen }: propsType) => {
         </div>
       )}
       {products.length == 0 && (
-        <span className="px-3">Seu carrinho ainda está vazio.</span>
+        <span className="px-3 font-bold">Seu carrinho ainda está vazio.</span>
       )}
       <div className="px-3 justify-between w-full flex  ">
-        <Link href={"/cart"} className="px-2 md:p-2 text-sm md:text-md rounded-lg border border-gray-400">
+        <Link href={"/cart"} onClick={handleCloseCartMobile} className="px-2 md:p-2 text-sm md:text-md rounded-lg border border-gray-400 flex items-center">
           Finalizar compra
         </Link>
         <div className="flex-col md:flex-row flex md:gap-2">
