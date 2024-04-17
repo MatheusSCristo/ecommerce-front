@@ -1,7 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { FaBoxArchive } from "react-icons/fa6";
-import { IoHeart, IoHome } from "react-icons/io5";
+import { IoHome } from "react-icons/io5";
 import { TfiMenuAlt } from "react-icons/tfi";
 
 const MobileMenu = ({
@@ -9,8 +10,6 @@ const MobileMenu = ({
 }: {
   setMenuMobileIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-
-
   return (
     <div className="absolute w-full z-10 bg-[#ededed7f] h-screen top-0">
       <div className="w-3/4 bg-white h-full relative">
@@ -29,22 +28,18 @@ const MobileMenu = ({
           </div>
         </div>
         <div className="flex flex-col p-4 gap-2">
-          <div className="flex items-center gap-2 text-xl">
+          <Link href={"/"} className="flex items-center gap-2 text-xl">
             <IoHome className="text-gray-600" />
             <span>Início</span>
-          </div>
+          </Link>
           <div className="flex items-center gap-2 text-xl">
             <TfiMenuAlt className="text-gray-600" />
             <span>Categorias</span>
           </div>
-          <div className="flex items-center gap-2 text-xl">
-            <IoHeart className="text-gray-600" />
-            <span>Favoritos</span>
-          </div>
-          <div className="flex items-center gap-2 text-xl">
+          <Link href={"/"} className="flex items-center gap-2 text-xl">
             <FaBoxArchive className="text-gray-600" />
             <span>Meus pedidos</span>
-          </div>
+          </Link>
         </div>
       </div>
     </div>
