@@ -72,10 +72,10 @@ const Cart = () => {
   const [cep, setCep] = useState("");
   const { products } = useContext(CartContext);
   return (
-    <section className="md:px-32 md:py-10 px-2 py-5 flex gap-2 flex-col flex-1 ">
+    <section className="md:px-24 2xl:px-32 md:py-10 px-2 py-5 flex gap-2 flex-col flex-1 ">
       <h1 className="text-2xl">Meu carrinho({products.length})</h1>
       <div className="flex gap-4 md:flex-row flex-col">
-        <div className="bg-white border border-gray-400 md:w-3/4 p-5 rounded-lg">
+        <div className="bg-white border border-gray-400 md:w-3/4 p-5 rounded-lg flex flex-col gap-2">
           {products.map((product) => (
             <Product product={product} />
           ))}

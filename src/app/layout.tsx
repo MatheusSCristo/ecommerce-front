@@ -24,7 +24,7 @@ export default function RootLayout({
           className={`${tilt.className} bg-gray-200 flex flex-col h-screen`}
         >
           <Navbar />
-          <div className="flex-1"> {children}</div>
+          <main className="flex-1"> {children}</main>
           <Footer />
         </body>
       </Provider>

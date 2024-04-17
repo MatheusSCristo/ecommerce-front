@@ -8,7 +8,7 @@ export type Product ={
     brand: string;
     model: string;
     color: string;
-    categories:String[];
+    categories:string[];
 
 }
 
@@ -26,7 +26,7 @@ export type Order={
     user:User,
     totalInCents:number,
     createdAt:Date,
-    orderStatus:String,
+    orderStatus:string,
     orderProduct:[],
     payment:Payment,
 }

@@ -9,7 +9,7 @@ import {
   MdOutlineStarPurple500,
 } from "react-icons/md";
 
-const getRatingStars = (rating: number) => {
+export const getRatingStars = (rating: number) => {
   const array = [];
   for (let i = 0; i < Math.floor(rating); i++) {
     array.push("full");
@@ -41,8 +41,8 @@ const ProductCard = ({ product }: ParamsType) => {
   };
 
   return (
-    <div className="bg-white rounded-lg border border-gray-300 p-3 flex flex-col items-center gap-2">
-      <div className="w-[100px] h-[100px] md:w-[150px] md:h-[150px] 2xl:w-[250px] 2xl:h-[200px] relative rounded-xl">
+    <div className="bg-white rounded-lg border border-gray-300 p-3 flex flex-col items-center gap-2 h-[300px]">
+      <Link href={`/product/${product.id}`} className="w-[100px] h-[100px] md:w-[150px] md:h-[150px] 2xl:w-[200px] 2xl:h-[150px] relative rounded-xl">
         <Image
           src={
             product.imageUrl ? product.imageUrl : `/images/notFoundImage.jpg`
@@ -51,7 +51,7 @@ const ProductCard = ({ product }: ParamsType) => {
           className="object-fit rounded-lg"
           alt="Imagem do produto "
         />
-      </div>
+      </Link>
       <div className="flex flex-col gap-2 w-full text-sm md:text-md ">
         <div>
           <h2>{product.name}</h2>
@@ -73,7 +73,7 @@ const ProductCard = ({ product }: ParamsType) => {
               );
             })}
           </div>
-          <Link href={""} className="text-gray-500 hover:text-dark">
+          <Link href={`/product/${product.id}`} className="text-gray-500 hover:text-dark">
             Ver detalhes
           </Link>
         </div>

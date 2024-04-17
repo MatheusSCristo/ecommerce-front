@@ -20,7 +20,7 @@ const ThirdBox = () => {
   return (
     <section className=" p-3 flex flex-col gap-2 h-fit  ">
       <h1 className="text-2xl md:text-3xl font-bold">Itens especiais para você</h1>
-      <div className="xl:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-3 grid">
+      <div className="xl:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-3 grid">
         {products.map((product) => (
           <ProductCard product={product} key={product.id}/>
         ))}

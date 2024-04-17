@@ -5,7 +5,7 @@ import {
 import { useContext, useState } from "react";
 import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 
-const categories = [
+export const categories = [
   { category: "shoes", categoria: "calçados" },
   { category: "technology", categoria: "tecnologia" },
   { category: "electronics", categoria: "eletrônicos" },
