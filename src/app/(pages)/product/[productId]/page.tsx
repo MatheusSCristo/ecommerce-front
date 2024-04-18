@@ -2,6 +2,7 @@
 import { CartContext } from "@/context/CartContext";
 import { ProductsContext } from "@/context/ProductsContext";
 import AddProductToCart from "@/utils/AddProductToCart";
+import { translateCategory } from "@/utils/CategoriesUtil";
 import getRatingStars from "@/utils/getRatingStars";
 import { CircularProgress } from "@mui/material";
 import Image from "next/image";
@@ -11,17 +12,13 @@ import {
   MdOutlineStarOutline,
   MdOutlineStarPurple500,
 } from "react-icons/md";
-import { categories } from "../../search/[productSearch]/SideBar/Categories";
 import Recommended from "../Recommended";
 
 type propsType = {
   params: { productId: string };
 };
 
-const translateCategory = (category: string) => {
-  const newCategory = categories.find((item) => item.category == category);
-  return newCategory?.categoria;
-};
+
 
 const getBlankStars = (ratingStars: String[] | undefined) => {
   return ratingStars ? new Array(5 - ratingStars.length).fill("") : undefined;

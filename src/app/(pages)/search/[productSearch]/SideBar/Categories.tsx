@@ -2,30 +2,10 @@ import {
   CategoryType,
   SearchParamsBarContext,
 } from "@/context/SearchParamsBarContext";
+import { categories } from "@/utils/CategoriesUtil";
 import { useContext, useState } from "react";
 import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 
-export const categories = [
-  { category: "shoes", categoria: "calçados" },
-  { category: "technology", categoria: "tecnologia" },
-  { category: "electronics", categoria: "eletrônicos" },
-  { category: "smartphones", categoria: "smartphones" },
-  { category: "accessories", categoria: "acessórios" },
-  { category: "computers", categoria: "computadores" },
-  { category: "notebooks", categoria: "notebooks" },
-  { category: "photography", categoria: "fotografia" },
-  { category: "cameras", categoria: "câmeras" },
-  { category: "gaming", categoria: "jogos" },
-  { category: "peripherals", categoria: "periféricos" },
-  { category: "smartwatches", categoria: "smartwatches" },
-  { category: "security", categoria: "segurança" },
-  { category: "printers", categoria: "impressoras" },
-  { category: "tablets", categoria: "tablets" },
-  { category: "monitors", categoria: "monitores" },
-  { category: "audio", categoria: "áudio" },
-  { category: "clothes", categoria: "roupas" },
-  { category: "house", categoria: "casa" },
-];
 
 const Categories = () => {
   const [showMoreIsActive, setShowMoreIsActive] = useState(false);
@@ -45,6 +25,8 @@ const Categories = () => {
     });
   };
 
+
+  
   return (
     <div className="flex flex-col border-gray-300 border-t-2 py-2 ">
       <div className="flex justify-between items-center gap-16">

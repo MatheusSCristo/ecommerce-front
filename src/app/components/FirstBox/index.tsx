@@ -1,35 +1,40 @@
+"use client";
+import { categories } from "@/utils/CategoriesUtil";
 import Image from "next/image";
-import React from "react";
+import { useRouter } from "next/navigation";
 import MobileCategoriesSlider from "./MobileCategoriesSlider";
 
 const PrimaryBox = () => {
-  const categories = [
-    "Eletrônicos",
-    "Moda",
-    "Casa e Jardim",
-    "Esportes e Fitness",
-    "Beleza e Cuidados Pessoais",
-    "Livros e Audiolivros",
-    "Brinquedos e Jogos",
-    "Automotivo",
-    "Música e Instrumentos",
-    "Saúde",
-    "Ferramentas e Equipamentos",
-    "Eletrônicos Domésticos",
-  ];
+  const router = useRouter();
+
+   const handleSearchClick = (category: string) => {
+    const queryParams = new URLSearchParams(category);
+    queryParams.set("q", "+");
+    const queryString = queryParams.toString();
+    router.push(`/search/${`/search/?${queryString}`}`);
+  };
 
   return (
     <section className="bg-white border border-gray-300 rounded-md md:p-3 flex flex-col md:flex-row gap-2 md:h-[450px] h-[250px]">
       <div className="md:hidden">
-        {<MobileCategoriesSlider categories={categories} />}
+        {<MobileCategoriesSlider categories={categories} handleSearchClick={handleSearchClick}/>}
       </div>
       <div className="md:flex flex-col hidden">
-        {categories.map((category) => (
-          <span className="p-1 hover:bg-gray-200 w-full rounded-md hover:scale-[1.01]" key={category}>
-            {category}
-          </span>
-        ))}
-        <span className="p-1 hover:bg-gray-200 w-full rounded-md hover:scale-[1.01]">Ver mais...</span>
+        {categories.map((category, index) => {
+          if (index < 12)
+            return (
+              <span
+                className="p-1 hover:bg-gray-200 w-full rounded-md hover:scale-[1.01] capitalize cursor-pointer"
+                key={category.category}
+                onClick={()=>handleSearchClick(category.categoria)}
+              >
+                {category.categoria}
+              </span>
+            );
+        })}
+        <span className="p-1 hover:bg-gray-200 w-full rounded-md hover:scale-[1.01]">
+          Ver mais...
+        </span>
       </div>
       <div className="flex-1 relative ">
         <Image
@@ -45,7 +50,10 @@ const PrimaryBox = () => {
             </h1>
             <h1 className="text-xl md:text-3xl font-bold">Mais vendidos</h1>
           </div>
-          <button className="bg-white px-5 py-2 rounded-lg w-fit font-bold">
+          <button
+            onClick={() => handleSearchClick("tecnologia")}
+            className="bg-white px-5 py-2 rounded-lg w-fit font-bold"
+          >
             Veja aqui!
           </button>
         </div>

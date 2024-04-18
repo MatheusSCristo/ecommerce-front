@@ -7,6 +7,7 @@ import {
   SearchParamsBarContext,
 } from "@/context/SearchParamsBarContext";
 import { Product } from "@/types";
+import { translateCategory } from "@/utils/CategoriesUtil";
 import { useSearchParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { IoFilter } from "react-icons/io5";
@@ -46,7 +47,12 @@ const page = ({ params: { productSearch } }: PropsType) => {
 
   const productsHasSearchedWord = (product: Product, searched: string) => {
     return Object.values(product).some((value) => {
-      if (typeof value === "string") {
+      if (typeof value === "object") {
+        return value.some((item) => {
+          const translatedCategory = translateCategory(item);
+          return translatedCategory?.includes(searched);
+        });
+      } else if (typeof value === "string") {
         return value.toLowerCase().includes(searched.toLowerCase());
       }
       return false;
@@ -89,7 +95,7 @@ const page = ({ params: { productSearch } }: PropsType) => {
         <SideBar setSideBarMobileIsOpen={setSideBarMobileIsOpen} />
       )}
       <div className="hidden md:block">
-        <SideBar setSideBarMobileIsOpen={setSideBarMobileIsOpen} />
+        <SideBar  />
       </div>
       <div className="flex flex-col w-full gap-2 ">
         <div className="flex items-center gap-2">
