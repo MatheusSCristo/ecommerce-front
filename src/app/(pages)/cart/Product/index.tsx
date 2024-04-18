@@ -1,4 +1,4 @@
-import { CartContext } from "@/context/Cart";
+import { CartContext } from "@/context/CartContext";
 import { CartProduct } from "@/types";
 import Image from "next/image";
 import { useContext, useState } from "react";
@@ -24,7 +24,7 @@ const Product = ({ product }: { product: CartProduct }) => {
         <div className="w-[80px] h-[80px] md:w-[80px] md:h-[80px] 2xl:w-[100px] 2xl:h-[100px] relative rounded-xl">
           <Image
             src={
-              product.imageUrl ? product.imageUrl : `/images/notFoundImage.jpg`
+              product.imageUrl ? product.imageUrl : `/images/notFoundImage.png`
             }
             fill
             className="object-fit rounded-lg"

@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import { CartProvider } from "./Cart";
-import { ProductsProvider } from "./Products";
-import { SearchParamsBarProvider } from "./SearchParamsBar";
+import { CartProvider } from "./CartContext";
+import { ProductsProvider } from "./ProductsContext";
+import { SearchParamsBarProvider } from "./SearchParamsBarContext";
 
 const Provider = ({ children }: { children: React.ReactNode }) => {
   return (

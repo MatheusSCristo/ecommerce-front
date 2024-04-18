@@ -1,4 +1,4 @@
-import { CartContext } from "@/context/Cart";
+import { CartContext } from "@/context/CartContext";
 import { useContext, useState } from "react";
 import { IoCart, IoPersonSharp } from "react-icons/io5";
 import Cart from "./Cart";

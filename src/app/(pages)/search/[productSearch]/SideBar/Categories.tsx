@@ -1,7 +1,7 @@
 import {
   CategoryType,
   SearchParamsBarContext,
-} from "@/context/SearchParamsBar";
+} from "@/context/SearchParamsBarContext";
 import { useContext, useState } from "react";
 import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 

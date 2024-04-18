@@ -1,5 +1,7 @@
-import { CartContext } from "@/context/Cart";
+import { CartContext } from "@/context/CartContext";
 import { Product } from "@/types";
+import AddProductToCart from "@/utils/AddProductToCart";
+import getRatingStars from "@/utils/getRatingStars";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
@@ -8,17 +10,6 @@ import {
   MdOutlineStarOutline,
   MdOutlineStarPurple500,
 } from "react-icons/md";
-
-export const getRatingStars = (rating: number) => {
-  const array = [];
-  for (let i = 0; i < Math.floor(rating); i++) {
-    array.push("full");
-  }
-  if (rating - Math.floor(rating) > 0) {
-    array.push("half");
-  }
-  return array;
-};
 
 type ParamsType = {
   product: Product;
@@ -30,14 +21,7 @@ const ProductCard = ({ product }: ParamsType) => {
   const { products, setProducts } = useContext(CartContext);
 
   const handleAddProductOnCard = (product: Product) => {
-    const newProducts = [...products];
-    const index = newProducts.findIndex((item) => item.id === product.id);
-    if (index!==-1) {
-      newProducts[index].quantity += 1;
-    } else {
-      newProducts.push({...product,quantity:1});
-    }
-    setProducts(newProducts);
+    setProducts(AddProductToCart(product,products));
   };
 
   return (
@@ -45,7 +29,7 @@ const ProductCard = ({ product }: ParamsType) => {
       <Link href={`/product/${product.id}`} className="w-[100px] h-[100px] md:w-[150px] md:h-[150px] 2xl:w-[200px] 2xl:h-[150px] relative rounded-xl">
         <Image
           src={
-            product.imageUrl ? product.imageUrl : `/images/notFoundImage.jpg`
+            product.imageUrl ? product.imageUrl : `/images/notFoundImage.png`
           }
           fill
           className="object-fit rounded-lg"

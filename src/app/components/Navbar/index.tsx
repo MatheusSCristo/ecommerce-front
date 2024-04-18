@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { FormEvent, useContext, useState } from "react";
 import { IoCart, IoMenu } from "react-icons/io5";
 
-import { CartContext } from "@/context/Cart";
+import { CartContext } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import Cart from "./Cart";
 import Icons from "./Icons";

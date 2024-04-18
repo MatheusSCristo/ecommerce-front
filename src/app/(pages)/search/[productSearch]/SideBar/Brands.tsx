@@ -1,5 +1,5 @@
-import { ProductsContext } from "@/context/Products";
-import { SearchParamsBarContext } from "@/context/SearchParamsBar";
+import { ProductsContext } from "@/context/ProductsContext";
+import { SearchParamsBarContext } from "@/context/SearchParamsBarContext";
 import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 

@@ -1,11 +1,11 @@
 "use client";
 import ProductCard from "@/app/components/ThirdBox/ProductCard";
-import { ProductsContext } from "@/context/Products";
+import { ProductsContext } from "@/context/ProductsContext";
 import {
   CategoryType,
   PriceRangeType,
   SearchParamsBarContext,
-} from "@/context/SearchParamsBar";
+} from "@/context/SearchParamsBarContext";
 import { Product } from "@/types";
 import { useSearchParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";

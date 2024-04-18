@@ -1,4 +1,4 @@
-import { CartContext } from "@/context/Cart";
+import { CartContext } from "@/context/CartContext";
 import { CartProduct as CartProductType } from "@/types";
 import Image from "next/image";
 import { useContext, useState } from "react";
@@ -30,7 +30,7 @@ const CartProduct = ({ product }: Props) => {
         <div className="p-2 border border-gray-400 rounded-xl w-[60px] h-[60px] md:w-[100px] md:h-[100px] relative">
           <Image
             src={
-              product.imageUrl ? product.imageUrl : "/images/notFoundImage.jpg"
+              product.imageUrl ? product.imageUrl : "/images/notFoundImage.png"
             }
             alt=""
             fill

@@ -1,4 +1,4 @@
-import { SearchParamsBarContext } from "@/context/SearchParamsBar";
+import { SearchParamsBarContext } from "@/context/SearchParamsBarContext";
 import { useContext, useEffect, useState } from "react";
 
 const Prices = () => {
