@@ -1,6 +1,6 @@
-import FirstBox from "./components/FirstBox";
-import SecondBox from "./components/SecondBox";
-import ThirdBox from "./components/ThirdBox";
+import FirstBox from "../components/FirstBox";
+import SecondBox from "../components/SecondBox";
+import ThirdBox from "../components/ThirdBox";
 
 const Home = () => {
   

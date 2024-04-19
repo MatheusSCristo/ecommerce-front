@@ -1,15 +1,12 @@
-import Provider from "@/context/Provider";
 import type { Metadata } from "next";
 import { Tilt_Neon } from "next/font/google";
-import { Footer } from "./components/Footer";
-import Navbar from "./components/Navbar";
 import "./globals.css";
 
 const tilt = Tilt_Neon({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Ecommerce",
-  description: "Página inicial do e-commerce",
+  description: "E-commerce",
 };
 
 export default function RootLayout({
@@ -19,15 +16,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Provider>
         <body
           className={`${tilt.className} bg-gray-200 flex flex-col h-screen`}
         >
-          <Navbar />
           <main className="flex-1"> {children}</main>
-          <Footer />
         </body>
-      </Provider>
     </html>
   );
 }
