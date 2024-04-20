@@ -1,8 +1,6 @@
-import Provider from "@/context/Provider";
 import type { Metadata } from "next";
 import { Footer } from "../components/Footer";
 import Navbar from "../components/Navbar";
-
 
 export const metadata: Metadata = {
   title: "Ecommerce",
@@ -15,10 +13,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Provider>
+    <>
       <Navbar />
       <main className="flex-1"> {children}</main>
       <Footer />
-    </Provider>
+    </>
   );
 }

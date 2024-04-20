@@ -1,3 +1,4 @@
+import Provider from "@/context/Provider";
 import type { Metadata } from "next";
 import { Tilt_Neon } from "next/font/google";
 import "./globals.css";
@@ -16,11 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-        <body
-          className={`${tilt.className} bg-gray-200 flex flex-col h-screen`}
-        >
+      <Provider>
+        <body className={`${tilt.className} bg-gray-200 flex flex-col h-screen`}>
           <main className="flex-1"> {children}</main>
         </body>
+      </Provider>
     </html>
   );
 }
