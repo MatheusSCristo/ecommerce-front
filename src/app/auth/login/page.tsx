@@ -1,5 +1,6 @@
 "use client";
 import { UserContext } from "@/context/UserContext";
+import { createSession } from "@/utils/User/createSession";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircularProgress } from "@mui/material";
 import Link from "next/link";
@@ -47,12 +48,13 @@ const Login = () => {
     }
     const data = await response.json();
     setUser(data);
+    createSession(data.accessToken)
     router.push("/")
   };
 
   return (
     <section className="flex items-center justify-center w-full h-screen">
-      <div className="bg-white border-gray-400 rounded-xl 2xl:w-[400px] 2xl:h-[500px] p-5 flex flex-col gap-5">
+      <div className="bg-white border-gray-400 rounded-xl 2xl:w-[400px] 2xl:h-[500px] p-5 flex flex-col gap-5 flex flex-col items-center">
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-3xl">Bem vindo!</h1>
           <h2 className="text-2xl">Entre com sua conta</h2>
@@ -109,6 +111,7 @@ const Login = () => {
             </span>
           </div>
         </form>
+        <Link href={"/"} className="hover:underline">Entrar sem conectar-se</Link>
       </div>
     </section>
   );

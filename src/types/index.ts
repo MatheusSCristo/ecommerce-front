@@ -50,6 +50,7 @@ export type User={
     createdAt: Date;
     updatedAt: Date;
     orders: Order[];
+    accessToken:string;
 }
 
 enum Role {

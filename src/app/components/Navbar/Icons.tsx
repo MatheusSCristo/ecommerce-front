@@ -1,4 +1,8 @@
 import { CartContext } from "@/context/CartContext";
+import { UserContext } from "@/context/UserContext";
+import deleteSession from "@/utils/User/deleteSession";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 import { IoCart, IoPersonSharp } from "react-icons/io5";
 import Cart from "./Cart";
@@ -7,11 +11,23 @@ const Icons = () => {
   const [accountDesktopIsOpen, setAccountDesktopIsOpen] = useState(false);
   const [cartMenuIsOpen, setCartMenuIsOpen] = useState(false);
   const { products } = useContext(CartContext);
+  const { user, setUser } = useContext(UserContext);
+  const router = useRouter();
+
+  const handleLogout = () => {
+    deleteSession();
+    router.push("/auth/login");
+    if (user) {
+      setTimeout(() => {
+        setUser(null);
+      }, 1000);
+    }
+  };
 
   return (
     <div className="md:flex gap-10 hidden">
       <div
-        className="relative"
+        className="relative py-2"
         onMouseEnter={() => setCartMenuIsOpen(true)}
         onMouseLeave={() => setCartMenuIsOpen(false)}
       >
@@ -26,12 +42,12 @@ const Icons = () => {
         {cartMenuIsOpen && <Cart />}
       </div>
       <div
-        className="relative "
+        className="relative py-2"
         onMouseEnter={() => setAccountDesktopIsOpen(true)}
         onMouseLeave={() => setAccountDesktopIsOpen(false)}
       >
         <IoPersonSharp size={30} className="hover:scale-[1.2]" />
-        {accountDesktopIsOpen && (
+        {accountDesktopIsOpen && user && (
           <div className="hidden md:flex absolute mt-2  flex-col w-[130px] p-2 bg-strongOrange text-white gap-2 right-1/2 rounded">
             <span className="border-white hover:border p-1 rounded">
               Minha conta
@@ -39,7 +55,22 @@ const Icons = () => {
             <span className="border-white hover:border p-1 rounded">
               Meus pedidos
             </span>
-            <span className="border-white hover:border p-1 rounded">Sair</span>
+            <span
+              className="border-white hover:border p-1 rounded"
+              onClick={handleLogout}
+            >
+              Sair
+            </span>
+          </div>
+        )}
+        {accountDesktopIsOpen && !user && (
+          <div className="hidden md:flex absolute mt-2  flex-col w-[130px] p-2 bg-strongOrange text-white gap-2 right-1/2 rounded">
+            <Link
+              href={"/auth/login"}
+              className="border-white hover:border p-1 rounded"
+            >
+              Entrar
+            </Link>
           </div>
         )}
       </div>
