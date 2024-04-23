@@ -15,6 +15,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@mui/material": "^5.15.15",
     "fs": "^0.0.1-security",
+    "gerador-validador-cpf": "^5.0.2",
     "i18next": "^23.11.2",
     "js-cookie": "^3.0.5",
     "next": "14.1.4",

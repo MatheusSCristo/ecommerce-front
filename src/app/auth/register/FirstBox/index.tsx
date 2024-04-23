@@ -1,12 +1,41 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { validate } from "gerador-validador-cpf";
 import { Dispatch, SetStateAction } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 type propsType = {
   setStep: Dispatch<SetStateAction<number>>;
+  handleData:(submit: any) => void
+  
 };
 
-const FirstBox = ({ setStep }: propsType) => {
+const registerSchema = z.object({
+  name: z.string().min(1, "É necessário informar seu nome."),
+  lastName: z.string().min(1, "É necessário informar seu sobrenome."),
+  birthDate: z
+    .string()
+    .refine(value =>new Date(value).getTime() <new Date(new Date().getFullYear() - 18,new Date().getMonth(),new Date().getDate()).getTime(),"É necessário ser maior de idade para se cadastrar."),
+  cpf: z.string().refine((value) => validate(value),"CPF inválido."),
+});
+
+type registerType = z.infer<typeof registerSchema>;
+
+const FirstBox = ({ setStep,handleData }: propsType) => {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<registerType>({
+    resolver: zodResolver(registerSchema),
+  });
+
   const handleContinue = () => {
     setStep((prevState) => prevState + 1);
+  };
+  const handleFormSubmit = (data:registerType) => {
+    handleData(data)
+    handleContinue();
   };
 
   return (
@@ -17,7 +46,10 @@ const FirstBox = ({ setStep }: propsType) => {
           Para começarmos, precisamos de algumas informações suas.
         </h2>
       </div>
-      <div className="flex flex-col w-3/4 gap-2 ">
+      <form
+        className="flex flex-col w-3/4 gap-2"
+        onSubmit={handleSubmit(handleFormSubmit)}
+      >
         <div className="flex flex-col gap-1">
           <label className="font-bold" htmlFor="name">
             Nome
@@ -25,7 +57,10 @@ const FirstBox = ({ setStep }: propsType) => {
           <input
             type="text"
             className="border-gray-300 border rounded-lg p-3"
+            {...register("name")}
           />
+          {errors.name?.message && <span className="text-red-500">{errors.name?.message}</span>}
+
         </div>
         <div className="flex flex-col gap-1">
           <label className="font-bold" htmlFor="lastName">
@@ -34,7 +69,10 @@ const FirstBox = ({ setStep }: propsType) => {
           <input
             type="text"
             className="border-gray-300 border rounded-lg p-3"
+            {...register("lastName")}
           />
+          {errors.lastName?.message && <span className="text-red-500">{errors.lastName?.message}</span>}
+
         </div>
         <div className="flex flex-col gap-1">
           <label className="font-bold" htmlFor="birthDate">
@@ -43,7 +81,9 @@ const FirstBox = ({ setStep }: propsType) => {
           <input
             type="date"
             className="border-gray-300 border rounded-lg p-3"
+            {...register("birthDate")}
           />
+          {errors.birthDate?.message && <span className="text-red-500">{errors.birthDate?.message}</span>}
         </div>
         <div className="flex flex-col gap-1">
           <label className="font-bold" htmlFor="cpf">
@@ -52,15 +92,18 @@ const FirstBox = ({ setStep }: propsType) => {
           <input
             type="text"
             className="border-gray-300 border rounded-lg p-3"
+            {...register("cpf")}
           />
+          {errors.cpf?.message && <span className="text-red-500">{errors.cpf?.message}</span>}
+
         </div>
-      </div>
-      <button
-        className="px-12 py-3 bg-strongOrange text-white rounded-lg"
-        onClick={handleContinue}
-      >
-        Continuar
-      </button>
+        <button
+          type="submit"
+          className="px-12 py-3 bg-strongOrange text-white rounded-lg"
+        >
+          Continuar
+        </button>
+      </form>
     </div>
   );
 };
