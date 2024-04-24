@@ -62,3 +62,20 @@ export interface CartProduct extends Product{
     quantity:number;
 }
 
+export type cepResponseType = {
+    cep: string;
+    logradouro: string;
+    complemento: string;
+    bairro: string;
+    localidade: string;
+    uf: string;
+    ibge: string;
+    gia: string;
+    ddd: string;
+    siafi: string;
+  };
+
+  export type citiesOptionType = {
+    stateId: string;
+    name: string;
+  };

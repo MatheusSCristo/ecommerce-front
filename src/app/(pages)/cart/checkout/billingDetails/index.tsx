@@ -1,3 +1,4 @@
+import { cepResponseType } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { getAllCities } from "easy-location-br";
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
@@ -5,12 +6,17 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import CitiesComp from "./CitiesComp";
 
+
 const refineCity = (value: string) => {
-  const splittedValue = value.split("-");
-  if (!splittedValue[1]) return false;
   const cities: { name: string; stateId: string }[] = getAllCities();
-  return cities.some((item) => item.name === splittedValue[0].trim());
+  return cities.some((item) => item.name === value.trim());
 };
+
+const refineEmail=(value:string)=>{
+  const providers = ["gmail.com", "outlook.com", "yahoo.com", "icloud.com","hotmail.com"];
+  return providers.some((provider)=>provider===value.split("@")[1])
+
+}
 
 const billingSchema = z.object({
   firstName: z.string().min(1, "É necessário informar o nome do comprador"),
@@ -18,9 +24,10 @@ const billingSchema = z.object({
   email: z
     .string()
     .min(1, "É necessário informar o email para contato")
-    .email("Email inválido"),
+    .email("Email inválido")
+    .refine((value)=>refineEmail(value),"Email inválido"),
   phone: z.string().min(11, "Telefone inválido").max(11, "Telefone inválido"),
-  cep: z.string().min(8, "CEP inválido").max(8, "CEP inválido"),
+  cep: z.string().min(9, "CEP inválido").max(9, "CEP inválido"),
   city: z
     .string()
     .min(1, "É necessário informar uma cidade")
@@ -48,32 +55,45 @@ type propsType = {
   >;
 };
 
-type cepResponseType = {
-  cep: string;
-  logradouro: string;
-  complemento: string;
-  bairro: string;
-  localidade: string;
-  uf: string;
-  ibge: string;
-  gia: string;
-  ddd: string;
-  siafi: string;
-};
 
 const BillingDetails = ({ setBillingData }: propsType) => {
   const [city, setCity] = useState<string>("");
+  const [addressIsDisabled,setAddressIsDisabled]=useState(false)
   const {
     register,
     handleSubmit,
     setValue,
+    getValues,
     setError,
     formState: { errors },
   } = useForm<billingSchemaType>({ resolver: zodResolver(billingSchema) });
 
+  const cepMask=()=>{
+    let currentCep=getValues("cep")
+    if (!currentCep) return ""
+    currentCep = currentCep.replace(/\D/g,'')
+    currentCep = currentCep.replace(/(\d{5})(\d)/,'$1-$2')
+    setValue("cep",currentCep)
+    }
+
+  const numberMask=()=>{
+    let currentNumber=getValues("phone")
+    if(!currentNumber) return "";
+    currentNumber=currentNumber.replace(/\D/g,'');
+    currentNumber = currentNumber.replace(/(\d{0})(\d)/,'$1($2')
+    currentNumber = currentNumber.replace(/(\d{2})(\d)/,'$1) $2')
+    currentNumber = currentNumber.replace(/(\d{5})(\d)/,'$1-$2')
+    setValue("phone",currentNumber)
+
+  }
+  
   const getDataFromCep = async (e: ChangeEvent<HTMLInputElement>) => {
+    cepMask()
     const cep = e.target.value;
-    if (cep.length !== 8) return;
+    if (cep.length !== 9 ) {
+      setAddressIsDisabled(false)
+      return
+    };
     const data = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
     const response = await data.json();
     if (response.erro) {
@@ -81,6 +101,7 @@ const BillingDetails = ({ setBillingData }: propsType) => {
       return;
     }
     const locationsData: cepResponseType = response;
+    setAddressIsDisabled(true)
     setError("cep", {});
     setValue("city", locationsData.localidade);
     setCity(`${locationsData.localidade} - ${locationsData.uf}`)
@@ -98,7 +119,6 @@ const BillingDetails = ({ setBillingData }: propsType) => {
     street: string;
     neighborhood: string;
   }) => {
-    console.log(data);
     setBillingData(data);
   };
 
@@ -156,8 +176,10 @@ const BillingDetails = ({ setBillingData }: propsType) => {
             type="text"
             className="border border-gray-400 rounded-md px-2 xl:w-[400px] py-2"
             placeholder="(XX) X XXXX-XXXX"
-            maxLength={11}
-            {...register("phone")}
+            maxLength={15}
+            {...register("phone",{
+              onChange:()=>numberMask()
+            })}
           />
           {errors.phone?.message && (
             <span className="text-red-500">{errors.phone.message}</span>
@@ -170,7 +192,7 @@ const BillingDetails = ({ setBillingData }: propsType) => {
           <input
             type="text"
             className="border border-gray-400 rounded-md px-2 xl:w-[400px] py-2"
-            maxLength={8}
+            maxLength={9}
             {...register("cep", {
               onChange: (e) => getDataFromCep(e),
             })}
@@ -182,7 +204,7 @@ const BillingDetails = ({ setBillingData }: propsType) => {
         </div>
         <CitiesComp
           errors={errors}
-          setCity={setCity}
+          addressIsDisabled={addressIsDisabled}
           city={city}
           register={register}
           setValue={setValue}
@@ -194,7 +216,8 @@ const BillingDetails = ({ setBillingData }: propsType) => {
           </label>
           <input
             type="text"
-            className="border border-gray-400 rounded-md px-2 xl:w-[400px] py-2"
+            className="border border-gray-400 rounded-md px-2 xl:w-[400px] py-2 disabled:opacity-50"
+            disabled={addressIsDisabled}
             {...register("street")}
           />
           {errors.street?.message && (
@@ -207,7 +230,8 @@ const BillingDetails = ({ setBillingData }: propsType) => {
           </label>
           <input
             type="text"
-            className="border border-gray-400 rounded-md px-2 xl:w-[400px] py-2"
+            className="border border-gray-400 rounded-md px-2 xl:w-[400px] py-2 disabled:opacity-50"
+            disabled={addressIsDisabled}
             {...register("neighborhood")}
           />
           {errors.neighborhood?.message && (
