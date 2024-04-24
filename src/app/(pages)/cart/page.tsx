@@ -84,7 +84,7 @@ const Cart = () => {
               </h2>
             </div>
           </div>
-          <Link href={"/cart/checkout"} className="uppercase rounded-lg w-3/4 self-center px-5 py-2 bg-strongOrange text-white">
+          <Link href={products.length?"/cart/checkout":""} className={`uppercase rounded-lg w-3/4 self-center px-5 py-2 bg-strongOrange text-white ${products.length===0 && "opacity-50 cursor-default"}`}>
                   Checkout
           </Link>
         </div>
