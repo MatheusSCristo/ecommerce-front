@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.11.5",
     "@hookform/resolvers": "^3.3.4",
     "@mui/material": "^5.15.15",
+    "card-validator": "^9.1.0",
     "fs": "^0.0.1-security",
     "gerador-validador-cpf": "^5.0.2",
     "i18next": "^23.11.2",

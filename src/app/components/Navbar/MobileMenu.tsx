@@ -1,15 +1,25 @@
+import { UserContext } from "@/context/UserContext";
+import deleteSession from "@/utils/User/deleteSession";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useContext, useState } from "react";
 import { FaBoxArchive } from "react-icons/fa6";
 import { IoHome } from "react-icons/io5";
-import { TfiMenuAlt } from "react-icons/tfi";
 
 const MobileMenu = ({
   setMenuMobileIsOpen,
 }: {
   setMenuMobileIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const { user } = useContext(UserContext);
+  const router = useRouter();
+  const [effect, setEffect] = useState(false);
+  const handleLogout = () => {
+    deleteSession();
+    router.push("/auth/login");
+  };
+
   return (
     <div className="absolute w-full z-10 bg-[#ededed7f] h-screen top-0">
       <div className="w-3/4 bg-white h-full relative">
@@ -21,22 +31,36 @@ const MobileMenu = ({
         </span>
         <div className="flex flex-col gap-1 bg-gray-200 p-4">
           <Image src="/icons/avatar.svg" width={40} height={40} alt="s" />
-          <div className="flex gap-2">
-            <span>Entrar</span>
-            <span>|</span>
-            <span>Registrar</span>
-          </div>
+          {!user && (
+            <div className="flex gap-2">
+              <Link href="/auth/login">Entrar</Link>
+              <span>|</span>
+              <Link href="/auth/register">Registrar</Link>
+            </div>
+          )}
+          {user && (
+            <div>
+              <span
+                onClick={handleLogout}
+                className="transform active:underline transition-transform "
+              >
+                Desconectar
+              </span>
+            </div>
+          )}
         </div>
         <div className="flex flex-col p-4 gap-2">
-          <Link href={"/"} className="flex items-center gap-2 text-xl">
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-xl transform active:scale-[1.1] active:bg-gray-300  transition-transform"
+          >
             <IoHome className="text-gray-600" />
-            <span>Início</span>
+            <span onClick={() => setMenuMobileIsOpen(false)}>Início</span>
           </Link>
-          <div className="flex items-center gap-2 text-xl">
-            <TfiMenuAlt className="text-gray-600" />
-            <span>Categorias</span>
-          </div>
-          <Link href={"/"} className="flex items-center gap-2 text-xl">
+          <Link
+            href={"/"}
+            className="flex items-center gap-2 text-xl transform active:scale-[1.1] active:bg-gray-300  transition-transform"
+          >
             <FaBoxArchive className="text-gray-600" />
             <span>Meus pedidos</span>
           </Link>

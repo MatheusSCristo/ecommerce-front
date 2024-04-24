@@ -84,7 +84,7 @@ const register = () => {
             {stepsDots.map((item) => (
               <div
                 key={item}
-                className={`w-[10px] h-[10px] border rounded-full border-black ${
+                className={`w-[10px] h-[10px] border rounded-full  ${
                   item <= step - 1 ? "bg-lime-400" : "bg-gray-300"
                 }`}
               />
