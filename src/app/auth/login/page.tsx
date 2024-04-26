@@ -34,7 +34,7 @@ const Login = () => {
   const handleLogin = async (userInfo: { email: string; password: string }) => {
     setCredentialsError(false);
     setIsLoading(true);
-    const response = await fetch("http://localhost:8080/api/auth/login", {
+    const response = await fetch(`https://mywebcommerce-07802a3ea935.herokuapp.com/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

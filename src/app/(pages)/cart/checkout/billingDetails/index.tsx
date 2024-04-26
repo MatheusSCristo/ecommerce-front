@@ -15,18 +15,17 @@ const refineCity = (value: string) => {
 const refineEmail=(value:string)=>{
   const providers = ["gmail.com", "outlook.com", "yahoo.com", "icloud.com","hotmail.com"];
   return providers.some((provider)=>provider===value.split("@")[1])
-
 }
 
 const billingSchema = z.object({
-  firstName: z.string().min(1, "É necessário informar o nome do comprador"),
+  name: z.string().min(1, "É necessário informar o nome do comprador"),
   lastName: z.string().min(1, "É necessário informar o sobrenome do comprador"),
   email: z
     .string()
     .min(1, "É necessário informar o email para contato")
     .email("Email inválido")
     .refine((value)=>refineEmail(value),"Email inválido"),
-  phone: z.string().min(11, "Telefone inválido").max(11, "Telefone inválido"),
+  phone: z.string().length(15, "Telefone inválido"),
   cep: z.string().min(9, "CEP inválido").max(9, "CEP inválido"),
   city: z
     .string()
@@ -41,7 +40,7 @@ type propsType = {
   setBillingData: Dispatch<
     SetStateAction<
       | {
-          firstName: string;
+          name: string;
           lastName: string;
           email: string;
           phone: string;
@@ -110,7 +109,7 @@ const BillingDetails = ({ setBillingData }: propsType) => {
   };
 
   const handleSendData = (data: {
-    firstName: string;
+    name: string;
     lastName: string;
     email: string;
     phone: string;
@@ -136,10 +135,10 @@ const BillingDetails = ({ setBillingData }: propsType) => {
           <input
             type="text"
             className="border border-gray-400 rounded-md px-2 xl:w-[400px] py-2"
-            {...register("firstName")}
+            {...register("name")}
           />
-          {errors.firstName?.message && (
-            <span className="text-red-500">{errors.firstName.message}</span>
+          {errors.name?.message && (
+            <span className="text-red-500">{errors.name.message}</span>
           )}
         </div>
         <div className="flex flex-col">

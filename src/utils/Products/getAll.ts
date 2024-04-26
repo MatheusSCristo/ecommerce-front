@@ -1,5 +1,5 @@
 export const GetAll = async () => {
-  const data = await fetch("http://localhost:8080/api/products", {
+  const data = await fetch(`https://mywebcommerce-07802a3ea935.herokuapp.com/api/products`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });

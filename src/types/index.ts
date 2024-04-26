@@ -79,3 +79,25 @@ export type cepResponseType = {
     stateId: string;
     name: string;
   };
+
+  export type orderDto={
+    products:orderProductDto[],
+    clientId:string,
+    shippingFeeInCents:number,
+    billingDetailsDto:billingDetailsDto;
+  }
+
+  export type orderProductDto={
+    productId:string,
+    quantity:number
+  }
+  export type billingDetailsDto={
+    name:string,
+    lastName:string,
+    email:string,
+    phone:string,
+    cep:string,
+    city:string,
+    street:string,
+    neighborhood:string
+  }

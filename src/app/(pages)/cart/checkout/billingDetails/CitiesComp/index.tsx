@@ -5,7 +5,7 @@ import { FieldErrors, UseFormRegister, UseFormSetValue } from "react-hook-form";
 
 type propsType = {
   errors: FieldErrors<{
-    firstName: string;
+    name: string;
     lastName: string;
     email: string;
     phone: string;
@@ -16,7 +16,7 @@ type propsType = {
   }>;
   city: string;
   register: UseFormRegister<{
-    firstName: string;
+    name: string;
     lastName: string;
     email: string;
     phone: string;
@@ -26,7 +26,7 @@ type propsType = {
     neighborhood: string;
   }>;
   setValue: UseFormSetValue<{
-    firstName: string;
+    name: string;
     lastName: string;
     email: string;
     phone: string;
