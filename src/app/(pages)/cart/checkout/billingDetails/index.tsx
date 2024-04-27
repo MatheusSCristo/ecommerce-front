@@ -52,10 +52,11 @@ type propsType = {
       | undefined
     >
   >;
+  setBillingDataError:Dispatch<SetStateAction<boolean>>
 };
 
 
-const BillingDetails = ({ setBillingData }: propsType) => {
+const BillingDetails = ({ setBillingData,setBillingDataError }: propsType) => {
   const [city, setCity] = useState<string>("");
   const [addressIsDisabled,setAddressIsDisabled]=useState(false)
   const {
@@ -118,6 +119,7 @@ const BillingDetails = ({ setBillingData }: propsType) => {
     street: string;
     neighborhood: string;
   }) => {
+    setBillingDataError(false)
     setBillingData(data);
   };
 

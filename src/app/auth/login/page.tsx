@@ -21,7 +21,7 @@ const Login = () => {
   const [credentialsError, setCredentialsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { setUser } = useContext(UserContext);
-  const router=useRouter();
+  const router = useRouter();
 
   const {
     handleSubmit,
@@ -34,22 +34,26 @@ const Login = () => {
   const handleLogin = async (userInfo: { email: string; password: string }) => {
     setCredentialsError(false);
     setIsLoading(true);
-    const response = await fetch(`https://mywebcommerce-07802a3ea935.herokuapp.com/api/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userInfo),
-    });
-    setIsLoading(false);
-    if (!response.ok) {
-      setCredentialsError(true);
-      return;
+    try {
+      const response = await fetch(`http://localhost:8080/api/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userInfo),
+      });
+      setIsLoading(false);
+      if (!response.ok) {
+        setCredentialsError(true);
+        return;
+      }
+      const data = await response.json();
+      setUser(data);
+      createSession(data.accessToken);
+      router.push("/");
+    } finally {
+      setIsLoading(false)
     }
-    const data = await response.json();
-    setUser(data);
-    createSession(data.accessToken)
-    router.push("/")
   };
 
   return (
@@ -91,7 +95,7 @@ const Login = () => {
             )}
             {isLoading && (
               <div className="flex justify-center text-strongOrange">
-                <CircularProgress color="inherit"/>
+                <CircularProgress color="inherit" />
               </div>
             )}
           </div>
@@ -111,7 +115,9 @@ const Login = () => {
             </span>
           </div>
         </form>
-        <Link href={"/"} className="hover:underline">Entrar sem conectar-se</Link>
+        <Link href={"/"} className="hover:underline">
+          Entrar sem conectar-se
+        </Link>
       </div>
     </section>
   );

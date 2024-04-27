@@ -3,7 +3,7 @@ import { orderDto } from "./../../types/index";
 
 export default async (body: orderDto, accessToken: string) => {
   const response = await fetch(
-    "https://mywebcommerce-07802a3ea935.herokuapp.com/api/orders",
+    "http://localhost:8080/api/orders",
     {
       method: "POST",
       headers: {

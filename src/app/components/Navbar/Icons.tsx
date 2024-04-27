@@ -52,9 +52,9 @@ const Icons = () => {
             <span className="border-white hover:border p-1 rounded">
               Minha conta
             </span>
-            <span className="border-white hover:border p-1 rounded">
+            <Link href={"/orders"} className="border-white hover:border p-1 rounded">
               Meus pedidos
-            </span>
+            </Link>
             <span
               className="border-white hover:border p-1 rounded"
               onClick={handleLogout}

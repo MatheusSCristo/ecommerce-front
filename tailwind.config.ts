@@ -20,7 +20,8 @@ const config: Config = {
         "gray-600":"#505050",
         "dark":"#1C1C1C",
         "starYellow":"#ffbe0b",
-        "blue":"#0D6EFD"
+        "blue":"#0D6EFD",
+        "pendingYellow":"#ffc738"
       }
     },
   },

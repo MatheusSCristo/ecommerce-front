@@ -4,6 +4,7 @@ import { UserContext } from "@/context/UserContext";
 import { CartProduct as CartProductType, orderDto } from "@/types";
 import createOrder from "@/utils/Order/createOrder";
 import { CircularProgress } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 import BillingDetails, { billingSchemaType } from "./billingDetails";
 import CheckoutProduct from "./CheckoutProduct";
@@ -19,13 +20,14 @@ const getTotalPrice = (products: CartProductType[]) => {
 };
 
 const Checkout = () => {
-  const { products } = useContext(CartContext);
+  const { products, setProducts } = useContext(CartContext);
   const { user } = useContext(UserContext);
   const [checkoutError, setCheckoutError] = useState(false);
   const [checkoutIsLoading, setCheckoutIsLoading] = useState(false);
   const [billingData, setBillingData] = useState<billingSchemaType>();
   const [billingDataError, setBillingDataError] = useState(false);
   const shippingFee = 1000;
+  const router = useRouter();
 
   const handleCheckout = async () => {
     setCheckoutError(false);
@@ -49,18 +51,30 @@ const Checkout = () => {
       billingDetailsDto: billingData,
       shippingFeeInCents: shippingFee,
     };
-    const data = await createOrder(body, accesstoken);
-    if (!data) {
-      setCheckoutError(true);
+    try {
+      const data = await createOrder(body, accesstoken);
+      if (!data) {
+        setCheckoutError(true);
+      }
+      setProducts([]);
+      router.push("/");
+    } finally {
+      setCheckoutIsLoading(false);
     }
-    setCheckoutIsLoading(false);
   };
   return (
     <section className="bg-white border border-gray-400 flex flex-col gap-10 xl:flex-row mx-5 2xl:mx-32 my-10 p-10 2xl:gap-32 rounded-md">
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-2">
-          <BillingDetails setBillingData={setBillingData} />
-          {billingDataError && <span className="text-red-500 text-center">É necessário informar os dados de cobrança.</span>}
+          <BillingDetails
+            setBillingData={setBillingData}
+            setBillingDataError={setBillingDataError}
+          />
+          {billingDataError && (
+            <span className="text-red-500 text-center">
+              É necessário informar os dados de cobrança.
+            </span>
+          )}
         </div>
 
         <Payment />

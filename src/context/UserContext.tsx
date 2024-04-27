@@ -13,9 +13,7 @@ function UserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    if(user){
-      localStorage.setItem("user", JSON.stringify(user));
-    }
+    if (user) localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
   useEffect(() => {
