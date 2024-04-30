@@ -1,20 +1,29 @@
 "use client";
+import { UserContext } from "@/context/UserContext";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 
 const page = () => {
   const searchParams = useSearchParams();
+  const { setUser } = useContext(UserContext);
 
   const verifyEmail = async () => {
     const email = searchParams.get("userEmail");
-    if(email)
-    await fetch(`http://localhost:8080/api/email/?userEmail=${email}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    if (email) {
+      const response = await fetch(
+        `http://localhost:8080/api/email/?userEmail=${email}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (!response.ok) return;
+      const user=localStorage.getItem("user")
+      if (user) setUser({ ...JSON.parse(user), verifiedEmail: true });
+    }
   };
 
   useEffect(() => {

@@ -3,17 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 
-type propsType={
-  userEmail:string,
-  userName:string
-}
+type propsType = {
+  userEmail: string;
+  userName: string;
+};
 
-const ThirdBox = ({userEmail,userName}:propsType) => {
-
-  useEffect(()=>{
-    sendVerifiyEmail({userName,userEmail})
-  },[])
-
+const ThirdBox = ({ userEmail, userName }: propsType) => {
+  useEffect(() => {
+    sendVerifiyEmail({ userName, userEmail });
+  }, []);
 
   return (
     <div className="flex flex-col items-center gap-4">

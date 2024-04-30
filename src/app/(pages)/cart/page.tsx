@@ -23,6 +23,7 @@ const Cart = () => {
   const [cep, setCep] = useState("");
   const { user } = useContext(UserContext);
   const { products } = useContext(CartContext);
+  console.log(user)
   return (
     <section className="md:px-24 2xl:px-32 md:py-10 px-2 py-5 flex gap-2 flex-col flex-1 relative    ">
       <h1 className="text-2xl">Meu carrinho({products.length})</h1>

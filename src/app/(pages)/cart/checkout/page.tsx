@@ -86,6 +86,7 @@ const Checkout = () => {
             {products.map((product) => (
               <CheckoutProduct product={product} key={product.id} />
             ))}
+            {products.length==0 && <h1 className="text-lg text-center font-bold">Seu carrinho está vazio.</h1>}
           </div>
           <div className="flex flex-col gap-1">
             <div className="flex justify-between ">
@@ -116,7 +117,7 @@ const Checkout = () => {
           <button
             className="bg-strongOrange text-white py-2 w-3/4 self-center rounded-lg disabled:opacity-50"
             onClick={handleCheckout}
-            disabled={checkoutIsLoading || !user?.verifiedEmail}
+            disabled={checkoutIsLoading || !user?.verifiedEmail || products.length==0}
           >
             Finalizar Compra
           </button>
