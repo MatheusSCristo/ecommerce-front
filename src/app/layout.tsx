@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <Provider>
         <body className={`${tilt.className} bg-gray-200 flex flex-col h-screen`}>
-          <main className="flex-1"> {children}</main>
+          <main className="flex-1 flex flex-col"> {children}</main>
         </body>
       </Provider>
     </html>

@@ -116,7 +116,7 @@ const Checkout = () => {
           <button
             className="bg-strongOrange text-white py-2 w-3/4 self-center rounded-lg disabled:opacity-50"
             onClick={handleCheckout}
-            disabled={checkoutIsLoading}
+            disabled={checkoutIsLoading || !user?.verifiedEmail}
           >
             Finalizar Compra
           </button>

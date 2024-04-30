@@ -7,6 +7,7 @@ import { z } from "zod";
 type propsType = {
   setStep: Dispatch<SetStateAction<number>>;
   name: string;
+  handleData:(submit:any)=>void
   handleRegisterSubmit: (infos: {
     email: string;
     password: string;
@@ -31,11 +32,7 @@ const registerSchema = z
 
 type registerType = z.infer<typeof registerSchema>;
 
-const SecondBox = ({
-  name,
-  setStep,
-  handleRegisterSubmit,
-}: propsType) => {
+const SecondBox = ({name,setStep,handleRegisterSubmit,handleData}: propsType) => {
   const name2 = "Matheus";
 
   const {
@@ -52,6 +49,7 @@ const SecondBox = ({
 
   const handleFormSubmit = (data: registerType) => {
     handleContinue();
+    handleData(data)
     handleRegisterSubmit({ email: data.email, password: data.password });
   };
 

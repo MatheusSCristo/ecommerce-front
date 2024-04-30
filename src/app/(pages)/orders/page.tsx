@@ -43,7 +43,7 @@ const Orders = () => {
   }, [user]);
 
   return (
-    <section className="flex flex-col mx-2 xl:mx-16 py-5 relative">
+    <section className="flex flex-col mx-2 xl:mx-16 py-5 relative ">
       <OptionBar
         setStatusSelected={setStatusSelected}
         statusSelected={statusSelected}
@@ -53,7 +53,7 @@ const Orders = () => {
           order.orderStatus.includes(status[statusSelected])
         ) && (
           <div className="flex justify-center">
-            <h1 className="text-md md:text-xl text-center">
+            <h1 className="text-md md:text-xl text-center ">
               O usuário não tem nenhum pedido com o status selecionado
             </h1>
           </div>

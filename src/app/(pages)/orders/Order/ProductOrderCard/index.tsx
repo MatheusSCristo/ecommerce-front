@@ -40,7 +40,7 @@ const ProductOrderCard = ({ product, orderProduct }: propsType) => {
         </div>
       </div>
       <button
-        className="py-1 md:py-2 px-3 rounded-md h-fit bg-strongOrange text-white"
+        className="py-1 md:py-2 px-3 rounded-md h-fit bg-strongOrange text-white text-nowrap"
         onClick={() => handleAddToCart(product)}
       >
         Adicionar ao Carrinho

@@ -29,7 +29,7 @@ type propsType = {
 const OptionBar = ({ statusSelected, setStatusSelected }: propsType) => {
   return (
     <>
-      <div className="bg-white flex justify-center rounded-md hidden md:block">
+      <div className="p-2 bg-white justify-center items-center rounded-md hidden md:flex ">
         {orderStatus.map((item) => (
           <span
             key={item}

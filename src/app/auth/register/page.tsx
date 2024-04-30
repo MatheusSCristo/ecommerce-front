@@ -24,6 +24,8 @@ type dataType = {
   lastName: string;
   birthDate: Date;
   cpf: string;
+  email:string;
+  password:string;
 };
 
 const capitalizeWord = (word: string) => {
@@ -79,6 +81,8 @@ const register = () => {
             setStep={setStep}
             handleData={handleData}
             handleRegisterSubmit={handleRegisterSubmit}
+            userEmail={data.email}
+            userName={data.name}
           />
           <div className="flex justify-center gap-2">
             {stepsDots.map((item) => (

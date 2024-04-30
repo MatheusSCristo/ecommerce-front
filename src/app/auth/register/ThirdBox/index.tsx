@@ -1,7 +1,20 @@
+import sendVerifiyEmail from "@/utils/Email/sendVerifiyEmail";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 
-const ThirdBox = () => {
+type propsType={
+  userEmail:string,
+  userName:string
+}
+
+const ThirdBox = ({userEmail,userName}:propsType) => {
+
+  useEffect(()=>{
+    sendVerifiyEmail({userName,userEmail})
+  },[])
+
+
   return (
     <div className="flex flex-col items-center gap-4">
       <h1 className="font-bold text-2xl">

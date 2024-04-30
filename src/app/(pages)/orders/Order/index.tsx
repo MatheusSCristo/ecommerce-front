@@ -67,13 +67,13 @@ const Order = ({ order }: { order: OrderResponse }) => {
   };
 
   return (
-    <div className="flex flex-col bg-white px-3 md:px-10 py-5 rounded-md">
-      <div className="flex flex-col md:flex-row md:justify-between border-gray-400 border-b-[1px] py-2 md:items-center">
+    <div className="flex flex-col bg-white px-3 2xl:px-10 py-5 rounded-2xl">
+      <div className="flex flex-col 2xl:flex-row 2xl:justify-between border-gray-400 border-b-[1px] py-2 2xl:items-center">
         <h1 className={`font-bold capitalize text-xl ${order.orderStatus==="canceled" && "text-red-500"} `}>
           {translateOrderStatus(order.orderStatus)}
         </h1>
         <div className="flex flex-col">
-          <span className="text-gray-600 md:text-right">
+          <span className="text-gray-600 2xl:text-right">
             Pedido feito em: {getCreatedDateInPT(order.createdAt)}
           </span>
           <div className="flex gap-2">
@@ -96,13 +96,13 @@ const Order = ({ order }: { order: OrderResponse }) => {
       <div className="self-end flex flex-col gap-2 ">
         <div className="flex flex-col">
           <div className="flex gap-1 items-center w-full  ">
-            <h1 className="font-bold md:text-2xl">Total:</h1>
-            <h1 className="md:text-xl">R$ {order.totalInCents / 100}</h1>
+            <h1 className="font-bold 2xl:text-2xl">Total:</h1>
+            <h1 className="2xl:text-xl">R$ {order.totalInCents / 100}</h1>
           </div>
           <div className="flex gap-1 items-center">
-            <h1 className="font-bold md:text-2xl">Status do pagamento:</h1>
+            <h1 className="font-bold 2xl:text-2xl">Status do pagamento:</h1>
             <h1
-              className={`capitalize md:text-xl ${getColorPaymentStatusText(
+              className={`capitalize 2xl:text-xl ${getColorPaymentStatusText(
                 order.payment?.paymentStatus
               )} `}
             >
