@@ -74,18 +74,18 @@ const AdminPage = () => {
   });
 
   return (
-    <section className="2xl:px-32 2xl:py-16 flex flex-col">
-      <h1 className="text-3xl font-bold">Admin Page</h1>
+    <section className="px-5 2xl:px-32 2xl:py-16 flex flex-col">
+      <h1 className="text-3xl font-bold self-center 2xl:self-start">Admin Page</h1>
       <h2 className="text-xl self-center">Cadastrar produto</h2>
-      <div className="bg-white border-gray-300 border rounded-lg w-fit self-center p-10">
+      <div className="bg-white border-gray-300 border rounded-lg w-full  2xl:w-fit self-center p-10">
         <form
           className="flex flex-col gap-2 "
           onSubmit={handleSubmit(handleSubmitData)}
         >
-          <div className="flex flex-col w-fit">
-            <div className="flex gap-5">
+          <div className="flex flex-col 2xl:w-fit">
+            <div className="flex flex-col 2xl:flex-row gap-5">
               <div className="flex flex-col gap-2">
-                <div className="w-[200px] h-[200px] relative m-5">
+                <div className="w-[100px] h-[100px] xl:w-[200px] xl:h-[200px] relative m-5">
                   <Image
                     src={
                       imageUrl
@@ -99,13 +99,13 @@ const AdminPage = () => {
                 </div>
                 <input type="file" onChange={handleImage} />
               </div>
-              <div className="flex flex-col gap-1">
-                <div className="flex flex-col">
+              <div className="flex flex-col gap-1  ">
+                <div className="flex flex-col ">
                   <label htmlFor="priceInCents">Preço</label>
                   <input
                     {...register("priceInCents")}
                     placeholder="R$"
-                    className="px-2 py-1 border-gray-400 border rounded-md"
+                    className="px-2 py-1 border-gray-400 border rounded-md "
                     type="text"
                     id="price"
                   />
