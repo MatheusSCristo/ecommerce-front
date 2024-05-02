@@ -1,5 +1,6 @@
 import { CartProduct } from "@/types";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { UserContext } from "./UserContext";
 
 type ContextType = {
   products: CartProduct[];
@@ -10,10 +11,11 @@ const CartContext = createContext<ContextType>({} as ContextType);
 
 function CartProvider({ children }: { children: React.ReactNode }) {
   const [products, setProducts] = useState<CartProduct[]>([]);
+  const {user}=useContext(UserContext);
 
   const saveProductsOnLocal = () => {
-    if (products.length > 0)
-      localStorage.setItem("cartProducts", JSON.stringify(products));
+    if(user)
+    localStorage.setItem("cartProducts", JSON.stringify(products));
   };
 
   useEffect(() => {

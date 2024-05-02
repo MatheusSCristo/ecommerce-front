@@ -1,5 +1,5 @@
 export default async (body: { email: string; password: string }) => {
-  const response = await fetch(`https://mywebcommerce-07802a3ea935.herokuapp.com/api/auth/login`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

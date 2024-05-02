@@ -1,6 +1,6 @@
 "use server"
 export default async(userId:string,accessToken:string)=>{
-    const response=await fetch(`http://localhost:8080/api/orders/${userId}`,{
+    const response=await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/orders/${userId}`,{
         method:"GET",
         headers:{
             "Content-Type":"application/json",

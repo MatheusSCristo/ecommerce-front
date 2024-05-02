@@ -1,5 +1,5 @@
 export const GetAll = async () => {
-  const data = await fetch(`http://localhost:8080/api/products`, {
+  const data = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/products`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });

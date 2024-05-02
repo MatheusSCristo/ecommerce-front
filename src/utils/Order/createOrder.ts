@@ -3,7 +3,7 @@ import { orderDto } from "./../../types/index";
 
 export default async (body: orderDto, accessToken: string) => {
   const response = await fetch(
-    "http://localhost:8080/api/orders",
+    `${process.env.NEXT_PUBLIC_BASE_API_URL}/orders`,
     {
       method: "POST",
       headers: {

@@ -29,7 +29,7 @@ const ProductCard = ({ product }: ParamsType) => {
       <Link href={`/product/${product.id}`} className="w-[100px] h-[100px] md:w-[150px] md:h-[150px] 2xl:w-[200px] 2xl:h-[150px] relative rounded-xl">
         <Image
           src={
-            product.imageUrl ? "" : `/images/notFoundImage.png`
+            product.imageUrl ? product.imageUrl : `/images/notFoundImage.png`
           }
           fill
           className="object-fit rounded-lg"

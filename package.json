@@ -16,6 +16,7 @@
     "@mui/material": "^5.15.15",
     "card-validator": "^9.1.0",
     "easy-location-br": "^1.0.9",
+    "firebase": "^10.11.1",
     "fs": "^0.0.1-security",
     "gerador-validador-cpf": "^5.0.2",
     "i18next": "^23.11.2",

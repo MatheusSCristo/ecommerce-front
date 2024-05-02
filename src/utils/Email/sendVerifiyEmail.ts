@@ -4,7 +4,7 @@ type propsType={
 }
 
 export default async({userName,userEmail}:propsType)=>{
-    await fetch("http://localhost:8080/api/email",{
+    await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/email`,{
       method:"POST",
       headers:{
         "Content-Type":"application/json"

@@ -8,7 +8,7 @@ type bodyType = {
 
 export default async (body: bodyType, orderId: string) => {
   const accessToken=cookies().get("accessToken")
-  const response = await fetch(`http://localhost:8080/api/orders/${orderId}`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/orders/${orderId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
