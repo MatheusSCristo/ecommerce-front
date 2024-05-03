@@ -1,64 +1,29 @@
 "use client";
-import { categories } from "@/utils/CategoriesUtil";
+
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import MobileCategoriesSlider from "./MobileCategoriesSlider";
+import Link from "next/link";
 
 const PrimaryBox = () => {
-  const router = useRouter();
-
-   const handleSearchClick = (category: string) => {
-    const queryParams = new URLSearchParams(category);
-    queryParams.set("q", "+");
-    const queryString = queryParams.toString();
-    router.push(`/search/${`/search/?${queryString}`}`);
-  };
 
   return (
-    <section className="bg-white border border-gray-300 rounded-md md:p-3 flex flex-col md:flex-row gap-2 md:h-[450px] h-[250px]">
-      <div className="md:hidden">
-        {<MobileCategoriesSlider categories={categories} handleSearchClick={handleSearchClick}/>}
+    <section className=" flex flex-col  items-center gap-8">
+      <div className="flex flex-col gap-2 items-center">
+        <h1 className="font-bold text-3xl 2xl:text-5xl text-center ">Os tênis perfeitos para você!</h1>
+        <h2 className="2xl:w-[450px] text-center text-gray-500">
+          Encontrar os tênis perfeitos vai além do conforto; é a harmonia entre
+          estilo, funcionalidade e personalidade.
+        </h2>
       </div>
-      <div className="md:flex flex-col hidden">
-        {categories.map((category, index) => {
-          if (index < 12)
-            return (
-              <span
-                className="p-1 hover:bg-gray-200 w-full rounded-md hover:scale-[1.01] capitalize cursor-pointer"
-                key={category.category}
-                onClick={()=>handleSearchClick(category.categoria)}
-              >
-                {category.categoria}
-              </span>
-            );
-        })}
-        <span className="p-1 hover:bg-gray-200 w-full rounded-md hover:scale-[1.01]">
-          Ver mais...
-        </span>
-      </div>
-      <div className="flex-1 relative ">
+      <Link href={"search/search?q="}  className="border border-black px-10 py-1">Ver todos</Link>
+      <div className="2xl:w-[1500px] 2xl:h-[600px] md:w-[1000px] md:h-[600px] w-[350px] h-[300px] relative px-2">
         <Image
-          src={"/images/primaryBanner.svg"}
-          alt="Banner principal"
+          priority
+          src={"/images/bannerImage.jpeg"}
+          alt="Tênis"
           fill
-          className="object-cover"
+          className="object-fit"
         />
-        <div className="absolute left-[2%] top-[15%] flex flex-col gap-4">
-          <div className="gap-1 flex flex-col">
-            <h1 className="text-xl md:text-3xl font-bold">
-              Os Aparelhos eletrônicos
-            </h1>
-            <h1 className="text-xl md:text-3xl font-bold">Mais vendidos</h1>
-          </div>
-          <button
-            onClick={() => handleSearchClick("tecnologia")}
-            className="bg-white px-5 py-2 rounded-lg w-fit font-bold"
-          >
-            Veja aqui!
-          </button>
-        </div>
       </div>
-      <div></div>
     </section>
   );
 };
