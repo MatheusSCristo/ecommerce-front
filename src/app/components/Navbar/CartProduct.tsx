@@ -2,7 +2,6 @@ import { CartContext } from "@/context/CartContext";
 import { CartProduct as CartProductType } from "@/types";
 import Image from "next/image";
 import { useContext, useState } from "react";
-import { IoTrashBin } from "react-icons/io5";
 
 type Props = {
   product: CartProductType;
@@ -37,12 +36,12 @@ const CartProduct = ({ product }: Props) => {
             className="object-cover p-1 rounded-xl"
           />
         </div>
-        <div>
-          <h1 className="text-sm md:text-md">{product.name}</h1>
-          <div className="flex items-center gap-2">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-sm md:text-md text-wrap w-[150px] ">{product.name}</h1>
+          <div className="flex items-center gap-2 border-black border w-fit px-2">
             {quantity > 1 && (
               <button
-                className="rounded-lg bg-strongOrange text-white w-[20px] h-[20px] flex items-center justify-center border-gray-400 border "
+                className="text-gray-500"
                 onClick={() => {
                   handleQuantityChange(quantity - 1);
                   setQuantity((prevState) => prevState - 1);
@@ -51,12 +50,9 @@ const CartProduct = ({ product }: Props) => {
                 -
               </button>
             )}
-            {quantity == 1 && (
-              <IoTrashBin size={20} className="text-gray-500 cursor-pointer" onClick={()=>handleQuantityChange(0)} />
-            )}
             <h2>{quantity}</h2>
             <button
-              className="rounded-lg bg-strongOrange text-white w-[20px] h-[20px] flex items-center justify-center border-gray-400 border "
+              className="text-gray-500"
               onClick={() => {
                 handleQuantityChange(quantity + 1);
                 setQuantity((prevState) => prevState + 1);

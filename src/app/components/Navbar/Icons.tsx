@@ -4,7 +4,8 @@ import deleteSession from "@/utils/User/deleteSession";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
-import { IoCart, IoPersonSharp } from "react-icons/io5";
+import { HiOutlineArchiveBox } from "react-icons/hi2";
+import { IoCartOutline, IoExitOutline } from "react-icons/io5";
 import Cart from "./Cart";
 
 const Icons = () => {
@@ -16,7 +17,6 @@ const Icons = () => {
 
   const handleLogout = () => {
     deleteSession();
-    router.push("/auth/login");
     if (user) {
       setTimeout(() => {
         setUser(null);
@@ -26,54 +26,47 @@ const Icons = () => {
 
   return (
     <div className="md:flex gap-10 hidden">
-      <div
-        className="relative py-2"
-        onMouseEnter={() => setCartMenuIsOpen(true)}
-        onMouseLeave={() => setCartMenuIsOpen(false)}
-      >
-        <div className="relative hover:scale-[1.05]">
-          {products.length > 0 && (
-            <span className="absolute right-0 bottom-0 bg-[#fa1a1a] rounded-full w-[15px] h-[15px] text-sm flex items-center justify-center text-white">
-              {products.length}
-            </span>
-          )}
-          <IoCart size={30} />
-        </div>
-        {cartMenuIsOpen && <Cart />}
-      </div>
-      <div
-        className="relative py-2"
-        onMouseEnter={() => setAccountDesktopIsOpen(true)}
-        onMouseLeave={() => setAccountDesktopIsOpen(false)}
-      >
-        <IoPersonSharp size={30} className="hover:scale-[1.2]" />
-        {accountDesktopIsOpen && user && (
-          <div className="hidden md:flex absolute mt-2  flex-col w-[130px] p-2 bg-strongOrange text-white gap-2 right-1/2 rounded">
-            <span className="border-white hover:border p-1 rounded">
-              Minha conta
-            </span>
-            <Link href={"/orders"} className="border-white hover:border p-1 rounded">
-              Meus pedidos
-            </Link>
-            <span
-              className="border-white hover:border p-1 rounded"
+      {!user && (
+        <Link href={"/auth/login"} className="hover:scale-110 cursor-pointer">
+          Entrar
+        </Link>
+      )}
+      {user && (
+        <>
+          <div
+            className="relative"
+            onMouseEnter={() => setCartMenuIsOpen(true)}
+            onMouseLeave={() => setCartMenuIsOpen(false)}
+          >
+            <div className="relative hover:scale-[1.1] flex flex-col items-center justify-center" title="Carrinho">
+              {products.length > 0 && (
+                <span className="absolute right-0 text-black  ">
+                  {products.length}
+                </span>
+              )}
+              <IoCartOutline size={25}  />
+            </div>
+            <span>Carrinho</span>
+            {cartMenuIsOpen && <Cart />}
+          </div>
+          <div className="flex flex-col items-center" title="Pedidos">
+            <HiOutlineArchiveBox
+              size={25}
+              className="hover:scale-[1.1] cursor-pointer"
+              onClick={() => router.push("/orders")}
+            />
+            <span>Pedidos</span>
+          </div>
+          <div className="flex flex-col items-center" title="Sair">
+            <IoExitOutline
+              size={25}
+              className="hover:scale-[1.1] cursor-pointer"
               onClick={handleLogout}
-            >
-              Sair
-            </span>
+              />
+              <span>Sair</span>
           </div>
-        )}
-        {accountDesktopIsOpen && !user && (
-          <div className="hidden md:flex absolute mt-2  flex-col w-[130px] p-2 bg-strongOrange text-white gap-2 right-1/2 rounded">
-            <Link
-              href={"/auth/login"}
-              className="border-white hover:border p-1 rounded"
-            >
-              Entrar
-            </Link>
-          </div>
-        )}
-      </div>
+        </>
+      )}
     </div>
   );
 };

@@ -46,7 +46,7 @@ const Cart = ({ setCartMobileIsOpen }: propsType) => {
           <Link
             onClick={handleCloseCartMobile}
             href="/cart"
-            className="py-1 px-2 bg-strongOrange text-white w-fit rounded-lg"
+            className="py-1 px-2 bg-gray-600 text-white w-fit rounded-lg"
           >
             Ver todos
           </Link>

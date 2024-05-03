@@ -14,5 +14,5 @@ export default async(body:z.infer<typeof productSchema>)=>{
         body:JSON.stringify(body)
     })
     if(!response.ok)
-    throw new Error("Error creating product")
+    throw response;
 }
