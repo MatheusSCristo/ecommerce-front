@@ -1,11 +1,12 @@
 import FirstBox from "../components/FirstBox";
+import SecondBox from "../components/SecondBox";
 
 const Home = () => {
   
   return (
-    <div className="flex gap-2 flex-col min-h-screen md:p-5">
+    <div className="flex gap-10 flex-col min-h-screen md:py-5 md:px-32 ">
       <FirstBox />
-      {/* <SecondBox /> */}
+      <SecondBox />
       {/* <ThirdBox /> */}
     </div>
   );

@@ -6,8 +6,8 @@ import createOrder from "@/utils/Order/createOrder";
 import { CircularProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
+import Product from "../Product";
 import BillingDetails, { billingSchemaType } from "./billingDetails";
-import CheckoutProduct from "./CheckoutProduct";
 import Payment from "./Payment";
 
 const getTotalPrice = (products: CartProductType[]) => {
@@ -63,8 +63,9 @@ const Checkout = () => {
     }
   };
   return (
-    <section className="bg-white border border-gray-400 flex flex-col gap-10 xl:flex-row mx-5 2xl:mx-32 my-10 p-10 2xl:gap-32 rounded-md">
+    <section className="flex flex-col gap-10 xl:flex-row mx-5 2xl:mx-32 my-10 p-10 2xl:gap-32 rounded-md">
       <div className="flex flex-col gap-5">
+        <h1 className="font-bold text-4xl">Checkout</h1>
         <div className="flex flex-col gap-2">
           <BillingDetails
             setBillingData={setBillingData}
@@ -76,32 +77,35 @@ const Checkout = () => {
             </span>
           )}
         </div>
-
         <Payment />
       </div>
       <div className="flex flex-col flex-1 gap-5">
         <div className="flex flex-col gap-5">
           <h1 className="text-2xl font-bold">Seu pedido</h1>
-          <div className="bg-white border border-gray-400  p-5 rounded-lg flex flex-col gap-3">
+          <div className="bg-white  p-5 rounded-lg flex flex-col gap-3">
             {products.map((product) => (
-              <CheckoutProduct product={product} key={product.id} />
+              <Product key={product.id} product={product} />
             ))}
-            {products.length==0 && <h1 className="text-lg text-center font-bold">Seu carrinho está vazio.</h1>}
+            {products.length == 0 && (
+              <h1 className="text-lg text-center font-bold">
+                Seu carrinho está vazio.
+              </h1>
+            )}
           </div>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1  border-[#909090]">
             <div className="flex justify-between ">
-              <h2 className="text-xl text-gray-500">Subtotal</h2>
-              <h3 className="text-xl text-gray-500">
+              <h2 className="text-xl ">Subtotal</h2>
+              <h3 className="text-xl ">
                 R$ {getTotalPrice(products)}
               </h3>
             </div>
-            <div className="flex justify-between border-b-2 border-gray-200">
-              <h2 className="text-xl text-gray-500">Frete</h2>
-              <h3 className="text-xl text-gray-500">
+            <div className="flex justify-between ">
+              <h2 className="text-xl ">Frete</h2>
+              <h3 className="text-xl ">
                 R$ {(shippingFee / 100).toFixed(2)}
               </h3>
             </div>
-            <div className="flex justify-between border-b-2 border-gray-500">
+            <div className="flex justify-between border-t-[1px] py-2 border-black">
               <h2 className="text-2xl font-bold">Total</h2>
               <h3 className="text-xl font-semibold">
                 R${" "}
@@ -115,9 +119,11 @@ const Checkout = () => {
         </div>
         <div className="flex flex-col gap-2">
           <button
-            className="bg-strongOrange text-white py-2 w-3/4 self-center rounded-lg disabled:opacity-50"
+            className="bg-black text-white py-2 w-3/4 self-center rounded-sm disabled:opacity-50"
             onClick={handleCheckout}
-            disabled={checkoutIsLoading || !user?.verifiedEmail || products.length==0}
+            disabled={
+              checkoutIsLoading || !user?.verifiedEmail || products.length == 0
+            }
           >
             Finalizar Compra
           </button>

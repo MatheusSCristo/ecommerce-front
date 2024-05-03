@@ -19,44 +19,39 @@ const Product = ({ product }: { product: CartProduct }) => {
   };
 
   return (
-    <div className="flex justify-between border-b-2 border-gray-400 pb-2">
+    <div className="flex justify-between border-b-2 border-[#909090] pb-5">
       <div className="flex gap-2">
-        <div className="w-[80px] h-[80px] md:w-[80px] md:h-[80px] 2xl:w-[100px] 2xl:h-[100px] relative rounded-xl">
+        <div className="w-[80px] h-[80px] md:w-[120px] md:h-[120px] 2xl:w-[150px] 2xl:h-[150px] relative bg-[#C4C4C4] rounded-md">
           <Image
             src={
-              product.imageUrl ? product.imageUrl : `/images/notFoundImage.png`
+              product.imageUrl ? product.imageUrl : `/images/sneakerImage.png`
             }
             fill
-            className="object-fit rounded-lg"
+            className="object-contain"
             alt="Imagem do produto "
           />
         </div>
         <div className="flex flex-col gap-2">
           <div>
-            <h2>{product.name}</h2>
-            <h3 className="text-gray-500">Marca: {product.brand}</h3>
-            <h3 className="text-gray-500">Modelo: {product.model}</h3>
+            <h2 className="font-bold text-xl">{product.name}</h2>
+            <h3 className="text-gray-600">Tamanho:{product.size}</h3>
+            <h3 className="text-gray-600">Marca: {product.brand}</h3>
           </div>
-          <button
-            className="border-gray-400 border text-red-400 px-2 rounded-lg"
-            onClick={() => handleQuantityChange(0)}
-          >
-            Remover do carrinho
-          </button>
+          <h3 className="font-bold text-xl">
+            R${((product.priceInCents * quantity) / 100).toFixed(2)}
+          </h3>
         </div>
       </div>
-      <div>
-        <h1 className="font-bold">
-          R${((product.priceInCents * quantity) / 100).toFixed(2)}
-        </h1>
-        <div className="flex items-center gap-2">
+      <div className="flex flex-col justify-between">
+        <div className="flex items-center gap-2 border-black border w-fit px-2">
           {
             <button
-              className="rounded-lg bg-strongOrange text-white w-[20px] h-[20px] flex items-center justify-center border-gray-400 border "
+            className="text-gray-500 hover:text-black"
               onClick={() => {
-                if(quantity>1){
-                handleQuantityChange(quantity - 1);
-                setQuantity((prevState) => prevState - 1)};
+                if (quantity > 1) {
+                  handleQuantityChange(quantity - 1);
+                  setQuantity((prevState) => prevState - 1);
+                }
               }}
             >
               -
@@ -64,7 +59,7 @@ const Product = ({ product }: { product: CartProduct }) => {
           }
           <h2>{quantity}</h2>
           <button
-            className="rounded bg-white text-black w-[20px] h-[20px] flex items-center justify-center  border-gray-400 border "
+            className="text-gray-500  hover:text-black"
             onClick={() => {
               handleQuantityChange(quantity + 1);
               setQuantity((prevState) => prevState + 1);
@@ -73,6 +68,9 @@ const Product = ({ product }: { product: CartProduct }) => {
             +
           </button>
         </div>
+        <button className="underline" onClick={() => handleQuantityChange(0)}>
+          Remover
+        </button>
       </div>
     </div>
   );

@@ -75,12 +75,10 @@ const CitiesComp = ({
 
   return (
     <div className="flex flex-col relative">
-      <label htmlFor="city">
-        Cidade/Estado<span className="ml-1 text-red-500">*</span>
-      </label>
       <input
+        placeholder="Cidade"
         disabled={addressIsDisabled}
-        className={`border border-gray-400 rounded-md px-2 xl:w-[400px] py-2 disabled:opacity-50 ${
+        className={`border border-black rounded-sm px-2 xl:w-[250px] py-2 disabled:opacity-50 ${
           citiesOption.length > 0 && "border-b-gray-200 rounded-b-none"
         }`}
         value={cityShow}

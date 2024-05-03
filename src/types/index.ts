@@ -9,7 +9,10 @@ export type Product = {
   model: string;
   color: string;
   categories: string[];
+  createdAt:Date;
+  sizes: number[];
 };
+
 
 export type OrderProduct = {
   id: string;
@@ -74,7 +77,19 @@ enum Role {
   USER = "USER",
 }
 
-export interface CartProduct extends Product {
+export type CartProduct = {
+  id: string;
+  name: string;
+  description: string;
+  priceInCents: number;
+  imageUrl: string;
+  rating: number;
+  brand: string;
+  model: string;
+  color: string;
+  categories: string[];
+  createdAt:Date;
+  size: number;
   quantity: number;
 }
 

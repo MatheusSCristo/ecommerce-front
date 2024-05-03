@@ -12,7 +12,7 @@ const page = () => {
     const email = searchParams.get("userEmail");
     if (email) {
       const response = await fetch(
-        `http://localhost:8080/api/email/?userEmail=${email}`,
+        `${process.env.NEXT_PUBLIC_BASE_API_URL}/email/?userEmail=${email}`,
         {
           method: "GET",
           headers: {

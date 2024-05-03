@@ -6,16 +6,21 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import CitiesComp from "./CitiesComp";
 
-
 const refineCity = (value: string) => {
   const cities: { name: string; stateId: string }[] = getAllCities();
   return cities.some((item) => item.name === value.trim());
 };
 
-const refineEmail=(value:string)=>{
-  const providers = ["gmail.com", "outlook.com", "yahoo.com", "icloud.com","hotmail.com"];
-  return providers.some((provider)=>provider===value.split("@")[1])
-}
+const refineEmail = (value: string) => {
+  const providers = [
+    "gmail.com",
+    "outlook.com",
+    "yahoo.com",
+    "icloud.com",
+    "hotmail.com",
+  ];
+  return providers.some((provider) => provider === value.split("@")[1]);
+};
 
 const billingSchema = z.object({
   name: z.string().min(1, "É necessário informar o nome do comprador"),
@@ -24,7 +29,7 @@ const billingSchema = z.object({
     .string()
     .min(1, "É necessário informar o email para contato")
     .email("Email inválido")
-    .refine((value)=>refineEmail(value),"Email inválido"),
+    .refine((value) => refineEmail(value), "Email inválido"),
   phone: z.string().length(15, "Telefone inválido"),
   cep: z.string().min(9, "CEP inválido").max(9, "CEP inválido"),
   city: z
@@ -52,13 +57,12 @@ type propsType = {
       | undefined
     >
   >;
-  setBillingDataError:Dispatch<SetStateAction<boolean>>
+  setBillingDataError: Dispatch<SetStateAction<boolean>>;
 };
 
-
-const BillingDetails = ({ setBillingData,setBillingDataError }: propsType) => {
+const BillingDetails = ({ setBillingData, setBillingDataError }: propsType) => {
   const [city, setCity] = useState<string>("");
-  const [addressIsDisabled,setAddressIsDisabled]=useState(false)
+  const [addressIsDisabled, setAddressIsDisabled] = useState(false);
   const {
     register,
     handleSubmit,
@@ -68,32 +72,31 @@ const BillingDetails = ({ setBillingData,setBillingDataError }: propsType) => {
     formState: { errors },
   } = useForm<billingSchemaType>({ resolver: zodResolver(billingSchema) });
 
-  const cepMask=()=>{
-    let currentCep=getValues("cep")
-    if (!currentCep) return ""
-    currentCep = currentCep.replace(/\D/g,'')
-    currentCep = currentCep.replace(/(\d{5})(\d)/,'$1-$2')
-    setValue("cep",currentCep)
-    }
+  const cepMask = () => {
+    let currentCep = getValues("cep");
+    if (!currentCep) return "";
+    currentCep = currentCep.replace(/\D/g, "");
+    currentCep = currentCep.replace(/(\d{5})(\d)/, "$1-$2");
+    setValue("cep", currentCep);
+  };
 
-  const numberMask=()=>{
-    let currentNumber=getValues("phone")
-    if(!currentNumber) return "";
-    currentNumber=currentNumber.replace(/\D/g,'');
-    currentNumber = currentNumber.replace(/(\d{0})(\d)/,'$1($2')
-    currentNumber = currentNumber.replace(/(\d{2})(\d)/,'$1) $2')
-    currentNumber = currentNumber.replace(/(\d{5})(\d)/,'$1-$2')
-    setValue("phone",currentNumber)
+  const numberMask = () => {
+    let currentNumber = getValues("phone");
+    if (!currentNumber) return "";
+    currentNumber = currentNumber.replace(/\D/g, "");
+    currentNumber = currentNumber.replace(/(\d{0})(\d)/, "$1($2");
+    currentNumber = currentNumber.replace(/(\d{2})(\d)/, "$1) $2");
+    currentNumber = currentNumber.replace(/(\d{5})(\d)/, "$1-$2");
+    setValue("phone", currentNumber);
+  };
 
-  }
-  
   const getDataFromCep = async (e: ChangeEvent<HTMLInputElement>) => {
-    cepMask()
+    cepMask();
     const cep = e.target.value;
-    if (cep.length !== 9 ) {
-      setAddressIsDisabled(false)
-      return
-    };
+    if (cep.length !== 9) {
+      setAddressIsDisabled(false);
+      return;
+    }
     const data = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
     const response = await data.json();
     if (response.erro) {
@@ -101,10 +104,10 @@ const BillingDetails = ({ setBillingData,setBillingDataError }: propsType) => {
       return;
     }
     const locationsData: cepResponseType = response;
-    setAddressIsDisabled(true)
+    setAddressIsDisabled(true);
     setError("cep", {});
     setValue("city", locationsData.localidade);
-    setCity(`${locationsData.localidade} - ${locationsData.uf}`)
+    setCity(`${locationsData.localidade} - ${locationsData.uf}`);
     setValue("neighborhood", locationsData.bairro);
     setValue("street", locationsData.logradouro);
   };
@@ -119,7 +122,7 @@ const BillingDetails = ({ setBillingData,setBillingDataError }: propsType) => {
     street: string;
     neighborhood: string;
   }) => {
-    setBillingDataError(false)
+    setBillingDataError(false);
     setBillingData(data);
   };
 
@@ -128,15 +131,13 @@ const BillingDetails = ({ setBillingData,setBillingDataError }: propsType) => {
       className="flex flex-col gap-5"
       onSubmit={handleSubmit(handleSendData)}
     >
-      <h1 className="font-bold text-2xl">Detalhes da Cobrança</h1>
+      <h1 className=" text-xl">Detalhes da Cobrança</h1>
       <div className="grid grid-cols-2 gap-5">
         <div className="flex flex-col">
-          <label htmlFor="firstName">
-            Nome<span className="ml-1 text-red-500">*</span>
-          </label>
           <input
             type="text"
-            className="border border-gray-400 rounded-md px-2 xl:w-[400px] py-2"
+            placeholder="Nome"
+            className="border border-black rounded-sm px-2 xl:w-[250px] py-2 disabled:opacity-50"
             {...register("name")}
           />
           {errors.name?.message && (
@@ -144,25 +145,21 @@ const BillingDetails = ({ setBillingData,setBillingDataError }: propsType) => {
           )}
         </div>
         <div className="flex flex-col">
-          <label htmlFor="lastName">
-            Sobrenome<span className="ml-1 text-red-500">*</span>
-          </label>
           <input
             type="text"
-            className="border border-gray-400 rounded-md px-2 xl:w-[400px] py-2"
+            placeholder="Sobrenome"
+            className="border border-black rounded-sm px-2 xl:w-[250px] py-2 disabled:opacity-50"
             {...register("lastName")}
           />
           {errors.lastName?.message && (
             <span className="text-red-500">{errors.lastName.message}</span>
           )}
         </div>
-        <div className="flex flex-col">
-          <label htmlFor="email">
-            Email<span className="ml-1 text-red-500">*</span>
-          </label>
+        <div className="flex flex-col col-span-2">
           <input
             type="text"
-            className="border border-gray-400 rounded-md px-2 xl:w-[400px] py-2"
+            placeholder="Email"
+            className="border border-black rounded-sm px-2  py-2 disabled:opacity-50"
             {...register("email")}
           />
           {errors.email?.message && (
@@ -170,16 +167,13 @@ const BillingDetails = ({ setBillingData,setBillingDataError }: propsType) => {
           )}
         </div>
         <div className="flex flex-col">
-          <label htmlFor="phone">
-            Celular<span className="ml-1 text-red-500">*</span>
-          </label>
           <input
             type="text"
-            className="border border-gray-400 rounded-md px-2 xl:w-[400px] py-2"
+            className="border border-black rounded-sm px-2 xl:w-[250px] py-2 disabled:opacity-50"
             placeholder="(XX) X XXXX-XXXX"
             maxLength={15}
-            {...register("phone",{
-              onChange:()=>numberMask()
+            {...register("phone", {
+              onChange: () => numberMask(),
             })}
           />
           {errors.phone?.message && (
@@ -187,12 +181,10 @@ const BillingDetails = ({ setBillingData,setBillingDataError }: propsType) => {
           )}
         </div>
         <div className="flex flex-col">
-          <label htmlFor="CEP">
-            CEP<span className="ml-1 text-red-500">*</span>
-          </label>
           <input
             type="text"
-            className="border border-gray-400 rounded-md px-2 xl:w-[400px] py-2"
+            placeholder="CEP"
+            className="border border-black rounded-sm px-2 xl:w-[250px] py-2 disabled:opacity-50"
             maxLength={9}
             {...register("cep", {
               onChange: (e) => getDataFromCep(e),
@@ -211,13 +203,11 @@ const BillingDetails = ({ setBillingData,setBillingDataError }: propsType) => {
           setValue={setValue}
         />
 
-        <div className="flex flex-col">
-          <label htmlFor="street">
-            Rua/Avenida<span className="ml-1 text-red-500">*</span>
-          </label>
+        <div className="flex flex-col col-span-2">
           <input
             type="text"
-            className="border border-gray-400 rounded-md px-2 xl:w-[400px] py-2 disabled:opacity-50"
+            placeholder="Rua"
+            className="border border-black rounded-sm px-2  py-2 disabled:opacity-50"
             disabled={addressIsDisabled}
             {...register("street")}
           />
@@ -225,13 +215,11 @@ const BillingDetails = ({ setBillingData,setBillingDataError }: propsType) => {
             <span className="text-red-500">{errors.street.message}</span>
           )}
         </div>
-        <div className="flex flex-col">
-          <label htmlFor="neighborhood">
-            Bairro<span className="ml-1 text-red-500">*</span>
-          </label>
+        <div className="flex flex-col col-span-2">
           <input
             type="text"
-            className="border border-gray-400 rounded-md px-2 xl:w-[400px] py-2 disabled:opacity-50"
+            placeholder="Bairro"
+            className="border border-black rounded-sm px-2  py-2 disabled:opacity-50"
             disabled={addressIsDisabled}
             {...register("neighborhood")}
           />
@@ -240,7 +228,7 @@ const BillingDetails = ({ setBillingData,setBillingDataError }: propsType) => {
           )}
         </div>
       </div>
-      <button className="bg-strongOrange w-1/4 py-2 text-white self-center rounded-lg">
+      <button className="bg-black w-1/4 py-2 text-white self-center rounded-sm">
         Salvar
       </button>
     </form>

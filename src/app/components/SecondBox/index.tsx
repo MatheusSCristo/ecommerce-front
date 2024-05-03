@@ -1,62 +1,20 @@
-import React from "react";
-import Countdown from "./Countdown";
-import Image from "next/image";
-import DescountCarousel from "./DescountCarousel";
 import Link from "next/link";
+import Sneakers from "./Sneakers";
 
 const SecondBox = () => {
-  const productsPromo = [
-    {
-      img: "product1",
-      descount: 25,
-    },
-    {
-      img: "product2",
-      descount: 19,
-    },
-    {
-      img: "product3",
-      descount: 32,
-    },
-    {
-      img: "product4",
-      descount: 10,
-    },
-    {
-      img: "product5",
-      descount: 23,
-    },
-  ];
   return (
-    <section className="bg-white border border-gray-300 rounded-md p-3 flex flex-col md:flex-row gap-2 md:h-[250px] h-fit  md:items-center ">
-      <div className="flex flex-col gap-5">
-        <h1 className="text-3xl text-center">Promoções imperdiveis</h1>
-        <Countdown />
+    <section className="flex flex-col items-center px-3 py-32 gap-8">
+      <div className="flex flex-col gap-2 items-center">
+        <h1 className="text-5xl font-bold text-center">Lançamentos Imperdíveis</h1>
+        <h2 className="text-gray-500 text-center">
+          Tênis: As Novidades que Você Precisa Conhecer! Dê um passo à frente da
+          moda com os lançamentos mais recentes de tênis na nossa loja! Descubra
+          uma coleção exclusiva que combina estilo e conforto, perfeita para
+          qualquer ocasião.
+        </h2>
       </div>
-      <div className="flex-1 md:flex hidden justify-evenly">
-        {productsPromo.map((product) => (
-          <Link
-            href={"/"}
-            className=" p-2 flex flex-col items-center justify-evenly"
-            key={product.img}
-          >
-            <div className="w-[150px] h-[150px] relative">
-              <Image
-                src={`/images/${product.img}.svg`}
-                alt=""
-                fill
-                className="object-contain"
-              />
-            </div>
-            <span className="text-red-500 bg-red-200 p-2 rounded-xl">
-              {product.descount}% OFF
-            </span>
-          </Link>
-        ))}
-      </div>
-      <div className="md:hidden">
-        <DescountCarousel products={productsPromo} />
-      </div>
+      <Link href={"search/search?q="} className="border border-black px-10 py-1 hover:bg-gray-200">Ver todos</Link>
+      <Sneakers/>
     </section>
   );
 };

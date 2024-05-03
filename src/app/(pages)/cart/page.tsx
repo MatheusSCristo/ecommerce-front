@@ -23,12 +23,14 @@ const Cart = () => {
   const [cep, setCep] = useState("");
   const { user } = useContext(UserContext);
   const { products } = useContext(CartContext);
-  console.log(user)
   return (
     <section className="md:px-24 2xl:px-32 md:py-10 px-2 py-5 flex gap-2 flex-col flex-1 relative    ">
-      <h1 className="text-2xl">Meu carrinho({products.length})</h1>
+      <h1 className="text-2xl font-bold">Meu Carrinho({products.length})</h1>
+      <Link href={"/"} className="text-lg font-semibold">
+        Precisa de algo mais? Continue a navegar
+      </Link>
       <div className="flex gap-4 md:flex-row flex-col">
-        <div className="bg-white border border-gray-400 md:w-3/4 p-5 rounded-lg flex flex-col gap-2">
+        <div className=" flex-[2]  p-5 rounded-lg flex flex-col gap-2">
           {products.map((product) => (
             <Product product={product} />
           ))}
@@ -47,43 +49,39 @@ const Cart = () => {
           )}
         </div>
         <div className="flex flex-col gap-2 flex-1">
-          <div className="bg-white border border-gray-400 p-3 rounded-lg flex flex-col gap-2">
+          <div className="bg-white  p-3 rounded-lg flex flex-col gap-2">
             <span>Calcular frete:</span>
             <input
               value={cep}
               onChange={(e) => setCep(e.target.value)}
-              placeholder="CEP"
-              className="border-gray-400 border rounded-lg px-2 focus:outline-none"
+              placeholder="Insira seu CEP"
+              className="border-black border px-2 focus:outline-none"
             />
             <div className="flex justify-between">
-              <span>
-                Valor:{" "}
-                <span className="font-bold">
-                  {shippingFee > 0 ? `R$ ${shippingFee.toFixed(2)}` : "Grátis"}
-                </span>
-              </span>
-              <button className="self-end text-sm border-gray-400 border rounded-lg px-2 bg-strongOrange text-white hover:scale-105 duration-300">
+              <button className="text-sm border-black border rounded-sm px-2 text-black hover:scale-105 duration-300">
                 Calcular
               </button>
             </div>
           </div>
-          <div className="bg-white border border-gray-400  p-3 rounded-lg">
-            <div className="flex justify-between">
-              <h1 className="text-gray-500">Subtotal:</h1>
-              <h2>R${getCartTotalPrice(products)}</h2>
-            </div>
-            <div className="flex justify-between">
-              <h1 className="text-gray-500">Frete:</h1>
-              <h2>
-                R${" "}
-                <span
-                  className={`${
-                    shippingFee > 0 ? "text-black" : "text-lime-500"
-                  }`}
-                >
-                  {shippingFee > 0 ? shippingFee.toFixed(2) : "Grátis"}
-                </span>
-              </h2>
+          <div className="bg-white p-3 rounded-lg flex flex-col gap-3 ">
+            <div className="border-b-[1px] pb-2 border-black">
+              <div className="flex justify-between">
+                <h1 className="">Subtotal:</h1>
+                <h2>R${getCartTotalPrice(products)}</h2>
+              </div>
+              <div className="flex justify-between">
+                <h1 className="">Frete:</h1>
+                <h2>
+                  R${" "}
+                  <span
+                    className={`${
+                      shippingFee > 0 ? "text-black" : "text-lime-500"
+                    }`}
+                  >
+                    {shippingFee.toFixed(2)}
+                  </span>
+                </h2>
+              </div>
             </div>
             <div className="flex justify-between">
               <h1>Total:</h1>
@@ -100,14 +98,13 @@ const Cart = () => {
             href={
               products.length && user?.verifiedEmail ? "/cart/checkout" : ""
             }
-            className={`uppercase rounded-lg w-3/4 self-center px-5 py-2 bg-strongOrange text-white ${
+            className={`uppercase rounded-sm w-3/4 self-center px-5 py-2 bg-black text-center text-white ${
               products.length === 0 && "opacity-50 cursor-default"
             }`}
             style={{
               pointerEvents: products.length === 0 ? "none" : "auto",
             }}
             onClick={() => {
-              console.log(user?.verifiedEmail);
               if (!user?.verifiedEmail && user) setUserEmailIsUnverified(true);
             }}
           >
