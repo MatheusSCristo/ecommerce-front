@@ -3,11 +3,11 @@ export type Product = {
   name: string;
   description: string;
   priceInCents: number;
-  imageUrl: string;
+  imagesUrl: string[];
   rating: number;
   brand: string;
   model: string;
-  color: string;
+  colors: string[];
   categories: string[];
   createdAt:Date;
   sizes: number[];
@@ -82,7 +82,7 @@ export type CartProduct = {
   name: string;
   description: string;
   priceInCents: number;
-  imageUrl: string;
+  imagesUrl: string[];
   rating: number;
   brand: string;
   model: string;

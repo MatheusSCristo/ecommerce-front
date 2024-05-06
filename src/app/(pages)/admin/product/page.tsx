@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import ProductImages from "./Category/Images";
+import Images from "./Category/Images";
 
 type categoryType = (typeof categories)[0];
 
@@ -120,7 +120,7 @@ const AdminPage = () => {
                 <div className="grid grid-cols-3 w-[500px] gap-2 ">
                   {images.length > 0 &&
                     images.map((image, index) => (
-                     <ProductImages image={image} index={index} setImages={setImages} images={images}/>
+                     <Images image={image} index={index} setImages={setImages} images={images}/>
                     ))}
                 </div>
                 <input type="file" onChange={handleImage} multiple />

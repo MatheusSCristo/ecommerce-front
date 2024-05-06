@@ -2,130 +2,114 @@
 import { CartContext } from "@/context/CartContext";
 import { ProductsContext } from "@/context/ProductsContext";
 import AddProductToCart from "@/utils/AddProductToCart";
-import { translateCategory } from "@/utils/CategoriesUtil";
-import getRatingStars from "@/utils/getRatingStars";
 import { CircularProgress } from "@mui/material";
-import { useContext, useState } from "react";
-import {
-  MdOutlineStarHalf,
-  MdOutlineStarOutline,
-  MdOutlineStarPurple500,
-} from "react-icons/md";
-import ProductImages from "../../admin/product/Category/Images";
+import { useContext, useEffect, useState } from "react";
 import Recommended from "../Recommended";
+import ProductImages from "./ProductImages";
+import Stars from "./Start";
 
 type propsType = {
   params: { productId: string };
 };
 
-const getBlankStars = (ratingStars: String[] | undefined) => {
-  return ratingStars ? new Array(5 - ratingStars.length).fill("") : undefined;
-};
-
 const Product = ({ params: { productId } }: propsType) => {
-  const [images, setImages] = useState<File[]>([]);
   const { products } = useContext(ProductsContext);
   const { products: cartProducts, setProducts: setCartProducts } =
     useContext(CartContext);
   const product = products.find((item) => item.id == productId);
-  const ratingStars = product ? getRatingStars(product?.rating) : undefined;
-  const array = getBlankStars(ratingStars);
+  const [imagesUrl, setImagesUrl] = useState<string[]>([]);
+  const [selectedColor, setSelectedColor] = useState<string>("");
+  const [selectedSize, setSelectedSize] = useState<number | null>(null);
 
   const handleAddProductOnCard = () => {
-    if (product) setCartProducts(AddProductToCart(product, cartProducts));
+    if (product && selectedSize && selectedColor)
+      setCartProducts(
+        AddProductToCart(product, cartProducts, selectedSize, selectedColor)
+      );
   };
 
-  console.log(product)
-  const handleImages=()=>{
-    
-  }
+  useEffect(() => {
+    setSelectedSize(product?.sizes[0] || null);
+    setSelectedColor(product?.colors[0] || "");
+  }, [product]);
 
+  useEffect(() => {
+    setImagesUrl(product?.imagesUrl || []);
+  }, [product]);
 
+  const handleSelectSize = (size: number) => {
+    setSelectedSize(size);
+  };
+
+  const handleSelectColor = (color: string) => {
+    setSelectedColor(color);
+  };
 
   return (
     <>
       {product && (
         <>
-          <section className="2xl:px-32 md:px-24 py-10 px-5">
-            <div className="bg-white p-5 flex-1 rounded-lg flex flex-col gap-2">
-              <div className="flex gap-5 flex-col md:flex-row items-center py-5">
-                {images.length > 0 &&
-                  images.map((image, index) => (
+          <section className=" md:px-24 py-10 px-5 flex flex-col items-center">
+            <div className="p-2 flex-1 rounded-lg flex flex-col xl:flex-row gap-24">
+              <div className="grid grid-cols-3 w-[800px] gap-5">
+                {imagesUrl?.length > 0 &&
+                  imagesUrl?.map((url, index) => (
                     <ProductImages
-                      image={image}
+                      imageUrl={url}
+                      imagesUrl={imagesUrl}
                       index={index}
-                      setImages={setImages}
-                      images={images}
+                      setImagesUrl={setImagesUrl}
                     />
                   ))}
               </div>
-              <div className="py-5 w-full flex flex-col gap-2">
+              <div className="pb-5 w-full flex flex-col gap-2">
                 <div>
-                  <h1 className="font-bold">{product.name}</h1>
-                  <div className="flex text-starYellow items-center gap-2 ">
-                    <div className="flex">
-                      {ratingStars?.map((item, index) => {
-                        if (item === "full")
-                          return (
-                            <MdOutlineStarPurple500 key={index} size={15} />
-                          );
-                        else return <MdOutlineStarHalf key={index} size={15} />;
-                      })}
-                      {array?.map(() => {
-                        return (
-                          <MdOutlineStarOutline
-                            key={Math.random() + 10}
-                            size={15}
-                          />
-                        );
-                      })}
-                    </div>
-                    <span>{product?.rating}</span>
-                  </div>
-                  <h2 className="border-b-2 border-gray-200 w-full">
-                    Preço:{" "}
-                    <span className="font-bold">
-                      R$ {(product.priceInCents / 100).toFixed(2)}
-                    </span>{" "}
-                  </h2>
+                  <h1 className="font-bold text-4xl">{product.name}</h1>
+                  <h2>R$ {(product.priceInCents / 100).toFixed(2)}</h2>
                 </div>
-                <div className=" border-b-2 border-gray-200 gap-1 flex flex-col">
-                  <div className="flex gap-2 flex-col md:flex-row">
-                    <h2 className="font-bold">Categorias:</h2>
-                    <div className="flex gap-1">
-                      {product.categories.map((category) => (
-                        <div className="bg-gray-200 rounded-md px-2 capitalize">
-                          {translateCategory(category)}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="flex gap-1">
-                    <h2 className="font-bold">Marca: </h2>
-                    <h2>{product.brand}</h2>
-                  </div>
-                  <div className="flex gap-1">
-                    <h2 className="font-bold">Modelo: </h2>
-                    <h2>{product.model}</h2>
-                  </div>
-                  <div className="flex gap-1">
-                    <h2 className="font-bold">Cores disponiveis: </h2>
-                    <h2>{product.color}</h2>
+                <text className="max-w-[400px]">
+                  Revamp your style with the latest designer trends in men’s
+                  clothing or achieve a perfectly curated wardrobe thanks to our
+                  line-up of timeless pieces.{" "}
+                </text>
+                <Stars product={product}>
+                  <h2>({product.rating.toFixed(1)})</h2>
+                </Stars>
+                <div className="flex flex-col gap-2">
+                  <h2 className="text-[#676767]">Cores</h2>
+                  <div className="flex gap-2">
+                    {product.colors.map((color) => (
+                      <button
+                        className={`bg-${color.toLowerCase()} rounded-full w-[50px] h-[50px] border border-black ${
+                          selectedColor === color ? "opacity-100" : "opacity-50"
+                        }  `}
+                        onClick={() => handleSelectColor(color)}
+                      />
+                    ))}
                   </div>
                 </div>
-                <div>
-                  <h2 className="font-bold">Descrição</h2>
-                  <text>{product.description}</text>
+                <div className="flex flex-col gap-2">
+                  <h2 className="text-[#676767]">Tamanho</h2>
+                  <div className="flex gap-2 ">
+                    {product.sizes.map((size) => (
+                      <button
+                        className={`w-[40px] h-[40px] border border-gray-500 font-bold ${
+                          selectedSize === size && "bg-gray-600 text-white"
+                        }`}
+                        onClick={() => handleSelectSize(size)}
+                      >
+                        {size}
+                      </button>
+                    ))}
+                  </div>
                 </div>
+                <button
+                  className="bg-black hover:scale-105 px-10 py-3 rounded-sm text-white w-fit mt-10 "
+                  onClick={() => handleAddProductOnCard()}
+                >
+                  Adicionar ao carrinho
+                </button>
               </div>
-            </div>
-            <div>
-              <button
-                className="bg-strongOrange hover:bg-hoverOrange hover:scale-105 px-2 py-1 rounded-lg text-white"
-                onClick={() => handleAddProductOnCard()}
-              >
-                Adicionar ao carrinho
-              </button>
             </div>
           </section>
           <Recommended product={product} />

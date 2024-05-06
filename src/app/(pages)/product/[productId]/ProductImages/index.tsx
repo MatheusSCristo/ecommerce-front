@@ -1,19 +1,19 @@
 import Image from "next/image";
 
 type propsType={
-    image: File;
-    images: File[];
-    setImages: React.Dispatch<React.SetStateAction<File[]>>;
+    imagesUrl: string[];
+    imageUrl:string;
+    setImagesUrl: React.Dispatch<React.SetStateAction<string[]>>;
     index: number;
 }
 
-const Images = ({image,images,setImages,index}:propsType) => {
+const ProductImages = ({imageUrl,imagesUrl,setImagesUrl,index}:propsType) => {
   const handleChangePrimaryImage = (index: number) => {
-    const newImages = [...images];
+    const newImages = [...imagesUrl];
     const oldPrimaryImage = newImages[0];
     newImages[0] = newImages[index];
     newImages[index] = oldPrimaryImage;
-    setImages(newImages);
+    setImagesUrl(newImages);
   };
   return (
     <div
@@ -24,7 +24,7 @@ const Images = ({image,images,setImages,index}:propsType) => {
       } rounded-sm relative bg-[#DDDDDD]`}
     >
       <Image
-        src={URL.createObjectURL(image)}
+        src={imageUrl}
         alt="Imagem do produto"
         fill
         className="object-contain hover:scale-[1.2]"
@@ -34,4 +34,4 @@ const Images = ({image,images,setImages,index}:propsType) => {
   );
 };
 
-export default Images;
+export default ProductImages;
