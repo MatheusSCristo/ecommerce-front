@@ -1,5 +1,5 @@
-import { sneakers } from "@/app/components/SecondBox/products";
 import { Product } from "@/types";
+import { GetAll } from "@/utils/Products/getAll";
 import React, { createContext, useEffect, useState } from "react";
 
 type ContextType = {
@@ -13,8 +13,7 @@ function ProductsProvider({ children }: { children: React.ReactNode }) {
   const [products, setProducts] = useState<Product[]>([]);
   useEffect(() => {
     const handleProductsLocalStorage = async () => {
-      // const newProducts = await GetAll();
-      const newProducts=sneakers;
+      const newProducts = await GetAll();
       setProducts(newProducts);
     };
     handleProductsLocalStorage();

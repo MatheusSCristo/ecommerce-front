@@ -1,10 +1,9 @@
 "use server"
-import productSchema from "@/schemas/productSchema";
 import { cookies } from 'next/headers';
-import { z } from "zod";
 
-export default async(body:z.infer<typeof productSchema>)=>{
+export default async(data:any)=>{
     const accessToken=cookies().get("accessToken")
+    const body={...data,sizes:data.sizes.split(","),colors:data.colors.split(",")}
     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/products`,{
         method:'POST',
         headers:{
