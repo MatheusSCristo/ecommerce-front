@@ -16,7 +16,7 @@ const Sneakers = () => {
               src={product.imagesUrl[0] || "/images/productImage.png"}
               alt="product"
               fill
-              className="object-contain "
+              className="object-cover"
             />
           </div>
         </Link>

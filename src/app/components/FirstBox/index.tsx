@@ -21,7 +21,7 @@ const PrimaryBox = () => {
           src={"/images/bannerImage.jpeg"}
           alt="Tênis"
           fill
-          className="object-fit"
+          className="object-cover"
         />
       </div>
     </section>

@@ -32,7 +32,7 @@ const Images = ({image,images,setImages,index}:propsType) => {
         src={URL.createObjectURL(image)}
         alt="Imagem do produto"
         fill
-        className="object-contain hover:scale-[1.2]"
+        className={`object-contain ${index !==0 && "hover:scale-[1.2]"}`}
         onClick={() => handleChangePrimaryImage(index)}
       />
       <span className="absolute text-xl right-2 top-2 cursor-pointer" onClick={handleRemoveImage}>X</span>
