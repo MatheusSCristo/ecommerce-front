@@ -15,7 +15,7 @@ const ThirdBox = ({ userEmail, userName }: propsType) => {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <h1 className="font-bold text-2xl">
+      <h1 className="font-bold text-2xl text-center">
         Um email de confirmação foi enviado!
       </h1>
       <Image
@@ -27,7 +27,7 @@ const ThirdBox = ({ userEmail, userName }: propsType) => {
       <h2 className="text-dark text-md">Você já pode navegar pela loja</h2>
       <Link
         href={"/"}
-        className="px-12 py-3 bg-strongOrange text-white rounded-lg"
+        className="px-12 py-3 bg-black text-white rounded-sm"
       >
         Ir para loja
       </Link>

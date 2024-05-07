@@ -32,11 +32,11 @@ const page = () => {
 
   return (
     <section className="flex items-center justify-center h-screen">
-      <div className="bg-white border-gray-500 border rounded-lg  flex flex-col items-center justify-center gap-5 px-5 md:w-2/5 2xl:w-1/5 py-12">
+      <div className="bg-white border-gray-500 border rounded-mdk  flex flex-col items-center justify-center gap-5 px-5 md:w-2/5 2xl:w-1/5 py-12">
         <h1 className="font-bold text-2xl">Email confirmado</h1>
         <Link
           href={"/"}
-          className="px-3 py-2 text-white bg-strongOrange rounded-md "
+          className="px-3 py-2 text-white bg-black rounded-sm "
         >
           Ir para loja
         </Link>

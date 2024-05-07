@@ -42,7 +42,7 @@ const FirstBox = ({ setStep,handleData }: propsType) => {
     <div className="flex flex-col items-center gap-5  ">
       <div className="flex items-center flex-col gap-2">
         <h1 className="text-2xl font-bold">Bem vindo!</h1>
-        <h2 className="text-md text-dark">
+        <h2 className="text-md text-dark text-center">
           Para começarmos, precisamos de algumas informações suas.
         </h2>
       </div>
@@ -56,7 +56,7 @@ const FirstBox = ({ setStep,handleData }: propsType) => {
           </label>
           <input
             type="text"
-            className="border-gray-300 border rounded-lg p-3"
+            className="border-gray-300 border rounded-lg p-3 focus:outline-none"
             {...register("name")}
           />
           {errors.name?.message && <span className="text-red-500">{errors.name?.message}</span>}
@@ -68,7 +68,7 @@ const FirstBox = ({ setStep,handleData }: propsType) => {
           </label>
           <input
             type="text"
-            className="border-gray-300 border rounded-lg p-3"
+            className="border-gray-300 border rounded-lg p-3 focus:outline-none"
             {...register("lastName")}
           />
           {errors.lastName?.message && <span className="text-red-500">{errors.lastName?.message}</span>}
@@ -80,7 +80,7 @@ const FirstBox = ({ setStep,handleData }: propsType) => {
           </label>
           <input
             type="date"
-            className="border-gray-300 border rounded-lg p-3"
+            className="border-gray-300 border rounded-lg p-3 focus:outline-none"
             {...register("birthDate")}
           />
           {errors.birthDate?.message && <span className="text-red-500">{errors.birthDate?.message}</span>}
@@ -91,7 +91,7 @@ const FirstBox = ({ setStep,handleData }: propsType) => {
           </label>
           <input
             type="text"
-            className="border-gray-300 border rounded-lg p-3"
+            className="border-gray-300 border rounded-lg p-3 focus:outline-none"
             {...register("cpf")}
           />
           {errors.cpf?.message && <span className="text-red-500">{errors.cpf?.message}</span>}
@@ -99,7 +99,7 @@ const FirstBox = ({ setStep,handleData }: propsType) => {
         </div>
         <button
           type="submit"
-          className="px-12 py-3 bg-strongOrange text-white rounded-lg"
+          className="px-12 py-3 bg-black text-white rounded-sm"
         >
           Continuar
         </button>

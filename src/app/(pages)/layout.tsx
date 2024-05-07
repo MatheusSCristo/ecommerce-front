@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <>
       <Navbar />
-      <main className="flex-1 flex flex-col bg-[#EFF2F6]">{children}</main>
+      <main className="flex-1 flex flex-col ">{children}</main>
       <Footer />
     </>
   );

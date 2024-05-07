@@ -58,7 +58,7 @@ const Login = () => {
 
   return (
     <section className="flex items-center justify-center w-full h-screen">
-      <div className="bg-white border-gray-400 rounded-xl 2xl:w-[400px] 2xl:h-[500px] p-5 flex flex-col gap-5 flex flex-col items-center">
+      <div className="2xl:w-[400px] 2xl:h-[500px] p-5 flex flex-col gap-5 flex flex-col items-center">
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-3xl">Bem vindo!</h1>
           <h2 className="text-2xl">Entre com sua conta</h2>
@@ -70,7 +70,7 @@ const Login = () => {
           <div className="flex gap-5 flex-col p-10">
             <div className="flex flex-col gap-1">
               <input
-                className="border-b-2 border-gray-400 w-full p-2 "
+                className="border border-gray-600 w-full p-2 focus:outline-none"
                 placeholder="Email"
                 {...register("email")}
               />
@@ -80,7 +80,7 @@ const Login = () => {
             </div>
             <div className="flex flex-col gap-1">
               <input
-                className="border-b-2 border-gray-400 w-full p-2 "
+                className="border border-gray-600 w-full p-2 focus:outline-none"
                 placeholder="Senha"
                 {...register("password")}
               />
@@ -101,7 +101,7 @@ const Login = () => {
           </div>
           <div className="flex flex-col justify-center items-center gap-2">
             <button
-              className="px-20 py-2 bg-strongOrange text-white w-fit rounded-lg disabled:opacity-50"
+              className="px-20 py-2 bg-black text-white w-fit rounded-sm disabled:opacity-50"
               type="submit"
               disabled={isLoading}
             >
@@ -109,7 +109,7 @@ const Login = () => {
             </button>
             <span className="text-gray-500">
               Não tem uma conta?{" "}
-              <Link href={"/auth/register"} className="text-strongOrange">
+              <Link href={"/auth/register"} className="text-blue hover:underline">
                 Crie uma agora!
               </Link>
             </span>

@@ -80,7 +80,7 @@ const SecondBox = ({name,setStep,handleRegisterSubmit,handleData}: propsType) =>
           </label>
           <input
             type="text"
-            className="border-gray-300 border rounded-lg p-3"
+            className="focus:outline-none border-gray-300 border rounded-lg p-3"
             {...register("email")}
           />
         </div>
@@ -90,7 +90,7 @@ const SecondBox = ({name,setStep,handleRegisterSubmit,handleData}: propsType) =>
           </label>
           <input
             type="text"
-            className="border-gray-300 border rounded-lg p-3"
+            className="focus:outline-none border-gray-300 border rounded-lg p-3"
             {...register("password")}
           />
         </div>
@@ -100,13 +100,13 @@ const SecondBox = ({name,setStep,handleRegisterSubmit,handleData}: propsType) =>
           </label>
           <input
             type="text"
-            className="border-gray-300 border rounded-lg p-3"
+            className="focus:outline-none border-gray-300 border rounded-lg p-3"
             {...register("confirmPassword")}
           />
         </div>
         <button
           type="submit"
-          className="px-12 py-3 bg-strongOrange text-white rounded-lg"
+          className="px-12 py-3 bg-black text-white rounded-sm"
         >
           Continuar
         </button>
