@@ -31,14 +31,14 @@ const Orders = () => {
   const [statusSelected, setStatusSelected] = useState<StatusKey>("TODOS");
 
   useEffect(() => {
-    const getUsersOrders = async (accessToken: string, userId: string) => {
-      const data = await getOrderByClientId(userId, accessToken);
+    const getUsersOrders = async (userId: string) => {
+      const data = await getOrderByClientId(userId);
       if (!data) return;
       setOrders(data);
     };
     if (user) {
-      const { id, accessToken } = user;
-      getUsersOrders(accessToken, id);
+      const { id } = user;
+      getUsersOrders(id);
     }
   }, [user]);
 

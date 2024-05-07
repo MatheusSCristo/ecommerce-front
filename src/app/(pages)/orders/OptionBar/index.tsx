@@ -9,15 +9,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 const orderStatus = [
   "TODOS",
-  "ENVIADOS",
   "ENTREGUES",
+  "ENVIADOS",
   "PROCESSANDO",
   "CANCELADOS",
 ];
 type StatusKey =
   | "TODOS"
-  | "ENVIADOS"
   | "ENTREGUES"
+  | "ENVIADOS"
   | "PROCESSANDO"
   | "CANCELADOS";
 
@@ -29,13 +29,13 @@ type propsType = {
 const OptionBar = ({ statusSelected, setStatusSelected }: propsType) => {
   return (
     <>
-      <div className="p-2 bg-white justify-center items-center rounded-md hidden md:flex ">
+        <div className="p-2 justify-center items-center  hidden md:flex ">
         {orderStatus.map((item) => (
           <span
             key={item}
             className={`px-5 py-3 cursor-pointer ${
               statusSelected === item
-                ? "text-strongOrange border-b-[2px] border-strongOrange"
+                ? "text-black border-b-[2px] border-black font-bold"
                 : "text-gray-600"
             }`}
             onClick={() => setStatusSelected(item as StatusKey)}
@@ -44,7 +44,7 @@ const OptionBar = ({ statusSelected, setStatusSelected }: propsType) => {
           </span>
         ))}
       </div>
-      <div className="md:hidden flex justify-center rounded-md  ">
+      <div className="md:hidden flex justify-center ">
         <Swiper
          className="py-8 rounded-lg "
           slidesPerView={3}
@@ -53,9 +53,9 @@ const OptionBar = ({ statusSelected, setStatusSelected }: propsType) => {
         >
             {orderStatus.map((status) => (
               <SwiperSlide
-                className={`px-5 py-3 bg-white  ${
+                className={`px-5 py-3   ${
                   statusSelected === status
-                    ? "text-strongOrange border-b-[2px] border-strongOrange"
+                    ? "text-black border-b-[2px] border-black font-bold"
                     : "text-gray-600"
                 }`}
                 key={status}

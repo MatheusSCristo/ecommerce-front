@@ -47,7 +47,8 @@ export type OrderProductResponse = {
   productId: string;
   quantity: string;
   subtotalInCents: number;
-  imageUrl: string;
+  imagesUrl: string[];
+  size: number;
 };
 
 export type Payment = {
