@@ -35,13 +35,16 @@ const Login = () => {
     setCredentialsError(false);
     setIsLoading(true);
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userInfo),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_API_URL}/auth/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userInfo),
+        }
+      );
       setIsLoading(false);
       if (!response.ok) {
         setCredentialsError(true);
@@ -52,7 +55,7 @@ const Login = () => {
       createSession(data.accessToken);
       router.push("/");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   };
 
@@ -80,6 +83,7 @@ const Login = () => {
             </div>
             <div className="flex flex-col gap-1">
               <input
+                type="password"
                 className="border border-gray-600 w-full p-2 focus:outline-none"
                 placeholder="Senha"
                 {...register("password")}
@@ -109,7 +113,10 @@ const Login = () => {
             </button>
             <span className="text-gray-500">
               Não tem uma conta?{" "}
-              <Link href={"/auth/register"} className="text-blue hover:underline">
+              <Link
+                href={"/auth/register"}
+                className="text-blue hover:underline"
+              >
                 Crie uma agora!
               </Link>
             </span>

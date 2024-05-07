@@ -32,7 +32,6 @@ const capitalizeWord = (word: string) => {
   return word[0].toUpperCase() + word.slice(1);
 };
 
-const stepsDots = [1, 2];
 const register = () => {
   const [step, setStep] = useState(1);
   const [data, setData] = useState<dataType>({} as dataType);
@@ -85,7 +84,7 @@ const register = () => {
             userName={data.name}
           />
           <div className="flex justify-center gap-2">
-            {stepsDots.map((item) => (
+            {[1,2].map((item) => (
               <div
                 key={item}
                 className={`w-[10px] h-[10px] border rounded-full  ${

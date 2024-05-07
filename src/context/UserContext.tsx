@@ -23,7 +23,7 @@ function UserProvider({ children }: { children: React.ReactNode }) {
   function getUserFromLocalStorage() {
     const local = localStorage.getItem("user");
     if (local) return JSON.parse(local);
-    else return {} as User;
+    else return null;
   }
 
   return (

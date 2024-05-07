@@ -9,7 +9,6 @@ import { IoCartOutline, IoExitOutline } from "react-icons/io5";
 import Cart from "./Cart";
 
 const Icons = () => {
-  const [accountDesktopIsOpen, setAccountDesktopIsOpen] = useState(false);
   const [cartMenuIsOpen, setCartMenuIsOpen] = useState(false);
   const { products } = useContext(CartContext);
   const { user, setUser } = useContext(UserContext);
@@ -17,9 +16,11 @@ const Icons = () => {
 
   const handleLogout = () => {
     deleteSession();
+    localStorage.removeItem("user");
     if (user) {
       setTimeout(() => {
         setUser(null);
+        router.push("/");
       }, 1000);
     }
   };

@@ -3,7 +3,7 @@ import deleteSession from "@/utils/User/deleteSession";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { FaBoxArchive } from "react-icons/fa6";
 import { IoHome } from "react-icons/io5";
 
@@ -14,10 +14,17 @@ const MobileMenu = ({
 }) => {
   const { user } = useContext(UserContext);
   const router = useRouter();
-  const [effect, setEffect] = useState(false);
+  const {setUser}=useContext(UserContext);
+
   const handleLogout = () => {
     deleteSession();
-    router.push("/auth/login");
+    localStorage.removeItem("user");
+    if (user) {
+      setTimeout(() => {
+        setUser(null);
+        router.push("/");
+      }, 1000);
+    }
   };
 
   return (
@@ -58,8 +65,9 @@ const MobileMenu = ({
             <span onClick={() => setMenuMobileIsOpen(false)}>Início</span>
           </Link>
           <Link
-            href={"/"}
+            href={"/orders"}
             className="flex items-center gap-2 text-xl transform active:scale-[1.1] active:bg-gray-300  transition-transform"
+            onClick={()=>setMenuMobileIsOpen(false)}
           >
             <FaBoxArchive className="text-gray-600" />
             <span>Meus pedidos</span>

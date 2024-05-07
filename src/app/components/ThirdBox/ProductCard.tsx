@@ -35,7 +35,7 @@ const ProductCard = ({ product }: ParamsType) => {
           <h2 className="text-sm md:text-lg">R$ {(product.priceInCents / 100).toFixed(2)}</h2>
         </div>
         <Link href={`/product/${product.id}`} className="px-3 py-1 w-fit bg-black rounded-sm text-white ">
-         Ver mais
+         Ver detalhes 
         </Link>
         <div className="flex gap-2 2xl:items-center flex-col 2xl:flex-row">
           <div className="flex text-starYellow  ">
