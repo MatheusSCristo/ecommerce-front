@@ -45,13 +45,14 @@ const Product = ({ params: { productId } }: propsType) => {
     setSelectedColor(color);
   };
 
+
   return (
     <>
       {product && (
         <>
-          <section className=" md:px-24 py-10 px-5 flex flex-col items-center">
-            <div className="p-2 flex-1 rounded-lg flex flex-col xl:flex-row gap-24">
-              <div className="grid grid-cols-3 w-[800px] gap-5">
+          <section className=" md:px-24 py-10 px-5 flex flex-col items-center flex-1">
+            <div className="p-2 flex-1 rounded-lg flex flex-col xl:flex-row gap-24 items-center md:items-start">
+              <div className="grid grid-cols-3 2xl:w-[800px] gap-5">
                 {imagesUrl?.length > 0 &&
                   imagesUrl?.map((url, index) => (
                     <ProductImages
@@ -59,6 +60,7 @@ const Product = ({ params: { productId } }: propsType) => {
                       imagesUrl={imagesUrl}
                       index={index}
                       setImagesUrl={setImagesUrl}
+                      
                     />
                   ))}
               </div>
@@ -67,11 +69,11 @@ const Product = ({ params: { productId } }: propsType) => {
                   <h1 className="font-bold text-4xl">{product.name}</h1>
                   <h2>R$ {(product.priceInCents / 100).toFixed(2)}</h2>
                 </div>
-                <text className="max-w-[400px]">
+                <p className="max-w-[400px]">
                   Revamp your style with the latest designer trends in men’s
                   clothing or achieve a perfectly curated wardrobe thanks to our
                   line-up of timeless pieces.{" "}
-                </text>
+                </p>
                 <Stars product={product}>
                   <h2>({product.rating.toFixed(1)})</h2>
                 </Stars>
@@ -80,8 +82,8 @@ const Product = ({ params: { productId } }: propsType) => {
                   <div className="flex gap-2">
                     {product.colors.map((color) => (
                       <button
-                        className={`bg-${color.toLowerCase()} rounded-full w-[50px] h-[50px] border border-black ${
-                          selectedColor === color ? "opacity-100" : "opacity-50"
+                        className={`bg-${color.toLowerCase()}  rounded-full w-[50px] h-[50px]  border-black ${
+                          selectedColor === color ? "opacity-100 border" : "opacity-50"
                         }  `}
                         onClick={() => handleSelectColor(color)}
                       />
@@ -93,8 +95,8 @@ const Product = ({ params: { productId } }: propsType) => {
                   <div className="flex gap-2 ">
                     {product.sizes.map((size) => (
                       <button
-                        className={`w-[40px] h-[40px] border border-gray-500 font-bold ${
-                          selectedSize === size && "bg-gray-600 text-white"
+                        className={`w-[40px] h-[40px] border border-gray-600 font-bold ${
+                          selectedSize === size && "bg-gray-600 text-white "
                         }`}
                         onClick={() => handleSelectSize(size)}
                       >

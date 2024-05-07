@@ -6,13 +6,20 @@ const Prices = () => {
     SearchParamsBarContext
   );
   const [min, setMin] = useState(0);
-  const [max, setMax] = useState(1500);
+  const [max, setMax] = useState(10000);
   const handleInputPriceRange = () => {
     setPriceRangeSelected(() => ({
-      min:min?min:0,
-      max:max?max:0,
+      min: min ? min : 0,
+      max: max ? max : 0,
     }));
   };
+
+  useEffect(() => {
+    if (priceRangeSelected.min !== min || priceRangeSelected.max != max) {
+      setMin(priceRangeSelected.min);
+      setMax(priceRangeSelected.max);
+    }
+  }, [priceRangeSelected]);
 
   useEffect(() => handleInputPriceRange(), [min, max]);
 
@@ -27,7 +34,7 @@ const Prices = () => {
           <div className="flex">
             <span>R$</span>
             <input
-              type="number"
+              type="string"
               name="min"
               className="w-full rounded-lg"
               value={min}
@@ -43,7 +50,7 @@ const Prices = () => {
           <div className="flex">
             <span>R$</span>
             <input
-              type="number"
+              type="string"
               name="max"
               className="w-full rounded-lg"
               value={max}

@@ -117,10 +117,10 @@ const AdminPage = () => {
           <div className="flex flex-col 2xl:w-fit">
             <div className="flex flex-col 2xl:flex-row gap-5">
               <div className="flex flex-col">
-                <div className="grid grid-cols-3 w-[500px] gap-2 ">
+                <div className="grid grid-cols-3 2xl:w-[500px] gap-2 ">
                   {images.length > 0 &&
                     images.map((image, index) => (
-                     <Images image={image} index={index} setImages={setImages} images={images}/>
+                     <Images image={image} index={index} setImages={setImages} images={images} key={image.name}/>
                     ))}
                 </div>
                 <input type="file" onChange={handleImage} multiple />
@@ -231,7 +231,7 @@ const AdminPage = () => {
               </div>
               <div className="flex flex-col">
                 {categories.map((category, index) => (
-                  <label htmlFor="categories" className="capitalize flex gap-2">
+                  <label htmlFor="categories" className="capitalize flex gap-2" key={category.category}>
                     <input
                       type="checkbox"
                       id={`categories ${index}`}

@@ -2,7 +2,7 @@ import { CartProduct, Product } from "@/types";
 
 export default (product: Product, products: CartProduct[],size:number,color:string) => {
   const newProducts = [...products];
-  const index = newProducts.findIndex((item) => item.id === product.id);
+  const index = newProducts.findIndex((item) => item.id === product.id && item.size===size);
   if (index !== -1) {
     newProducts[index].quantity += 1;
   } else {

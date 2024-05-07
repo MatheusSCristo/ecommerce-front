@@ -18,8 +18,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Provider>
-        <body className={`${tilt.className}flex flex-col h-screen`}>
-          <main className="flex-1 flex flex-col bg-[#EFF2F6]"> {children}</main>
+        <body className={`${tilt.className} flex flex-col h-screen`}>
+           {children}
         </body>
       </Provider>
     </html>

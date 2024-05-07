@@ -20,7 +20,7 @@ function SearchParamsBarProvider({ children }: { children: React.ReactNode }) {
   const [brandsSelected, setBrandsSelected] = useState<string[]>([]);
   const [categorySelected, setCategorySelected] = useState<CategoryType>({} as CategoryType);
   const [priceRangeSelected, setPriceRangeSelected] = useState<PriceRangeType>(
-    {} as PriceRangeType
+    {min:0,max:10000}
   );
   const [ratingsSelected, setRatingsSelected] = useState<Number[]>([]);
 

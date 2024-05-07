@@ -2,6 +2,7 @@ import { ProductsContext } from "@/context/ProductsContext";
 import { SearchParamsBarContext } from "@/context/SearchParamsBarContext";
 import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { IoChevronDown, IoChevronUp } from "react-icons/io5";
+import { set } from "zod";
 
 const Brands = () => {
   const [showBrands, setShowBrands] = useState(true);
@@ -25,6 +26,11 @@ const Brands = () => {
         setBrandsSelected((prevState)=>[...prevState,brand])
     }
   };
+
+
+  useEffect(()=>{
+    set
+  },[brandsSelected])
 
   return (
     <div className="flex flex-col border-gray-300 border-t-2 py-2">
@@ -50,14 +56,14 @@ const Brands = () => {
           if (showBrands && index < 6 && !showMoreIsActive)
             return (
               <div key={brand} className="flex items-center">
-                <input type="checkbox" onChange={handleSelectBrand} value={brand} />
+                <input type="checkbox" onChange={handleSelectBrand} value={brand} checked={brandsSelected.includes(brand)} />
                 <span>{brand}</span>
               </div>
             );
           else if (showBrands && showMoreIsActive) {
             return (
               <div key={brand} className="flex items-center">
-                <input type="checkbox" onChange={handleSelectBrand}  value={brand} />
+                <input type="checkbox" onChange={handleSelectBrand}  value={brand} checked={brandsSelected.includes(brand)}/>
                 <span>{brand}</span>
               </div>
             );
@@ -67,7 +73,7 @@ const Brands = () => {
           className="text-blue"
           onClick={() => setShowMoreIsActive((prevState) => !prevState)}
         >
-         {showBrands && (showMoreIsActive  ? "Ver menos" : "Ver mais")}
+         {showBrands && brands.length>6 && (showMoreIsActive  ? "Ver menos" : "Ver mais")}
         </span>
       </div>
     </div>

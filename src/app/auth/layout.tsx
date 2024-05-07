@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Crie sue conta",
-  description: "Crie sua conta para aproveitar por completo nossa loja",
+  title: "Entre na sua conta",
+  description: "Entre na sua conta para aproveitar por completo nossa loja",
 };
 
 export default function RootLayout({

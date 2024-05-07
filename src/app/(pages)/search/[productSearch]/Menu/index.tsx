@@ -13,19 +13,21 @@ const Menu = ({ products }: ParamsType) => {
   );
   return (
     <div className="w-full">
-      <div className="w-full bg-white p-3 border border-gray-500 rounded-lg flex justify-between items-center relative">
-        {categorySelected.category && (
-          <h1>
-            {products.length} items encontrados em{" "}
-            <span className="font-bold capitalize">
-              {categorySelected.categoria}
-            </span>
-          </h1>
-        )}
-        {!categorySelected.category && (
-          <h1>Mostrando {products.length} items</h1>
-        )}
-        <Select/>
+      <div className="self-end p-3 flex justify-end  relative">
+        <div className="flex flex-col items-center">
+          <Select />
+          {categorySelected.category && (
+            <h1>
+              {products.length} items encontrados em{" "}
+              <span className="font-bold capitalize">
+                {categorySelected.categoria}
+              </span>
+            </h1>
+          )}
+          {!categorySelected.category && (
+            <h1>Mostrando {products.length} items</h1>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -12,11 +12,11 @@ const ProductsContext = createContext<ContextType>({} as ContextType);
 function ProductsProvider({ children }: { children: React.ReactNode }) {
   const [products, setProducts] = useState<Product[]>([]);
   useEffect(() => {
-    const handleProductsLocalStorage = async () => {
+    const getProducts = async () => {
       const newProducts = await GetAll();
       setProducts(newProducts);
     };
-    handleProductsLocalStorage();
+    getProducts();
   }, []);
 
   return (

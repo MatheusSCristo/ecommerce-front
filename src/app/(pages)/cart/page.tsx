@@ -26,22 +26,25 @@ const Cart = () => {
   return (
     <section className="md:px-24 2xl:px-32 md:py-10 px-2 py-5 flex gap-2 flex-col flex-1 relative    ">
       <h1 className="text-2xl font-bold">Meu Carrinho({products.length})</h1>
-      <Link href={"/"} className="text-lg font-semibold">
-        Precisa de algo mais? Continue a navegar
-      </Link>
+      <span className="text-lg font-bold flex gap-2">
+        Precisa de algo mais?
+        <Link href={"/"} className="hover:underline">
+          Continue a navegar
+        </Link>
+      </span>
       <div className="flex gap-4 md:flex-row flex-col">
         <div className=" flex-[2]  p-5 rounded-lg flex flex-col gap-2">
           {products.map((product) => (
-            <Product product={product} />
+            <Product product={product} key={product.id + product.size} />
           ))}
-          {products.length < 1 && (
+          {products.length === 0 && (
             <div className="w-full h-full flex flex-col items-center justify-center gap-2">
               <h2 className="font-bold text-2xl ">
                 Você ainda não possui nenhum item no seu carrinho!
               </h2>
               <Link
                 href={"/"}
-                className="text-center border-gray-400 border rounded-lg px-2 py-1 bg-strongOrange text-white hover:scale-105 hover:bg-hoverOrange duration-300"
+                className="text-center border-gray-400 border rounded-sm px-2 py-1 bg-black text-white hover:scale-105  duration-300"
               >
                 Continue a navegar pelos produtos
               </Link>
@@ -143,9 +146,7 @@ const Cart = () => {
             Reenviar email de verificação
           </h3>
           {emailSent && (
-            <span className="text-sm text-strongOrange">
-              Email de verificação enviado.
-            </span>
+            <span className="text-sm ">Email de verificação enviado.</span>
           )}
         </div>
       )}

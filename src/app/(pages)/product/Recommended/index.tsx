@@ -39,7 +39,7 @@ const Recommended = ({ product }: propsType) => {
         <Swiper
           className="px-2 pt-1 hidden 2xl:block"
           spaceBetween={10}
-          slidesPerView={5}
+          slidesPerView={products.length >5? 5:products.length}
           loop={true}
           autoplay={{
             delay: 1000,
@@ -57,7 +57,7 @@ const Recommended = ({ product }: propsType) => {
         <Swiper
           className="px-2 pt-1 hidden md:block 2xl:hidden"
           spaceBetween={10}
-          slidesPerView={3}
+          slidesPerView={products.length >3? 3:products.length}
           loop={true}
           autoplay={{
             delay: 1000,
@@ -75,7 +75,7 @@ const Recommended = ({ product }: propsType) => {
         <Swiper
           className="px-2 pt-1 md:hidden"
           spaceBetween={10}
-          slidesPerView={2}
+          slidesPerView={products.length >2? 2:products.length}
           loop={true}
           autoplay={{
             delay: 1000,

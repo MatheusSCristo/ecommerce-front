@@ -15,12 +15,17 @@ const Images = ({image,images,setImages,index}:propsType) => {
     newImages[index] = oldPrimaryImage;
     setImages(newImages);
   };
+
+  const handleRemoveImage=()=>{
+    setImages(images.filter((image, i) => i !== index))
+  }
+
   return (
     <div
       className={`${
         index == 0
-          ? "col-span-3 xl:w-[450px] xl:h-[450px] w-[100px] h-[50px] xl:h-[400px] border border-black "
-          : "w-[50px] h-[50px] xl:w-[150px] xl:h-[150px]"
+          ? "col-span-3 xl:w-[450px] xl:h-[450px] w-[150px] h-[150px] xl:h-[400px] border border-black "
+          : "w-[100px] h-[100px] xl:w-[150px] xl:h-[150px] mr-5"
       } rounded-sm relative bg-[#DDDDDD]`}
     >
       <Image
@@ -30,6 +35,7 @@ const Images = ({image,images,setImages,index}:propsType) => {
         className="object-contain hover:scale-[1.2]"
         onClick={() => handleChangePrimaryImage(index)}
       />
+      <span className="absolute text-xl right-2 top-2 cursor-pointer" onClick={handleRemoveImage}>X</span>
     </div>
   );
 };

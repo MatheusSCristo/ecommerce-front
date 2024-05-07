@@ -8,6 +8,12 @@ const nextConfig = {
             port: '',
             pathname: '/**',
           },
+          {
+            protocol: 'https',
+            hostname: '%20',
+            port: '',
+            pathname: '/**',
+          },
         ],
       },
 };

@@ -7,7 +7,6 @@ import {
   SearchParamsBarContext,
 } from "@/context/SearchParamsBarContext";
 import { Product } from "@/types";
-import { translateCategory } from "@/utils/CategoriesUtil";
 import { useSearchParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { IoFilter } from "react-icons/io5";
@@ -36,27 +35,19 @@ type PropsType = {
 
 const page = ({ params: { productSearch } }: PropsType) => {
   const searchParams = useSearchParams();
+  const [sideBarMobileIsOpen, setSideBarMobileIsOpen] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
-  const { products: allProducts } = useContext(ProductsContext);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const { products: allProducts } = useContext(ProductsContext);
   const { brandsSelected, categorySelected, priceRangeSelected } = useContext(
     SearchParamsBarContext
-  );
-  const query = searchParams.get("q");
-  const [sideBarMobileIsOpen, setSideBarMobileIsOpen] = useState(false);
+    );
+    const query = searchParams.get("q");
 
   const productsHasSearchedWord = (product: Product, searched: string) => {
-    return Object.values(product).some((value) => {
-      if (typeof value === "object") {
-        return value.some((item) => {
-          const translatedCategory = translateCategory(item);
-          return translatedCategory?.includes(searched);
-        });
-      } else if (typeof value === "string") {
-        return value.toLowerCase().includes(searched.toLowerCase());
-      }
-      return false;
-    });
+    const {name,description,brand,model }= product;
+    const values=[name,description,brand,model];
+    return values.some(value=>value.toLowerCase().includes(searched.toLowerCase()))
   };
 
   const filterProducts = (product: Product) => {

@@ -5,7 +5,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useState } from 'react';
 
 export default function SelectAutoWidth() {
-  const [sortBy, setSortBy] = useState<string>();
+  const [sortBy, setSortBy] = useState<string >("");
 
 
   const handleChange = (event: SelectChangeEvent) => {
