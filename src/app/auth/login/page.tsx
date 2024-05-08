@@ -98,7 +98,7 @@ const Login = () => {
               </span>
             )}
             {isLoading && (
-              <div className="flex justify-center text-strongOrange">
+              <div className="flex justify-center text-black">
                 <CircularProgress color="inherit" />
               </div>
             )}

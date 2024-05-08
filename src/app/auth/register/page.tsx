@@ -107,7 +107,7 @@ const register = () => {
           <MdError size={40} className="text-red-500" />
           <Link
             href={"/"}
-            className="px-12 py-3 bg-strongOrange text-white rounded-lg"
+            className="px-12 py-3 bg-black text-white rounded-sm"
           >
             Ir para loja
           </Link>

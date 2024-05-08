@@ -21,7 +21,17 @@ const config: Config = {
         "dark":"#1C1C1C",
         "starYellow":"#ffbe0b",
         "blue":"#0D6EFD",
-        "pendingYellow":"#ffc738"
+        "pendingYellow":"#ffc738",
+        "blue-500":"#00F",
+        "orange-500":"#f90",
+        "red-500": "#F00",
+        "green-500": "#0F0",
+        "yellow-500": "#FF0",
+        "purple-500": "#800080",
+        "pink-500": "#FFC0CB",
+        "teal-500": "#008080",
+        "cyan-500": "#00FFFF",
+        "brown-500": "#A52A2A"
       }
     },
   },

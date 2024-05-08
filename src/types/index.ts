@@ -9,7 +9,7 @@ export type Product = {
   model: string;
   colors: string[];
   categories: string[];
-  createdAt:Date;
+  createdAt:string;
   sizes: number[];
 };
 

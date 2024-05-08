@@ -17,7 +17,7 @@ const ThirdBox = () => {
           <ProductCard product={product} key={product.id} />
         ))}
         {products.length == 0 && (
-          <div className="w-screen items-center justify-center flex my-10 text-strongOrange">
+          <div className="w-screen items-center justify-center flex my-10 text-black">
             <CircularProgress color="inherit"/>
           </div>
         )}

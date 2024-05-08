@@ -17,6 +17,7 @@ const Product = ({ params: { productId } }: propsType) => {
   const { products: cartProducts, setProducts: setCartProducts } =
     useContext(CartContext);
   const product = products.find((item) => item.id == productId);
+  const [error, setError] = useState(false);
   const [imagesUrl, setImagesUrl] = useState<string[]>([]);
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
@@ -45,6 +46,37 @@ const Product = ({ params: { productId } }: propsType) => {
     setSelectedColor(color);
   };
 
+  const handleProductError = () => {
+    setTimeout(() => {
+      if (!product) {
+        setError(true);
+      }
+    }, 3000);
+  };
+
+  useEffect(() => {
+    handleProductError();
+  }, []);
+
+  const colors:colorType = {
+    red: "bg-red-500",
+    green: "bg-green-500",
+    yellow: "bg-yellow-500",
+    purple: "bg-purple-500",
+    pink: "bg-pink-500",
+    teal: "bg-teal-500",
+    cyan: "bg-cyan-500",
+    brown: "bg-brown-500",
+    blue: "bg-blue-500",
+    orange: "bg-orange-500",
+    black: "bg-black",
+    white: "bg-white",
+  };
+
+  type colorType = {
+    [key: string]: string;
+  };
+
 
   return (
     <>
@@ -60,7 +92,6 @@ const Product = ({ params: { productId } }: propsType) => {
                       imagesUrl={imagesUrl}
                       index={index}
                       setImagesUrl={setImagesUrl}
-                      
                     />
                   ))}
               </div>
@@ -81,13 +112,18 @@ const Product = ({ params: { productId } }: propsType) => {
                   <h2 className="text-[#676767]">Cores</h2>
                   <div className="flex gap-2">
                     {product.colors.map((color) => (
-                      <button
-                        className={`bg-${color.toLowerCase()}  rounded-full w-[50px] h-[50px]  border-black ${
-                          selectedColor === color ? "opacity-100 border" : "opacity-50"
-                        }  `}
-                        onClick={() => handleSelectColor(color)}
-                      />
-                    ))}
+                        <button
+                          className={`${
+                            colors[color.toLowerCase()]
+                          }  rounded-full w-[50px] h-[50px]  border-black ${
+                            selectedColor === color
+                              ? "opacity-100 border"
+                              : "opacity-50"
+                          }  `}
+                          key={color}
+                          onClick={() => handleSelectColor(color)}
+                        />
+                      ))}
                   </div>
                 </div>
                 <div className="flex flex-col gap-2">
@@ -117,9 +153,14 @@ const Product = ({ params: { productId } }: propsType) => {
           <Recommended product={product} />
         </>
       )}
-      {!product && (
+      {!product && !error && (
         <div className="w-full h-screen flex items-center justify-center text-gray-400">
           <CircularProgress color="inherit" />
+        </div>
+      )}
+      {error && (
+        <div className="w-full h-screen flex items-center justify-center ">
+          <h1 className="text-2xl">Erro ao procurar produto...</h1>
         </div>
       )}
     </>

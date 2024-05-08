@@ -250,7 +250,7 @@ const AdminPage = () => {
           </div>
           <button
             type="submit"
-            className="bg-strongOrange px-3 py-2 text-white rounded-md hover:bg-hoverOrange w-fit self-center "
+            className="bg-black px-3 py-2 text-white rounded-sm w-fit self-center "
           >
             Cadastrar
           </button>

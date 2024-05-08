@@ -19,13 +19,13 @@ const ProductCard = ({ product }: ParamsType) => {
   
   return (
     <div className="p-3 flex flex-col items-center gap-2 w-fit ">
-      <div className="w-[150px] h-[150px] md:w-[150px] md:h-[150px] 2xl:w-[300px] 2xl:h-[300px] relative bg-[#C4C4C4]">
+      <div className="w-[150px] h-[150px] md:w-[150px] md:h-[150px] 2xl:w-[300px] 2xl:h-[300px] relative ">
         <Image
           src={
             product.imagesUrl[0] || `/images/notFoundImage.png`
           }
           fill
-          className="object-contain rounded-lg"
+          className="object-contain rounded-sm"
           alt="Imagem do produto "
         />
       </div>
