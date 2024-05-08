@@ -36,11 +36,11 @@ const Product = ({ product }: { product: CartProduct }) => {
         <div className="flex flex-col gap-2">
           <div>
             <h2 className="font-bold text-xl">{product.name}</h2>
-            <h3 className="text-gray-600">Tamanho:{product.size}</h3>
+            <h3 className="text-gray-600">Tamanho: {product.size}</h3>
             <h3 className="text-gray-600">Marca: {product.brand}</h3>
           </div>
           <h3 className="font-bold text-xl">
-            R${((product.priceInCents * quantity) / 100).toFixed(2)}
+            R$ {((product.priceInCents * quantity) / 100).toFixed(2)}
           </h3>
         </div>
       </div>

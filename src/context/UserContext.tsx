@@ -1,5 +1,6 @@
 "use client";
 import { User } from "@/types";
+import verifySession from "@/utils/User/verifySession";
 import React, { createContext, useEffect, useState } from "react";
 
 type ContextType = {
@@ -17,7 +18,15 @@ function UserProvider({ children }: { children: React.ReactNode }) {
   }, [user]);
 
   useEffect(() => {
-    setUser(getUserFromLocalStorage());
+    const verifyToken = async () => {
+      if (!await verifySession()) {
+        setUser(null);
+        localStorage.removeItem("user");
+        return
+      }
+      setUser(getUserFromLocalStorage());
+    };
+    verifyToken();
   }, []);
 
   function getUserFromLocalStorage() {
