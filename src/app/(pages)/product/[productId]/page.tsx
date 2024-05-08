@@ -3,6 +3,7 @@ import { CartContext } from "@/context/CartContext";
 import { ProductsContext } from "@/context/ProductsContext";
 import AddProductToCart from "@/utils/AddProductToCart";
 import { CircularProgress } from "@mui/material";
+import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import Recommended from "../Recommended";
 import ProductImages from "./ProductImages";
@@ -48,17 +49,15 @@ const Product = ({ params: { productId } }: propsType) => {
 
   const handleProductError = () => {
     setTimeout(() => {
-      if (!product) {
-        setError(true);
-      }
-    }, 3000);
+      if (!product) setError(true);
+    }, 5000);
   };
 
   useEffect(() => {
     handleProductError();
-  }, []);
+  }, [product]);
 
-  const colors:colorType = {
+  const colors: colorType = {
     red: "bg-red-500",
     green: "bg-green-500",
     yellow: "bg-yellow-500",
@@ -71,12 +70,12 @@ const Product = ({ params: { productId } }: propsType) => {
     orange: "bg-orange-500",
     black: "bg-black",
     white: "bg-white",
+    gray: "bg-gray-400",
   };
 
   type colorType = {
     [key: string]: string;
   };
-
 
   return (
     <>
@@ -112,18 +111,18 @@ const Product = ({ params: { productId } }: propsType) => {
                   <h2 className="text-[#676767]">Cores</h2>
                   <div className="flex gap-2">
                     {product.colors.map((color) => (
-                        <button
-                          className={`${
-                            colors[color.toLowerCase()]
-                          }  rounded-full w-[50px] h-[50px]  border-black ${
-                            selectedColor === color
-                              ? "opacity-100 border"
-                              : "opacity-50"
-                          }  `}
-                          key={color}
-                          onClick={() => handleSelectColor(color)}
-                        />
-                      ))}
+                      <button
+                        className={`${
+                          colors[color.toLowerCase()]
+                        }  rounded-full w-[50px] h-[50px]  border-black ${
+                          selectedColor === color
+                            ? "opacity-100 border"
+                            : "opacity-50"
+                        }  `}
+                        key={color}
+                        onClick={() => handleSelectColor(color)}
+                      />
+                    ))}
                   </div>
                 </div>
                 <div className="flex flex-col gap-2">
@@ -158,9 +157,10 @@ const Product = ({ params: { productId } }: propsType) => {
           <CircularProgress color="inherit" />
         </div>
       )}
-      {error && (
-        <div className="w-full h-screen flex items-center justify-center ">
+      {error && !product && (
+        <div className="w-full h-screen flex flex-col gap-2 items-center justify-center ">
           <h1 className="text-2xl">Erro ao procurar produto...</h1>
+          <Link href={"/"} className="bg-black px-2 py-1 text-white">Voltar para página inicial</Link>
         </div>
       )}
     </>

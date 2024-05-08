@@ -58,9 +58,8 @@ const AdminPage = () => {
     });
   };
 
-
   const handleSubmitData = async (data: FieldValues) => {
-    const imagesUrl= await handleSubmitImage(data.name);
+    const imagesUrl = await handleSubmitImage(data.name);
     const categories = categoriesSelected.map((category) => category.category);
     const body = {
       ...data,
@@ -75,7 +74,6 @@ const AdminPage = () => {
       setError(true);
     }
   };
-
 
   const handleSelectCategory = (category: categoryType) => {
     if (categoriesSelected.includes(category)) {
@@ -93,6 +91,19 @@ const AdminPage = () => {
       categoriesSelected.map((category) => category.category)
     );
   }, [categoriesSelected]);
+
+  const handleClearFields = () => {
+    setImages([]);
+    setCategoriesSelected([]);
+    setValue("priceInCents", "");
+    setValue("brand", "");
+    setValue("model", "");
+    setValue("name", "");
+    setValue("description", "");
+    setValue("sizes", "");
+    setValue("colors", "");
+    setValue("categories", "");
+  };
 
   const {
     register,
@@ -120,7 +131,13 @@ const AdminPage = () => {
                 <div className="grid grid-cols-3 2xl:w-[500px] gap-2 ">
                   {images.length > 0 &&
                     images.map((image, index) => (
-                     <Images image={image} index={index} setImages={setImages} images={images} key={image.name}/>
+                      <Images
+                        image={image}
+                        index={index}
+                        setImages={setImages}
+                        images={images}
+                        key={image.name}
+                      />
                     ))}
                 </div>
                 <input type="file" onChange={handleImage} multiple />
@@ -231,7 +248,11 @@ const AdminPage = () => {
               </div>
               <div className="flex flex-col">
                 {categories.map((category, index) => (
-                  <label htmlFor="categories" className="capitalize flex gap-2" key={category.category}>
+                  <label
+                    htmlFor="categories"
+                    className="capitalize flex gap-2"
+                    key={category.category}
+                  >
                     <input
                       type="checkbox"
                       id={`categories ${index}`}
@@ -247,6 +268,7 @@ const AdminPage = () => {
                 )}
               </div>
             </div>
+            <span className="text-red-500 hover:underline cursor-pointer" onClick={handleClearFields}>Limpar campos</span>
           </div>
           <button
             type="submit"

@@ -7,7 +7,6 @@ const Home = () => {
     <div className="flex gap-10 flex-col min-h-screen md:py-5 md:px-32 ">
       <FirstBox />
       <SecondBox />
-      {/* <ThirdBox /> */}
     </div>
   );
 };

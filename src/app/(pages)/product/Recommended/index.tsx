@@ -1,4 +1,4 @@
-import ProductCard from "@/app/components/ThirdBox/ProductCard";
+import ProductCard from "@/app/components/ProductCard";
 import { ProductsContext } from "@/context/ProductsContext";
 import { Product as ProductType } from "@/types";
 import { useContext } from "react";

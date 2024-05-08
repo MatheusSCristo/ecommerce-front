@@ -1,5 +1,4 @@
 "use client";
-import ProductCard from "@/app/components/ThirdBox/ProductCard";
 import { ProductsContext } from "@/context/ProductsContext";
 import {
   CategoryType,
@@ -12,6 +11,7 @@ import { useContext, useEffect, useState } from "react";
 import { IoFilter } from "react-icons/io5";
 import Menu from "./Menu";
 import SideBar from "./SideBar";
+import ProductCard from "@/app/components/ProductCard";
 
 const categoryFilter = (product: Product, category: CategoryType) => {
   if (!category.category) return true;
