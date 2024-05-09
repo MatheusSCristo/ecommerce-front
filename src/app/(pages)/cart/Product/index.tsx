@@ -23,7 +23,7 @@ const Product = ({ product }: { product: CartProduct }) => {
   return (
     <div className="flex justify-between border-b-2 border-[#909090] pb-5">
       <div className="flex gap-2">
-        <Link href={`/product/${product.id}`} className="w-[80px] h-[80px] md:w-[120px] md:h-[120px] 2xl:w-[150px] 2xl:h-[150px] relative bg-[#C4C4C4] rounded-md">
+        <Link href={`/product/${product.id}`} className="w-[80px] h-[80px] md:w-[120px] md:h-[120px] 2xl:w-[150px] 2xl:h-[150px] relative rounded-sm">
           <Image
             src={product.imagesUrl[0] || `/images/sneakerImage.png`}
             fill

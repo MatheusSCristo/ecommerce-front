@@ -14,7 +14,7 @@ const PrimaryBox = () => {
           estilo, funcionalidade e personalidade.
         </h2>
       </div>
-      <Link href={"search/search?q="}  className="border border-black px-10 py-1 hover:bg-gray-200">Ver todos</Link>
+      <Link href={"search/search?q="}  className="border border-black px-10 py-1 hover:bg-gray-200 transition duration-300 ease-in-out">Ver todos</Link>
       <div className="2xl:w-[1500px] 2xl:h-[600px] md:w-[1000px] md:h-[600px] w-[350px] h-[300px] relative px-2">
         <Image
           priority

@@ -62,7 +62,7 @@ const Navbar = () => {
             <Cart setCartMobileIsOpen={setCartMobileIsOpen} />
           )}
           {!cartMobileIsOpen && (
-            <div className="relative hover:scale-[1.05] flex items-center">
+            <div className="relative hover:scale-[1.05] duration-300 transition ease-in-out flex items-center">
               <IoCartOutline
                 size={35}
                 onClick={() => setCartMobileIsOpen(true)}

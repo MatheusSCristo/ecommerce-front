@@ -13,7 +13,7 @@ const SecondBox = () => {
           qualquer ocasião.
         </h2>
       </div>
-      <Link href={"search/search?q="} className="border border-black px-10 py-1 hover:bg-gray-200">Ver todos</Link>
+      <Link href={"search/search?q="} className="border border-black px-10 py-1 hover:bg-gray-200 duration-300 transition ease-in-out">Ver todos</Link>
       <Sneakers/>
     </section>
   );

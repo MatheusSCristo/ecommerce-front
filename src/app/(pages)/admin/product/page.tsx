@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import Images from "./Category/Images";
+import Images from "./Images";
 
 type categoryType = (typeof categories)[0];
 
@@ -268,11 +268,11 @@ const AdminPage = () => {
                 )}
               </div>
             </div>
-            <span className="text-red-500 hover:underline cursor-pointer" onClick={handleClearFields}>Limpar campos</span>
+            <span className="text-red-500 hover:underline cursor-pointer " onClick={handleClearFields}>Limpar campos</span>
           </div>
           <button
             type="submit"
-            className="bg-black px-3 py-2 text-white rounded-sm w-fit self-center "
+            className="bg-black px-3 py-2 text-white rounded-sm w-fit self-center hover:scale-105 duration-300 transition ease-in-out "
           >
             Cadastrar
           </button>

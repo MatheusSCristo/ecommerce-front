@@ -4,7 +4,7 @@ export type Product = {
   description: string;
   priceInCents: number;
   imagesUrl: string[];
-  rating: number;
+  ratings: Rating[];
   brand: string;
   model: string;
   colors: string[];
@@ -13,6 +13,12 @@ export type Product = {
   sizes: number[];
 };
 
+export type Rating={
+  userId:string;
+  rating:number;
+  comment:string;
+
+}
 
 export type OrderProduct = {
   id: string;

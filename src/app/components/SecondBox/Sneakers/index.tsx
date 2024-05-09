@@ -8,7 +8,7 @@ const Sneakers = () => {
   const productsSorted = products.sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)).slice(0, 3);
   return (
     <div className="flex flex-col md:flex-row gap-10 mt-10 2xl:mt-[150px]">
-      {productsSorted.map((product,index) => (
+      {productsSorted.map((product) => (
         <div className="border border-gray-500">
         <ProductCard product={product}/>
           </div>

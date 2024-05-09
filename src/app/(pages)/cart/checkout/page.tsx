@@ -119,7 +119,7 @@ const Checkout = () => {
         </div>
         <div className="flex flex-col gap-2">
           <button
-            className="bg-black text-white py-2 w-3/4 self-center rounded-sm disabled:opacity-50"
+            className="bg-black text-white py-2 w-3/4 self-center rounded-sm disabled:opacity-50 hover:scale-105 duration-300 transition ease-in-out"
             onClick={handleCheckout}
             disabled={
               checkoutIsLoading || !user?.verifiedEmail || products.length == 0

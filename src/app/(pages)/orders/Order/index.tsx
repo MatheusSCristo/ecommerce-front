@@ -96,7 +96,7 @@ const Order = ({ order }: { order: OrderResponse }) => {
           const product = getProductInfos(orderProduct);
           if (product)
             return (
-              <ProductOrderCard product={product} orderProduct={orderProduct} />
+              <ProductOrderCard product={product} orderProduct={orderProduct} order={order}/>
             );
         })}
       </div>
@@ -120,7 +120,7 @@ const Order = ({ order }: { order: OrderResponse }) => {
         </div>
         <div className="flex self-end flex-col  w-full">
           <button
-            className="px-3 py-2 bg-black text-white rounded-md w-fit disabled:opacity-75 "
+            className="px-3 py-2 bg-black text-white rounded-md w-fit disabled:opacity-50 "
             disabled={
               order.orderStatus === "delivered" ||
               order.orderStatus === "canceled"

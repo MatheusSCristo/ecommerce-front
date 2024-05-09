@@ -44,7 +44,7 @@ const Cart = () => {
               </h2>
               <Link
                 href={"/"}
-                className="text-center border-gray-400 border rounded-sm px-2 py-1 bg-black text-white hover:scale-105  duration-300"
+                className="text-center border-gray-400 border rounded-sm px-2 py-1 bg-black text-white hover:scale-105 transition  duration-300"
               >
                 Continue a navegar pelos produtos
               </Link>
@@ -61,7 +61,7 @@ const Cart = () => {
               className="border-black border px-2 focus:outline-none"
             />
             <div className="flex justify-between">
-              <button className="text-sm border-black border rounded-sm px-2 text-black hover:scale-105 duration-300">
+              <button className="text-sm border-black border rounded-sm px-2 text-black hover:scale-105 transition duration-300">
                 Calcular
               </button>
             </div>
@@ -118,7 +118,7 @@ const Cart = () => {
       {userEmailIsUnverified && (
         <div className="absolute bg-white border border-gray-400 rounded-lg flex flex-col top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 p-4 items-center">
           <span
-            className="fixed self-end hover:scale-105 cursor-pointer"
+            className="fixed self-end hover:scale-105 transition ease-in-out cursor-pointer"
             onClick={() => {
               setEmailSent(false);
               setUserEmailIsUnverified(false);

@@ -28,7 +28,7 @@ const Icons = () => {
   return (
     <div className="md:flex gap-10 hidden">
       {!user && (
-        <Link href={"/auth/login"} className="hover:scale-110 cursor-pointer">
+        <Link href={"/auth/login"} className="hover:scale-110 duration-300 transition ease-in-out cursor-pointer">
           Entrar
         </Link>
       )}
@@ -39,7 +39,7 @@ const Icons = () => {
             onMouseEnter={() => setCartMenuIsOpen(true)}
             onMouseLeave={() => setCartMenuIsOpen(false)}
           >
-            <div className="relative hover:scale-[1.1] flex flex-col items-center justify-center" title="Carrinho">
+            <div className="relative hover:scale-[1.1] duration-300 transition ease-in-out duration-300 transition ease-in-out flex flex-col items-center justify-center" title="Carrinho">
               {products.length > 0 && (
                 <span className="absolute right-0 text-black  ">
                   {products.length}
@@ -53,7 +53,7 @@ const Icons = () => {
           <div className="flex flex-col items-center" title="Pedidos">
             <HiOutlineArchiveBox
               size={25}
-              className="hover:scale-[1.1] cursor-pointer"
+              className="hover:scale-[1.1] duration-300 transition ease-in-out cursor-pointer"
               onClick={() => router.push("/orders")}
             />
             <span>Pedidos</span>
@@ -61,7 +61,7 @@ const Icons = () => {
           <div className="flex flex-col items-center" title="Sair">
             <IoExitOutline
               size={25}
-              className="hover:scale-[1.1] cursor-pointer"
+              className="hover:scale-[1.1] duration-300 transition ease-in-out cursor-pointer"
               onClick={handleLogout}
               />
               <span>Sair</span>

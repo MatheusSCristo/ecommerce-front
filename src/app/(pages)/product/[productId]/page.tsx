@@ -2,12 +2,12 @@
 import { CartContext } from "@/context/CartContext";
 import { ProductsContext } from "@/context/ProductsContext";
 import AddProductToCart from "@/utils/AddProductToCart";
-import { CircularProgress } from "@mui/material";
+import { getRating } from "@/utils/Products/getRating";
+import { CircularProgress, Rating } from "@mui/material";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import Recommended from "../Recommended";
 import ProductImages from "./ProductImages";
-import Stars from "./Start";
 
 type propsType = {
   params: { productId: string };
@@ -22,6 +22,7 @@ const Product = ({ params: { productId } }: propsType) => {
   const [imagesUrl, setImagesUrl] = useState<string[]>([]);
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
+  const [showRating, setShowRating] = useState(false);
 
   const handleAddProductOnCard = () => {
     if (product && selectedSize && selectedColor)
@@ -104,9 +105,15 @@ const Product = ({ params: { productId } }: propsType) => {
                   clothing or achieve a perfectly curated wardrobe thanks to our
                   line-up of timeless pieces.{" "}
                 </p>
-                <Stars product={product}>
-                  <h2>({product.rating.toFixed(1)})</h2>
-                </Stars>
+                <div className="flex gap-2">
+                  <Rating value={getRating(product)} readOnly />
+                  <h2
+                    className="hover:underline cursor-pointer"
+                    onClick={() => setShowRating((prevState) => !prevState)}
+                  >
+                    Ver avaliações
+                  </h2>
+                </div>
                 <div className="flex flex-col gap-2">
                   <h2 className="text-[#676767]">Cores</h2>
                   <div className="flex gap-2">
@@ -141,13 +148,30 @@ const Product = ({ params: { productId } }: propsType) => {
                   </div>
                 </div>
                 <button
-                  className="bg-black hover:scale-105 px-10 py-3 rounded-sm text-white w-fit mt-10 "
+                  className="bg-black hover:scale-105 transition duration-500 ease-in-out px-10 py-3 rounded-sm text-white w-fit mt-10 "
                   onClick={() => handleAddProductOnCard()}
                 >
                   Adicionar ao carrinho
                 </button>
               </div>
             </div>
+            {showRating && (
+              <div className="flex flex-col gap-2 w-full ">
+                <h1 className="font-bold text-2xl text-">Avaliações ({product.ratings.length})</h1>
+                {product.ratings.map((rating) => (
+                  <div className="border-gray-500 border p-3 flex flex-col gap-2">
+                    <div className="flex  gap-1">
+                    <h2 className="font-bold text-lg">Avaliacão:</h2>
+                    <Rating value={rating.rating} readOnly />
+                    </div>
+                    <div>
+                      <h2 className="font-bold text-lg">Comentário:</h2>
+                      <p>{rating.comment}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </section>
           <Recommended product={product} />
         </>
@@ -160,7 +184,9 @@ const Product = ({ params: { productId } }: propsType) => {
       {error && !product && (
         <div className="w-full h-screen flex flex-col gap-2 items-center justify-center ">
           <h1 className="text-2xl">Erro ao procurar produto...</h1>
-          <Link href={"/"} className="bg-black px-2 py-1 text-white">Voltar para página inicial</Link>
+          <Link href={"/"} className="bg-black px-2 py-1 text-white">
+            Voltar para página inicial
+          </Link>
         </div>
       )}
     </>

@@ -228,7 +228,7 @@ const BillingDetails = ({ setBillingData, setBillingDataError }: propsType) => {
           )}
         </div>
       </div>
-      <button className="bg-black w-1/4 py-2 text-white self-center rounded-sm">
+      <button className="bg-black w-1/4 py-2 text-white self-center rounded-sm hover:scale-105 duration-300 transition ease-in-out">
         Salvar
       </button>
     </form>

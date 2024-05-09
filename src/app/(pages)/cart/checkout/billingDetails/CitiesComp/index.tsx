@@ -90,7 +90,7 @@ const CitiesComp = ({
         <ul className="border-gray-400 border-t-0 border rounded-b-md ">
           {citiesOption.map((city) => (
             <li
-              className="px-2 py-1 hover:bg-gray-100 cursor-pointer"
+              className="px-2 py-1 hover:bg-gray-100  cursor-pointer"
               onClick={() => handleDropdownClick(city)}
             >
               {city.name} - {city.stateId}

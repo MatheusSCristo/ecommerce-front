@@ -31,7 +31,7 @@ const MobileMenu = ({
     <div className="absolute w-full z-10 bg-[#ededed7f] h-screen top-0">
       <div className="w-3/4 bg-white h-full relative">
         <span
-          className="absolute top-2 right-2 text-lg text-black hover:scale-[1.2]"
+          className="absolute top-2 right-2 text-lg text-black hover:scale-[1.2] duration-300 transition ease-in-out"
           onClick={() => setMenuMobileIsOpen(false)}
         >
           X
