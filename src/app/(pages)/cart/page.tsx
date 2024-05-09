@@ -3,8 +3,9 @@ import { CartContext } from "@/context/CartContext";
 import { UserContext } from "@/context/UserContext";
 import { CartProduct } from "@/types";
 import sendVerifiyEmail from "@/utils/Email/sendVerifiyEmail";
+import { CircularProgress } from "@mui/material";
 import Link from "next/link";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Product from "./Product";
 
 const getCartTotalPrice = (products: CartProduct[]) => {
@@ -13,16 +14,38 @@ const getCartTotalPrice = (products: CartProduct[]) => {
       (total, product) => total + product.priceInCents * product.quantity,
       0
     ) / 100
-  ).toFixed(2);
+  );
 };
 
 const Cart = () => {
   const [shippingFee, setShippingFee] = useState(0);
+  const [shippingFeeLoading, setShippingFeeLoading] = useState(false);
   const [userEmailIsUnverified, setUserEmailIsUnverified] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
   const [cep, setCep] = useState("");
   const { user } = useContext(UserContext);
   const { products } = useContext(CartContext);
+
+  const handleShippingFee = () => {
+    setShippingFeeLoading(true);
+    setTimeout(() => {
+      setShippingFee(Math.random() * 20 + 25);
+      setShippingFeeLoading(false);
+    }, 1500);
+  };
+
+  const cepMask = () => {
+    let currentCep = cep;
+    if (!currentCep) return "";
+    currentCep = currentCep.replace(/\D/g, "");
+    currentCep = currentCep.replace(/(\d{5})(\d)/, "$1-$2");
+    setCep(currentCep);
+  };
+
+  useEffect(() => {
+    cepMask();
+  }, [cep]);
+
   return (
     <section className="md:px-24 2xl:px-32 md:py-10 px-2 py-5 flex gap-2 flex-col flex-1 relative    ">
       <h1 className="text-2xl font-bold">Meu Carrinho({products.length})</h1>
@@ -57,13 +80,23 @@ const Cart = () => {
             <input
               value={cep}
               onChange={(e) => setCep(e.target.value)}
+              maxLength={9}
+              accept="number"
               placeholder="Insira seu CEP"
               className="border-black border px-2 focus:outline-none"
             />
-            <div className="flex justify-between">
-              <button className="text-sm border-black border rounded-sm px-2 text-black hover:scale-105 transition duration-300">
+            <div className="flex gap-2 items-center">
+              <button
+                className="text-sm border-black border  px-2 text-white bg-black hover:scale-105 transition duration-300"
+                onClick={handleShippingFee}
+              >
                 Calcular
               </button>
+              {shippingFeeLoading && (
+                <div className="text-gray-600 flex items-center">
+                  <CircularProgress size={20} color="inherit" />
+                </div>
+              )}
             </div>
           </div>
           <div className="bg-white p-3 rounded-lg flex flex-col gap-3 ">
@@ -74,26 +107,17 @@ const Cart = () => {
               </div>
               <div className="flex justify-between">
                 <h1 className="">Frete:</h1>
-                <h2>
-                  R${" "}
-                  <span
-                    className={`${
-                      shippingFee > 0 ? "text-black" : "text-lime-500"
-                    }`}
-                  >
+                {!shippingFeeLoading && <h2>R$<span className={`${shippingFee > 0 ? "text-black" : "text-lime-500"}`}>
                     {shippingFee.toFixed(2)}
                   </span>
-                </h2>
+                </h2>}
+                {shippingFeeLoading && <CircularProgress size={20} color="inherit" />}
               </div>
             </div>
             <div className="flex justify-between">
               <h1>Total:</h1>
               <h2>
-                {" "}
-                R$
-                {parseFloat(
-                  getCartTotalPrice(products) + shippingFee.toFixed(2)
-                )}
+                R${(getCartTotalPrice(products) + shippingFee).toFixed(2)}
               </h2>
             </div>
           </div>

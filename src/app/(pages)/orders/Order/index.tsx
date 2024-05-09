@@ -64,8 +64,6 @@ const Order = ({ order }: { order: OrderResponse }) => {
     }));
   };
 
-  console.log(ratedMap)
-
   const getProductInfos = (orderProduct: OrderProductResponse) => {
     if (!products) return null;
     const product = products.find((item) => item.id === orderProduct.productId);

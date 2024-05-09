@@ -26,8 +26,18 @@ const Checkout = () => {
   const [checkoutIsLoading, setCheckoutIsLoading] = useState(false);
   const [billingData, setBillingData] = useState<billingSchemaType>();
   const [billingDataError, setBillingDataError] = useState(false);
-  const shippingFee = 1000;
+  const [shippingFee,setShippingFee]=useState(0); 
+  const [shippingFeeLoading,setShippingFeeLoading]=useState(false);
   const router = useRouter();
+
+  const handleShippingFee=()=>{
+    setShippingFeeLoading(true);
+    setTimeout(()=>{
+      setShippingFee(Math.random()*10 +40)
+      setShippingFeeLoading(false)
+    },1500)
+  }
+  
 
   const handleCheckout = async () => {
     setCheckoutError(false);
@@ -70,6 +80,7 @@ const Checkout = () => {
           <BillingDetails
             setBillingData={setBillingData}
             setBillingDataError={setBillingDataError}
+            data={billingData}
           />
           {billingDataError && (
             <span className="text-red-500 text-center">

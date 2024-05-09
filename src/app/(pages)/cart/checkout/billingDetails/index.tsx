@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { getAllCities } from "easy-location-br";
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaCheck } from "react-icons/fa6";
 import { z } from "zod";
 import CitiesComp from "./CitiesComp";
 
@@ -42,25 +43,14 @@ const billingSchema = z.object({
 
 export type billingSchemaType = z.infer<typeof billingSchema>;
 type propsType = {
+  data: billingSchemaType | undefined;
   setBillingData: Dispatch<
-    SetStateAction<
-      | {
-          name: string;
-          lastName: string;
-          email: string;
-          phone: string;
-          cep: string;
-          city: string;
-          street: string;
-          neighborhood: string;
-        }
-      | undefined
-    >
+    SetStateAction<billingSchemaType|undefined>
   >;
   setBillingDataError: Dispatch<SetStateAction<boolean>>;
 };
 
-const BillingDetails = ({ setBillingData, setBillingDataError }: propsType) => {
+const BillingDetails = ({ data,setBillingData, setBillingDataError }: propsType) => {
   const [city, setCity] = useState<string>("");
   const [addressIsDisabled, setAddressIsDisabled] = useState(false);
   const {
@@ -228,9 +218,15 @@ const BillingDetails = ({ setBillingData, setBillingDataError }: propsType) => {
           )}
         </div>
       </div>
-      <button className="bg-black w-1/4 py-2 text-white self-center rounded-sm hover:scale-105 duration-300 transition ease-in-out">
-        Salvar
-      </button>
+      <div className="flex gap-2 justify-center">
+        <button className="bg-black w-1/4 py-2 text-white self-center rounded-sm hover:scale-105 duration-300 transition ease-in-out">
+          Salvar
+        </button>
+        {data && <div className="flex gap-1 text-green-400 items-center">
+          <FaCheck />
+          <span >Salvo</span>
+        </div>}
+      </div>
     </form>
   );
 };
