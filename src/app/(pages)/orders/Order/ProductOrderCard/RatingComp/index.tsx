@@ -1,18 +1,20 @@
 import { UserContext } from "@/context/UserContext";
 import { ratingSchema } from "@/schemas/ratingSchema";
+import { OrderProductResponse } from "@/types";
 import createRating from "@/utils/Products/createRating";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Rating } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 type propsType={
   productId:string;
-  setRated:React.Dispatch<React.SetStateAction<boolean>>;
+  orderProduct:OrderProductResponse;
+  onRatingChange:(ratedStatus:boolean)=>void;
 }
 
-const RatingComp = ({productId,setRated}:propsType) => {
+const RatingComp = ({productId,orderProduct,onRatingChange}:propsType) => {
   const [rating, setRating] = useState<number | null>(0);
   const {user}=useContext(UserContext);
   
@@ -26,10 +28,10 @@ const RatingComp = ({productId,setRated}:propsType) => {
 
   const handleRating = (data: any) => {
     if(data && user){
-    createRating(data,productId,user.id)
+    createRating(data,productId,user.id,orderProduct.id)
     setRating(0);
     setValue("comment","")
-    setRated(true)
+    onRatingChange(true)
   }
   };
 

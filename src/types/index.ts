@@ -17,7 +17,8 @@ export type Rating={
   userId:string;
   rating:number;
   comment:string;
-
+  productId:string;
+  orderId:string;
 }
 
 export type OrderProduct = {
@@ -40,6 +41,7 @@ export type OrderResponse = {
   orderStatus: string;
   orderProduct: OrderProductResponse[];
   payment: PaymentResponse;
+  ratings: Rating[];
 };
 
 export type PaymentResponse = {
@@ -55,6 +57,7 @@ export type OrderProductResponse = {
   subtotalInCents: number;
   imagesUrl: string[];
   size: number;
+  rating:Rating
 };
 
 export type Payment = {

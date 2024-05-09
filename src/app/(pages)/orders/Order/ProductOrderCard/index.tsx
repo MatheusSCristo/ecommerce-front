@@ -1,33 +1,26 @@
-import { UserContext } from "@/context/UserContext";
 import { OrderProductResponse, OrderResponse, Product } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import RatingComp from "./RatingComp";
 
 type propsType = {
   product: Product;
   orderProduct: OrderProductResponse;
-  order:OrderResponse;
+  order: OrderResponse;
+  rated:boolean;
+  onRatingChange: (ratedStatus: boolean) => void;
 };
 
-const ProductOrderCard = ({ product, orderProduct,order }: propsType) => {
-  const [rated,setRated]=useState(false);
-  const [allowedRating,setAllowedRating]=useState(order.orderStatus==="delivered"?true : false);
-
-  const {user}=useContext(UserContext);
-
-  const checkIfRated=()=>{
-    product.ratings?.forEach((rating)=>{
-      if(rating.userId===user?.id){
-        setRated(true);
-      }
-    })
-  }
-
-  useEffect(()=>{
-    if(user) checkIfRated();
-  },[user])
+const ProductOrderCard = ({ product, orderProduct, order,rated, onRatingChange }: propsType) => {
+  
+  const [allowedRating, setAllowedRating] = useState(
+    order.orderStatus === "delivered" ? true : false
+  );
+  
+    useEffect(()=>{
+      onRatingChange(!!orderProduct.rating)
+    },[orderProduct])
 
 
   return (
@@ -39,6 +32,7 @@ const ProductOrderCard = ({ product, orderProduct,order }: propsType) => {
             alt="Imagem do produto"
             fill
             className="object-cover"
+            sizes="100px"
           />
         </div>
         <div className="flex flex-col flex-1">
@@ -54,8 +48,16 @@ const ProductOrderCard = ({ product, orderProduct,order }: propsType) => {
             ).toFixed(2)}
           </h2>
           <h2 className="text-lg">Quantidade: {orderProduct.quantity}</h2>
-         {!rated && allowedRating && <RatingComp productId={product.id} setRated={setRated} />}
-         {rated && allowedRating && <h2 className="text-lg text-strongOrange">Produto já avaliado.</h2>}
+          {!rated && allowedRating && (
+            <RatingComp
+              productId={product.id}
+              onRatingChange={(ratedStatus:boolean) => onRatingChange(ratedStatus)}
+              orderProduct={orderProduct}
+            />
+          )}
+          {rated && allowedRating && (
+            <h2 className="text-lg text-strongOrange">Produto já avaliado.</h2>
+          )}
         </div>
       </div>
       <Link

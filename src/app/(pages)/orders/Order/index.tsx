@@ -27,7 +27,7 @@ const translateOrderStatus = (orderStatus: string) => {
     { orderStatus: "delivered", translatedStatus: "entregue" },
     { orderStatus: "canceled", translatedStatus: "cancelado" },
   ];
-  const find = status.find((item) => (item.orderStatus === orderStatus));
+  const find = status.find((item) => item.orderStatus === orderStatus);
   if (!find) return null;
   return find?.translatedStatus;
 };
@@ -45,14 +45,29 @@ const getColorPaymentStatusText = (paymentStatus: string) => {
   }
 };
 
+type ratedMapType = {
+  [key:string]:boolean
+}
+
 
 
 const Order = ({ order }: { order: OrderResponse }) => {
   const { orderProduct: orderProducts } = order;
   const { products } = useContext(ProductsContext);
   const [cancelError, setCancelError] = useState(false);
+  const [ratedMap, setRatedMap] = useState<ratedMapType>({});
+
+  const handleRatingChange = (orderProductId: string, ratedStatus: boolean) => {
+    setRatedMap((prevState) => ({
+      ...prevState,
+      [orderProductId]: ratedStatus,
+    }));
+  };
+
+  console.log(ratedMap)
 
   const getProductInfos = (orderProduct: OrderProductResponse) => {
+    if (!products) return null;
     const product = products.find((item) => item.id === orderProduct.productId);
     return product;
   };
@@ -70,13 +85,16 @@ const Order = ({ order }: { order: OrderResponse }) => {
 
   const handleCopyToClipboard = () => {
     navigator.clipboard.writeText(order.id);
-  }
-
+  };
 
   return (
     <div className="flex flex-col bg-white px-3 2xl:px-10 py-5 rounded-sm">
       <div className="flex flex-col 2xl:flex-row 2xl:justify-between border-gray-400 border-b-[1px] py-2 2xl:items-center">
-        <h1 className={`font-bold capitalize text-xl ${order.orderStatus==="canceled" && "text-red-500"} `}>
+        <h1
+          className={`font-bold capitalize text-xl ${
+            order.orderStatus === "canceled" && "text-red-500"
+          } `}
+        >
           {translateOrderStatus(order.orderStatus)}
         </h1>
         <div className="flex flex-col">
@@ -85,7 +103,10 @@ const Order = ({ order }: { order: OrderResponse }) => {
           </span>
           <div className="flex gap-2">
             <span className="text-gray-600">Numero do pedido: {order.id}</span>
-            <span className="text-blue cursor-pointer hover:underline "onClick={handleCopyToClipboard}>
+            <span
+              className="text-blue cursor-pointer hover:underline "
+              onClick={handleCopyToClipboard}
+            >
               Copiar
             </span>
           </div>
@@ -96,7 +117,16 @@ const Order = ({ order }: { order: OrderResponse }) => {
           const product = getProductInfos(orderProduct);
           if (product)
             return (
-              <ProductOrderCard product={product} orderProduct={orderProduct} order={order}/>
+              <ProductOrderCard
+                key={orderProduct.id}
+                product={product}
+                orderProduct={orderProduct}
+                order={order}
+                rated={ratedMap[orderProduct.id] || false} 
+                onRatingChange={(ratedStatus:boolean) =>
+                  handleRatingChange(orderProduct.id, ratedStatus)
+                }
+              />
             );
         })}
       </div>
