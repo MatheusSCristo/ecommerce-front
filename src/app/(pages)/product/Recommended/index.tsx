@@ -50,7 +50,7 @@ const Recommended = ({ product }: propsType) => {
         >
           {recommendedProducts.map((recommendedProduct) => (
             <SwiperSlide>
-              <ProductCard product={recommendedProduct} />
+              <ProductCard product={recommendedProduct} key={product.id} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -68,7 +68,7 @@ const Recommended = ({ product }: propsType) => {
         >
           {recommendedProducts.map((recommendedProduct) => (
             <SwiperSlide>
-              <ProductCard product={recommendedProduct} />
+              <ProductCard product={recommendedProduct} key={product.id} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -86,7 +86,7 @@ const Recommended = ({ product }: propsType) => {
         >
           {recommendedProducts.map((recommendedProduct) => (
             <SwiperSlide>
-              <ProductCard product={recommendedProduct} />
+              <ProductCard product={recommendedProduct} key={product.id}/>
             </SwiperSlide>
           ))}
         </Swiper>

@@ -1,6 +1,5 @@
 import { UserContext } from "@/context/UserContext";
 import deleteSession from "@/utils/User/deleteSession";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
@@ -37,7 +36,6 @@ const MobileMenu = ({
           X
         </span>
         <div className="flex flex-col gap-1 bg-gray-200 p-4">
-          <Image src="/icons/avatar.svg" width={40} height={40} alt="s" />
           {!user && (
             <div className="flex gap-2">
               <Link href="/auth/login">Entrar</Link>

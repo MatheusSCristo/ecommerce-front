@@ -9,8 +9,8 @@ const Sneakers = () => {
   return (
     <div className="flex flex-col md:flex-row gap-10 mt-10 2xl:mt-[150px]">
       {productsSorted.map((product) => (
-        <div className="border border-gray-500">
-        <ProductCard product={product}/>
+        <div className="border border-gray-500" key={product.id}>
+        <ProductCard product={product} />
           </div>
       ))}
     </div>

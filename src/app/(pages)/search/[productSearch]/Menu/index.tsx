@@ -6,8 +6,9 @@ import Select from "./Select";
 
 type ParamsType = {
   products: Product[];
+  handleSortBy: (sortBy: string) => void;
 };
-const Menu = ({ products }: ParamsType) => {
+const Menu = ({ products,handleSortBy }: ParamsType) => {
   const { brandsSelected, categorySelected, priceRangeSelected } = useContext(
     SearchParamsBarContext
   );
@@ -15,7 +16,7 @@ const Menu = ({ products }: ParamsType) => {
     <div className="w-full">
       <div className="self-end p-3 flex justify-end  relative">
         <div className="flex flex-col items-center">
-          <Select />
+          <Select handleSortBy={handleSortBy}/>
           {categorySelected.category && (
             <h1>
               {products.length} items encontrados em{" "}

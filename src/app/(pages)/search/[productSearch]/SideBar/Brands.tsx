@@ -13,7 +13,12 @@ const Brands = () => {
   
 
   useEffect(()=>{
-    setBrands(products.map((product)=>product.brand))
+    const getBrands=()=>{
+      const brands=products.map((product)=>product.brand)
+      return brands.filter((value, index, self) => self.indexOf(value) === index); 
+
+    }
+    setBrands(getBrands())
   },[products])
 
   const handleSelectBrand = (e: ChangeEvent<HTMLInputElement>) => {

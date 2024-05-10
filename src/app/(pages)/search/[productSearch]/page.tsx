@@ -1,4 +1,5 @@
 "use client";
+import ProductCard from "@/app/components/ProductCard";
 import { ProductsContext } from "@/context/ProductsContext";
 import {
   CategoryType,
@@ -11,7 +12,6 @@ import { useContext, useEffect, useState } from "react";
 import { IoFilter } from "react-icons/io5";
 import Menu from "./Menu";
 import SideBar from "./SideBar";
-import ProductCard from "@/app/components/ProductCard";
 
 const categoryFilter = (product: Product, category: CategoryType) => {
   if (!category.category) return true;
@@ -80,6 +80,44 @@ const page = ({ params: { productSearch } }: PropsType) => {
     getSearchedProducts();
   }, [allProducts, query]);
 
+
+  const sortByPriceASC = () => {
+    setFilteredProducts((prev) =>[...prev.sort((a, b) => a.priceInCents - b.priceInCents)]
+    );  
+  }
+
+  const sortByPriceDESC = () => {
+    setFilteredProducts((prev) =>[...prev.sort((a, b) => b.priceInCents - a.priceInCents)]
+    );
+  }
+  
+  const sortByMostRated=()=>{
+    const getRating=(product:Product)=>{
+      const ratings=product.ratings.map((rating)=>rating.rating)
+      const sum=ratings.reduce((a,b)=>a+b,0)
+      return sum/ratings.length
+    }
+    setFilteredProducts(prev=>[...prev.sort((a,b)=>getRating(b)-getRating(a))])
+    
+  }
+
+  const handleSortBy = (sortBy: string) => {
+    switch (sortBy) { 
+      case "priceASC":
+        sortByPriceASC();
+        break;
+      case "priceDSC":
+        sortByPriceDESC();
+      break;
+      case "avaliation":
+        sortByMostRated();
+        break;
+      default:
+        break;
+    }
+  }
+
+
   return (
     <section className="flex gap-2 md:gap-10 w-full px-2 xl:px-32 py-8 relative ">
       {sideBarMobileIsOpen && (
@@ -96,11 +134,11 @@ const page = ({ params: { productSearch } }: PropsType) => {
           >
             <IoFilter size={20} />
           </span>
-          <Menu products={filteredProducts} />
+          <Menu products={filteredProducts} handleSortBy={handleSortBy}  />
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 ">
           {filteredProducts.map((product) => (
-            <ProductCard product={product} />
+            <ProductCard product={product} key={product.id}/>
           ))}
         </div>
       </div>

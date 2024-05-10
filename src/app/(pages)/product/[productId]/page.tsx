@@ -3,11 +3,12 @@ import { CartContext } from "@/context/CartContext";
 import { ProductsContext } from "@/context/ProductsContext";
 import AddProductToCart from "@/utils/AddProductToCart";
 import { getRating } from "@/utils/Products/getRating";
-import { CircularProgress, Rating } from "@mui/material";
+import { CircularProgress, Rating as Stars } from "@mui/material";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import Recommended from "../Recommended";
 import ProductImages from "./ProductImages";
+import Rating from "./Rating";
 
 type propsType = {
   params: { productId: string };
@@ -100,15 +101,13 @@ const Product = ({ params: { productId } }: propsType) => {
                   <h1 className="font-bold text-4xl">{product.name}</h1>
                   <h2>R$ {(product.priceInCents / 100).toFixed(2)}</h2>
                 </div>
-                <p className="max-w-[400px]">
-                  Revamp your style with the latest designer trends in men’s
-                  clothing or achieve a perfectly curated wardrobe thanks to our
-                  line-up of timeless pieces.{" "}
+                <p className="max-w-[800px]">
+                  {product.description}
                 </p>
                 <div className="flex gap-2">
-                  <Rating value={getRating(product)} readOnly />
+                  <Stars value={getRating(product)} readOnly  sx={{color:"black"}}/>
                   <h2
-                    className="hover:underline cursor-pointer"
+                    className="hover:underline cursor-pointer text-gray-600 hover:text-black"
                     onClick={() => setShowRating((prevState) => !prevState)}
                   >
                     Ver avaliações
@@ -156,21 +155,7 @@ const Product = ({ params: { productId } }: propsType) => {
               </div>
             </div>
             {showRating && (
-              <div className="flex flex-col gap-2 w-full ">
-                <h1 className="font-bold text-2xl text-">Avaliações ({product.ratings.length})</h1>
-                {product.ratings.map((rating) => (
-                  <div className="border-gray-500 border p-3 flex flex-col gap-2">
-                    <div className="flex  gap-1">
-                    <h2 className="font-bold text-lg">Avaliacão:</h2>
-                    <Rating value={rating.rating} readOnly />
-                    </div>
-                    <div>
-                      <h2 className="font-bold text-lg">Comentário:</h2>
-                      <p>{rating.comment}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <Rating product={product} />
             )}
           </section>
           <Recommended product={product} />

@@ -4,12 +4,13 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useState } from 'react';
 
-export default function SelectAutoWidth() {
+export default function SelectAutoWidth({handleSortBy}:{handleSortBy:(sortBy:string)=>void}){
   const [sortBy, setSortBy] = useState<string >("");
 
 
   const handleChange = (event: SelectChangeEvent) => {
     setSortBy(event.target.value);
+    handleSortBy(event.target.value);
   };
 
   return (

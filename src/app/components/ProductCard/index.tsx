@@ -9,11 +9,9 @@ type ParamsType = {
 };
 
 const ProductCard = ({ product }: ParamsType) => {
-
-  
   return (
     <div className="p-3 flex flex-col items-center gap-2 w-fit ">
-      <div className="w-[150px] h-[150px] md:w-[150px] md:h-[150px] 2xl:w-[300px] 2xl:h-[300px] relative ">
+      <div className="w-[150px] h-[150px]  2xl:w-[300px] 2xl:h-[300px] relative ">
         <Image
           src={
             product.imagesUrl[0] || `/images/notFoundImage.png`
@@ -21,6 +19,7 @@ const ProductCard = ({ product }: ParamsType) => {
           fill
           className="object-contain rounded-sm"
           alt="Imagem do produto "
+          sizes="(max-width: 1200px) 150px, 300px"
         />
       </div>
       <div className="flex flex-col gap-2 w-full text-sm md:text-md ">
