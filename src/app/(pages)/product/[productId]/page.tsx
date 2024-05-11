@@ -1,10 +1,12 @@
 "use client";
 import { CartContext } from "@/context/CartContext";
 import { ProductsContext } from "@/context/ProductsContext";
+import { UserContext } from "@/context/UserContext";
 import AddProductToCart from "@/utils/AddProductToCart";
 import { getRating } from "@/utils/Products/getRating";
 import { CircularProgress, Rating as Stars } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import Recommended from "../Recommended";
 import ProductImages from "./ProductImages";
@@ -24,8 +26,11 @@ const Product = ({ params: { productId } }: propsType) => {
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [showRating, setShowRating] = useState(false);
+  const router=useRouter();
+  const {user}=useContext(UserContext);
 
   const handleAddProductOnCard = () => {
+    if(!user) router.push("/auth/login")
     if (product && selectedSize && selectedColor)
       setCartProducts(
         AddProductToCart(product, cartProducts, selectedSize, selectedColor)
