@@ -51,7 +51,7 @@ const Cart = () => {
       <h1 className="text-2xl font-bold">Meu Carrinho({products.length})</h1>
       <span className="text-lg font-bold flex gap-2">
         Precisa de algo mais?
-        <Link href={"/"} className="hover:underline">
+        <Link href={"/"} className="hover:underline font-normal">
           Continue a navegar
         </Link>
       </span>
@@ -122,10 +122,8 @@ const Cart = () => {
             </div>
           </div>
           <Link
-            href={
-              products.length && user?.verifiedEmail ? "/cart/checkout" : ""
-            }
-            className={`uppercase rounded-sm w-3/4 self-center px-5 py-2 bg-black text-center text-white ${
+            href={products.length && user?.verifiedEmail ? "/cart/checkout" : ""}
+            className={`hover:scale-105 duration-300 transition ease-in-out uppercase rounded-sm w-3/4 self-center px-5 py-2 bg-black text-center text-white ${
               products.length === 0 && "opacity-50 cursor-default"
             }`}
             style={{

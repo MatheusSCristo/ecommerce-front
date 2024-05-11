@@ -93,12 +93,12 @@ export type CartProduct = {
   description: string;
   priceInCents: number;
   imagesUrl: string[];
-  rating: number;
+  ratings: Rating[];
   brand: string;
   model: string;
   color: string;
   categories: string[];
-  createdAt:Date;
+  createdAt:String;
   size: number;
   quantity: number;
 }

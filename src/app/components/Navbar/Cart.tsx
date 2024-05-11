@@ -42,11 +42,11 @@ const Cart = ({ setCartMobileIsOpen }: propsType) => {
           return <CartProduct product={product} key={product.id + product.size} />;
       })}
       {products.length > 3 && (
-        <div className="px-3">
+        <div className="px-3 ">
           <Link
             onClick={handleCloseCartMobile}
             href="/cart"
-            className="py-1 px-2 bg-black text-white w-fit rounded-sm"
+            className="py-1 px-2 bg-black text-white w-fit rounded-sm hover:scale-105 duration-300 transition ease-in-out"
           >
             Ver todos
           </Link>
@@ -59,7 +59,7 @@ const Cart = ({ setCartMobileIsOpen }: propsType) => {
         <Link
           href={"/cart"}
           onClick={handleCloseCartMobile}
-          className="px-2 md:p-2 text-sm md:text-md rounded-sm border border-gray-400 flex items-center bg-black text-white rounded-sm"
+          className="px-2 md:p-2 text-sm md:text-md rounded-sm border border-gray-400 flex items-center bg-black text-white rounded-sm hover:scale-105 duration-300 transition ease-in-out"
         >
           Finalizar compra
         </Link>

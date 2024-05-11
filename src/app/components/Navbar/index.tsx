@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, Suspense, useContext, useState } from "react";
 import { IoCartOutline, IoMenu, IoSearch } from "react-icons/io5";
 
 import { CartContext } from "@/context/CartContext";
@@ -9,15 +9,12 @@ import { useRouter } from "next/navigation";
 import Cart from "./Cart";
 import Icons from "./Icons";
 import MobileMenu from "./MobileMenu";
+import { CircularProgress } from "@mui/material";
 
-const Navbar = () => {
+const SearchBar = () => {
   const [search, setSearch] = useState("");
-  const [accountMobileIsOpen, setMenuMobileIsOpen] = useState(false);
-  const [cartMobileIsOpen, setCartMobileIsOpen] = useState(false);
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const { products } = useContext(CartContext);
-
+  const router = useRouter();
   const handleSearchClick = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (search === "") return;
@@ -27,6 +24,28 @@ const Navbar = () => {
     const queryString = queryParams.toString();
     router.push(`/search/${`/search/?${queryString}`}`);
   };
+  return (
+    <form
+      className="flex w-full md:w-fit  md:px-0 focus:outline gap-2 "
+      onSubmit={(e) => handleSearchClick(e)}
+    >
+      <button type="submit" className="text-gray-600">
+        <IoSearch size={20} />
+      </button>
+      <input
+        placeholder="Procurar..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="focus:outline-none"
+      />
+    </form>
+  );
+};
+
+const Navbar = () => {
+  const [accountMobileIsOpen, setMenuMobileIsOpen] = useState(false);
+  const [cartMobileIsOpen, setCartMobileIsOpen] = useState(false);
+  const { products } = useContext(CartContext);
 
   return (
     <header className="sticky top-0 flex flex-col gap-2 md:gap-0 md:flex-row md:items-center w-full justify-between md:px-32 py-4 border-b-gray-300 border-b-2 relative bg-white z-10">
@@ -42,20 +61,15 @@ const Navbar = () => {
               Sneakkers
             </Link>
           </div>
-          <form
-            className="flex w-full md:w-fit  md:px-0 focus:outline gap-2 "
-            onSubmit={(e) => handleSearchClick(e)}
+          <Suspense
+            fallback={
+              <div className="h-screen w-screen flex items-center justify-center text-gray-500">
+                <CircularProgress color="inherit" />
+              </div>
+            }
           >
-            <button type="submit" className="text-gray-600">
-              <IoSearch size={20} />
-            </button>
-            <input
-              placeholder="Procurar..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="focus:outline-none"
-            />
-          </form>
+            <SearchBar />
+          </Suspense>
         </div>
         <div className="flex gap-10 md:hidden relative">
           {cartMobileIsOpen && (

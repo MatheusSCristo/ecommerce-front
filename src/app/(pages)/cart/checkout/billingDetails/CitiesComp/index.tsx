@@ -92,6 +92,7 @@ const CitiesComp = ({
             <li
               className="px-2 py-1 hover:bg-gray-100  cursor-pointer"
               onClick={() => handleDropdownClick(city)}
+              key={city.name}
             >
               {city.name} - {city.stateId}
             </li>

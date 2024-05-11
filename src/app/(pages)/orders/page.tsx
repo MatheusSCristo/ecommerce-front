@@ -64,7 +64,7 @@ const Orders = () => {
           )}
         {orders.map((order) => {
           if (order.orderStatus.includes(status[statusSelected]))
-            return <Order order={order} />;
+            return <Order order={order} key={order.id}/>;
         })}
         {isLoading && (
           <div className="text-gray-500 flex items-center justify-center h-full" >

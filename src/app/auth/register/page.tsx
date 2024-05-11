@@ -32,7 +32,7 @@ const capitalizeWord = (word: string) => {
   return word[0].toUpperCase() + word.slice(1);
 };
 
-const register = () => {
+const Register = () => {
   const [step, setStep] = useState(1);
   const [data, setData] = useState<dataType>({} as dataType);
   const [error, setError] = useState(false);
@@ -117,4 +117,4 @@ const register = () => {
   );
 };
 
-export default register;
+export default Register;

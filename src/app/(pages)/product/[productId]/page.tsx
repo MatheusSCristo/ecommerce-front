@@ -93,6 +93,7 @@ const Product = ({ params: { productId } }: propsType) => {
                       imagesUrl={imagesUrl}
                       index={index}
                       setImagesUrl={setImagesUrl}
+                      key={url}
                     />
                   ))}
               </div>
@@ -140,6 +141,7 @@ const Product = ({ params: { productId } }: propsType) => {
                           selectedSize === size && "bg-gray-600 text-white "
                         }`}
                         onClick={() => handleSelectSize(size)}
+                        key={size}
                       >
                         {size}
                       </button>

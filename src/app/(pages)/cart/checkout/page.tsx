@@ -67,7 +67,7 @@ const Checkout = () => {
         setCheckoutError(true);
       }
       setProducts([]);
-      router.push("/");
+      router.push("/orders");
     } finally {
       setCheckoutIsLoading(false);
     }

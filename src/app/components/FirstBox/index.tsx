@@ -18,7 +18,7 @@ const PrimaryBox = () => {
       <div className="2xl:w-[1500px] 2xl:h-[600px] md:w-[1000px] md:h-[600px] w-[350px] h-[300px] relative px-2">
         <Image
           priority
-          src={"/images/bannerImage.jpeg"}
+          src={"/images/bannerImage.jpg"}
           alt="Tênis"
           fill
           className="object-cover"

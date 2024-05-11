@@ -218,7 +218,7 @@ const BillingDetails = ({ data,setBillingData, setBillingDataError }: propsType)
           )}
         </div>
       </div>
-      <div className="flex gap-2 justify-center">
+      <div className="flex flex-col gap-2 items-center">
         <button className="bg-black w-1/4 py-2 text-white self-center rounded-sm hover:scale-105 duration-300 transition ease-in-out">
           Salvar
         </button>

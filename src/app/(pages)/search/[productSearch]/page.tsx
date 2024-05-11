@@ -8,10 +8,11 @@ import {
 } from "@/context/SearchParamsBarContext";
 import { Product } from "@/types";
 import { useSearchParams } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { Suspense, useContext, useEffect, useState } from "react";
 import { IoFilter } from "react-icons/io5";
 import Menu from "./Menu";
 import SideBar from "./SideBar";
+import { CircularProgress } from "@mui/material";
 
 const categoryFilter = (product: Product, category: CategoryType) => {
   if (!category.category) return true;
@@ -33,7 +34,7 @@ type PropsType = {
   params: { productSearch: string };
 };
 
-const page = ({ params: { productSearch } }: PropsType) => {
+const Page = ({ params: { productSearch } }: PropsType) => {
   const searchParams = useSearchParams();
   const [sideBarMobileIsOpen, setSideBarMobileIsOpen] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
@@ -119,6 +120,7 @@ const page = ({ params: { productSearch } }: PropsType) => {
 
 
   return (
+    <Suspense fallback={<div className="h-screen w-screen flex items-center justify-center text-gray-500"><CircularProgress color="inherit"/></div>}>
     <section className="flex gap-2 md:gap-10 w-full px-2 xl:px-32 py-8 relative ">
       {sideBarMobileIsOpen && (
         <SideBar setSideBarMobileIsOpen={setSideBarMobileIsOpen} />
@@ -143,7 +145,8 @@ const page = ({ params: { productSearch } }: PropsType) => {
         </div>
       </div>
     </section>
+    </Suspense>
   );
 };
 
-export default page;
+export default Page;

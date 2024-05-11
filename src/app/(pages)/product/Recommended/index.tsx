@@ -49,8 +49,8 @@ const Recommended = ({ product }: propsType) => {
           modules={[Navigation, Pagination, Scrollbar, A11y]}
         >
           {recommendedProducts.map((recommendedProduct) => (
-            <SwiperSlide>
-              <ProductCard product={recommendedProduct} key={product.id} />
+            <SwiperSlide key={recommendedProduct.id}>
+              <ProductCard product={recommendedProduct} key={recommendedProduct.id} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -67,8 +67,8 @@ const Recommended = ({ product }: propsType) => {
           modules={[Pagination, Scrollbar, A11y]}
         >
           {recommendedProducts.map((recommendedProduct) => (
-            <SwiperSlide>
-              <ProductCard product={recommendedProduct} key={product.id} />
+            <SwiperSlide key={recommendedProduct.id}>
+              <ProductCard product={recommendedProduct}  />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -85,8 +85,8 @@ const Recommended = ({ product }: propsType) => {
           modules={[Pagination, Scrollbar, A11y]}
         >
           {recommendedProducts.map((recommendedProduct) => (
-            <SwiperSlide>
-              <ProductCard product={recommendedProduct} key={product.id}/>
+            <SwiperSlide key={recommendedProduct.id}>
+              <ProductCard product={recommendedProduct} />
             </SwiperSlide>
           ))}
         </Swiper>
