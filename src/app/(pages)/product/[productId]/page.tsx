@@ -26,6 +26,7 @@ const Product = ({ params: { productId } }: propsType) => {
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [showRating, setShowRating] = useState(false);
+  const [showFullDescription, setShowFullDescription] = useState(false);
   const router = useRouter();
   const { user } = useContext(UserContext);
 
@@ -107,7 +108,11 @@ const Product = ({ params: { productId } }: propsType) => {
                   <h1 className="font-bold text-4xl">{product.name}</h1>
                   <h2>R$ {(product.priceInCents / 100).toFixed(2)}</h2>
                 </div>
-                <p className="max-w-[800px]">{product.description}</p>
+                <div className="flex flex-col ">
+               {showFullDescription && <p className="max-w-[800px]">{product.description}</p>}
+               {!showFullDescription && <p className="max-w-[800px]">{product.description.slice(0,400)}...</p>}
+               <span className="hover:underline text-gray-600" onClick={()=>setShowFullDescription(prevState=>!prevState)}>{showFullDescription?"Ver menos":"Ver mais"}</span>
+                </div>
                 <div className="flex gap-2">
                   <Stars
                     value={getRating(product)}
