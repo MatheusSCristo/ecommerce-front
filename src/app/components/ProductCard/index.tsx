@@ -24,7 +24,7 @@ const ProductCard = ({ product }: ParamsType) => {
       </div>
       <div className="flex flex-col gap-2 w-full text-sm md:text-md ">
         <div>
-          <h2 className="text-md md:text-xl font-bold w-[200px]">{product.name}</h2>
+          <h2 className="text-md md:text-xl font-bold w-full text-wrap">{product.name}</h2>
           <h2 className="text-sm md:text-lg">R$ {(product.priceInCents / 100).toFixed(2)}</h2>
         </div>
         <Link href={`/product/${product.id}`} className="px-3 py-1 w-fit bg-black rounded-sm text-white hover:scale-105 duration-300 transition ease-in-out">

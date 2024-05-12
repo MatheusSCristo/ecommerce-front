@@ -26,11 +26,11 @@ const Product = ({ params: { productId } }: propsType) => {
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [showRating, setShowRating] = useState(false);
-  const router=useRouter();
-  const {user}=useContext(UserContext);
+  const router = useRouter();
+  const { user } = useContext(UserContext);
 
   const handleAddProductOnCard = () => {
-    if(!user) router.push("/auth/login")
+    if (!user) router.push("/auth/login");
     if (product && selectedSize && selectedColor)
       setCartProducts(
         AddProductToCart(product, cartProducts, selectedSize, selectedColor)
@@ -107,11 +107,13 @@ const Product = ({ params: { productId } }: propsType) => {
                   <h1 className="font-bold text-4xl">{product.name}</h1>
                   <h2>R$ {(product.priceInCents / 100).toFixed(2)}</h2>
                 </div>
-                <p className="max-w-[800px]">
-                  {product.description}
-                </p>
+                <p className="max-w-[800px]">{product.description}</p>
                 <div className="flex gap-2">
-                  <Stars value={getRating(product)} readOnly  sx={{color:"black"}}/>
+                  <Stars
+                    value={getRating(product)}
+                    readOnly
+                    sx={{ color: "black" }}
+                  />
                   <h2
                     className="hover:underline cursor-pointer text-gray-600 hover:text-black"
                     onClick={() => setShowRating((prevState) => !prevState)}
@@ -161,9 +163,12 @@ const Product = ({ params: { productId } }: propsType) => {
                 </button>
               </div>
             </div>
-            {showRating && (
-              <Rating product={product} />
-            )}
+
+            <Rating
+              product={product}
+              setShowRating={setShowRating}
+              showRating={showRating}
+            />
           </section>
           <Recommended product={product} />
         </>
