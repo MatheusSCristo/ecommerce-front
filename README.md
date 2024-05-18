@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Frontend do Comércio Eletrônico
+Este é o repositório do frontend do projeto de comércio eletrônico, desenvolvido com Next.js, Material-UI e Tailwind CSS. Concentrei nossos esforços em criar uma interface responsiva e intuitiva para os usuários, proporcionando uma experiência de compra agradável.
+<center>
+  <img src="https://github.com/MatheusSCristo/ecommerce-front/assets/138341797/2bda7f36-54d4-4f6f-af71-603cf52111c4"/>
+</center>
 
-## Getting Started
 
-First, run the development server:
+## Tecnologias Utilizadas
+### Next.js
+- Utilizei o Next.js para construir páginas dinâmicas e otimizadas, que se adaptam perfeitamente a diferentes dispositivos. Além disso, o Next.js nos permite renderização do lado do servidor (SSR) e geração de páginas estáticas, melhorando o desempenho e a experiência do usuário.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Material-UI
+- Material-UI é uma biblioteca de componentes React que implementa o Material Design, oferecendo uma ampla gama de componentes pré-projetados e estilizados. Utilizei os componentes do Material-UI para garantir uma interface consistente e esteticamente agradável em todo o aplicativo.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Tailwind CSS
+- Tailwind CSS é uma estrutura de design CSS utilitária que oferece classes de estilo pré-definidas para facilitar a construção de interfaces flexíveis e responsivas. Usei o Tailwind CSS para estilizar componentes personalizados e ajustar o layout da aplicação de acordo com as necessidades do projeto.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Funcionalidades Principais
+### Interface Responsiva
+- Criei uma interface que se adapta perfeitamente a diferentes tamanhos de tela, proporcionando uma experiência de navegação consistente em dispositivos móveis, tablets e desktops.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Navegação Intuitiva
+- Implementamos uma navegação intuitiva e fácil de usar, com menus claros e botões de ação bem posicionados para orientar os usuários durante a navegação no aplicativo.
 
-## Learn More
+### Páginas Dinâmicas
+- Utilizamos o Next.js para criar páginas dinâmicas que são carregadas de forma eficiente e rápida, garantindo tempos de carregamento mínimos e uma experiência de usuário fluida.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Estilo Moderno
+- A aplicação possui um estilo moderno e atraente, com cores, tipografia e elementos visuais cuidadosamente escolhidos para criar uma estética visualmente agradável e convidativa.
